@@ -55,7 +55,7 @@ Hermes 能获得：
 
 agentmemory 不替代：
 
-- `AGENT.nd`
+- `AGENTS.md`
 - `docs/`
 - `dev-logs/YYYY-MM-DD.md`
 - Git 检查点

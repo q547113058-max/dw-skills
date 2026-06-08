@@ -8,7 +8,7 @@
 
 每次会话开始：
 
-1. 读取 `AGENT.nd`。
+1. 读取 `AGENTS.md`。
 2. 读取相关 `docs/` 文件。
 3. 打开当天 `dev-logs/YYYY-MM-DD.md`。
 4. 检查 Git 状态：
@@ -78,7 +78,7 @@ git commit -m "checkpoint: concise description"
 
 失败、中断、上下文丢失或工具超时后：
 
-1. 读取 `AGENT.nd`。
+1. 读取 `AGENTS.md`。
 2. 读取当天开发日志。
 3. 运行：
 

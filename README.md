@@ -6,7 +6,7 @@
 
 ## 目录
 
-- `AGENT.nd`：开发会话入口说明，规定 Agent 开始工作前必须读取的标准文件、可用 skills 和核心流程。
+- `AGENTS.md`：开发会话入口说明，规定 Agent 开始工作前必须读取的标准文件、可用 skills 和核心流程。
 - `docs/`：项目开发标准，包括需求模板、开发流程、技术规范、设计规范、执行清单、质量门禁、GitHub 更新、恢复机制和条件质量策略。
 - `dev-logs/`：每日开发日志，用于记录已完成事项、决策、验证结果、阻塞项和待办事项。
 
@@ -18,7 +18,7 @@
 - 轻量项目默认先用 `rg`、直接读文件和现有测试；需要代码结构图时再用 codegraph，项目变复杂或已有图谱时才用 Graphify。
 - 长期多会话项目可选用 agentmemory 作为记忆层；轻量项目不默认启用。
 - 所有代码修改后通过 GitHub 提交和更新。
-- 重复出现的 Agent 错误要沉淀成 `AGENT.nd` 中的明确规则。
+- 重复出现的 Agent 错误要沉淀成 `AGENTS.md` 中的明确规则。
 
 ## 已用 Skills 和下载地址
 
@@ -35,7 +35,7 @@
 
 开始一个开发任务前，先读取：
 
-1. `AGENT.nd`
+1. `AGENTS.md`
 2. `docs/01-requirements-template.md`
 3. `docs/02-development-workflow.md`
 4. `docs/05-execution-checklist.md`
