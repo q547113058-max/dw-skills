@@ -1,73 +1,73 @@
-# Graphify Auxiliary Development Standard
+# Graphify 辅助开发标准
 
-Use Graphify as a codebase understanding and architecture analysis aid.
+使用 Graphify 辅助理解代码库和架构。
 
-## Installed Paths
+## 已安装位置
 
-- Codex skill: `C:\Users\54711\.codex\skills\graphify\SKILL.md`
-- CLI: `C:\Users\54711\.local\bin\graphify.exe`
-- User PATH entry: `C:\Users\54711\.local\bin`
-- Reference repo clone: `work\graphify`
-- Source repository: `https://github.com/safishamsi/graphify`
-- Official PyPI package: `graphifyy`
+- Skill：`C:\Users\54711\.codex\skills\graphify\SKILL.md`
+- CLI：`graphify`
+- 备用 CLI：`C:\Users\54711\.local\bin\graphify.exe`
+- 参考仓库：`work\graphify`
 
-## When To Use
+## 何时使用
 
-Use Graphify for:
+用于：
 
-- architecture questions
-- module and file relationship questions
-- dependency path questions
-- impact analysis before refactors
-- understanding large or unfamiliar codebases
-- summarizing project structure from code and docs
+- 大型代码库理解
+- 架构关系分析
+- 文件依赖关系
+- 影响分析
+- 模块路径追踪
+- 长文档、论文、图片或视频的知识图谱化
 
-Do not run a full graph build for small edits where normal file inspection is faster.
+不用于：
 
-## Default Commands
+- 小文件的简单阅读
+- 不需要结构分析的窄改动
+- 生成目录、依赖目录或无关克隆仓库
 
-When a graph already exists:
+## 默认命令
+
+已有图谱时：
 
 ```powershell
 graphify query "question"
-graphify path "A" "B"
-graphify explain "node"
-graphify affected "node"
+graphify path "NodeA" "NodeB"
+graphify explain "NodeName"
 ```
 
-When a graph needs to be created:
+需要新建图谱时：
 
 ```powershell
-graphify extract .
+graphify .
 ```
 
-For Codex skill usage after restart:
-
-```text
-/graphify .
-/graphify query "question"
-```
-
-After modifying code files in a project with an existing graph:
+需要深度分析时：
 
 ```powershell
-graphify update .
+graphify . --mode deep
 ```
 
-## Scope Rules
+代码修改后更新已有图谱：
 
-- Run Graphify from the actual project root.
-- Exclude unrelated tool clones, generated files, dependencies, build outputs, caches, and archives.
-- Do not scan `work\graphify` unless the Graphify repository itself is the target.
-- If the target project is large, narrow to the relevant subfolder first.
-- Record Graphify outputs and notable findings in the daily development log.
+```powershell
+graphify . --update
+```
 
-## Output Expectations
+## 工作规则
 
-Graphify may create:
+1. 如果项目根目录存在 `graphify-out/graph.json`，优先查询现有图谱。
+2. 没有图谱时，只有分析价值足够才创建。
+3. 不把 `work/ecc`、`work/graphify` 或其他临时克隆纳入业务项目图谱，除非它们就是分析目标。
+4. Graphify 结论要与源码或文档交叉确认。
+5. 重要发现记录到每日开发日志。
 
-- `graphify-out/graph.json`
+## 输出文件
+
+常见输出：
+
 - `graphify-out/GRAPH_REPORT.md`
+- `graphify-out/graph.json`
 - `graphify-out/graph.html`
 
-Use `GRAPH_REPORT.md` for architecture summary and `graph.json` for follow-up queries.
+使用 `GRAPH_REPORT.md` 做架构摘要，使用 `graph.json` 做后续查询。

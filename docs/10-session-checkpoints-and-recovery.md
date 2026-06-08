@@ -1,17 +1,17 @@
-# Session Checkpoints And Recovery
+# 会话检查点和恢复
 
-Use this standard to make work recoverable across stateless LLM sessions.
+本标准用于让工作能在无状态 LLM 会话之间恢复。
 
-## Session Startup
+## 会话启动
 
-Assume the model has no reliable memory.
+假设模型没有可靠记忆。
 
-At the start of every session:
+每次会话开始：
 
-1. Read `AGENT.nd`.
-2. Read relevant `docs/` files.
-3. Open today's `dev-logs/YYYY-MM-DD.md`.
-4. Check Git state:
+1. 读取 `AGENT.nd`。
+2. 读取相关 `docs/` 文件。
+3. 打开当天 `dev-logs/YYYY-MM-DD.md`。
+4. 检查 Git 状态：
 
 ```powershell
 git status
@@ -19,44 +19,44 @@ git branch --show-current
 git log -1 --oneline
 ```
 
-5. Locate active progress files:
-   - feature checklist
-   - TODO list
-   - project requirements
-   - project design spec
-   - technical decisions
+5. 找到进度文件：
+   - 功能清单
+   - TODO
+   - 项目需求
+   - 项目设计规范
+   - 技术决策
 
-6. Identify:
-   - last completed checkpoint
-   - current unfinished task
-   - changed files
-   - checks already run
-   - checks still pending
+6. 确认：
+   - 上一个完成的检查点
+   - 当前未完成任务
+   - 已变更文件
+   - 已运行检查
+   - 待运行检查
 
-## Progress Tracking
+## 进度追踪
 
-Track work as a feature checklist and TODO list.
+以功能清单和 TODO 跟踪工作。
 
-Recommended files:
+推荐文件：
 
 - `docs/project-feature-checklist.md`
 - `docs/project-todo.md`
 
-Each feature checklist item should include:
+每个功能清单项包含：
 
-- feature name
-- status: pending / in progress / blocked / verified / done
-- acceptance criteria
-- verification method
-- checkpoint commit, when available
+- 功能名
+- 状态：pending / in progress / blocked / verified / done
+- 验收标准
+- 验证方式
+- 可用时记录 checkpoint commit
 
-Each TODO should be small enough to finish and verify independently.
+每个 TODO 应足够小，可以独立完成和验证。
 
-## Git Checkpoints
+## Git 检查点
 
-Use Git commits as recovery snapshots.
+使用 Git commit 作为恢复快照。
 
-Create a checkpoint after each coherent verified step:
+每个连贯且已验证的步骤后创建检查点：
 
 ```powershell
 git status
@@ -65,23 +65,22 @@ git add <relevant-files>
 git commit -m "checkpoint: concise description"
 ```
 
-Rules:
+规则：
 
-- Commit only relevant files.
-- Do not mix unrelated features.
-- Do not commit broken code unless the commit message clearly marks it as a work-in-progress checkpoint and the project policy allows that.
-- Prefer verified checkpoints over large unverified batches.
-- Push checkpoints according to the GitHub update standard.
+- 只提交相关文件。
+- 不混合无关功能。
+- 不提交坏代码，除非提交信息明确标记为 WIP 且项目策略允许。
+- 优先使用已验证的小检查点，而不是大批未验证变更。
+- 按 GitHub 更新标准推送检查点。
+- 如果项目不能创建 Git commit，记录阻塞项，并临时使用每日日志作为恢复记录。
 
-If the project cannot create Git commits, record the blocker and use the daily log as the temporary recovery record.
+## 检查点恢复
 
-## Checkpoint Recovery
+失败、中断、上下文丢失或工具超时后：
 
-After failure, interruption, context loss, or tool timeout:
-
-1. Read `AGENT.nd`.
-2. Read today's development log.
-3. Run:
+1. 读取 `AGENT.nd`。
+2. 读取当天开发日志。
+3. 运行：
 
 ```powershell
 git status
@@ -89,38 +88,38 @@ git log --oneline -5
 git diff
 ```
 
-4. Compare current files to the latest checkpoint.
-5. Read the feature checklist and TODO list.
-6. Continue from the first unfinished item.
+4. 比较当前文件和最新检查点。
+5. 读取功能清单和 TODO。
+6. 从第一个未完成事项继续。
 
-Do not restart from scratch when a usable checkpoint exists.
+存在可用检查点时，不要从头开始。
 
-## Failure Notes
+## 失败记录
 
-If a task fails:
+任务失败时记录：
 
-- record the failed command or step
-- record the observed error
-- record files changed since last checkpoint
-- record the next recovery action
+- 失败命令或步骤
+- 观察到的错误
+- 上一个检查点之后变更的文件
+- 下一步恢复动作
 
-Put this in `dev-logs/YYYY-MM-DD.md` before ending the session.
+结束会话前写入 `dev-logs/YYYY-MM-DD.md`。
 
-## Session Save And Resume Record
+## 会话保存和恢复记录
 
-When a session is long, interrupted, near context limits, or handed off, preserve enough state for a stateless restart.
+会话很长、中断、接近上下文限制或需要交接时，保留足够信息用于无状态重启。
 
-Record:
+记录：
 
-- what is being built and why
-- confirmed working behavior with evidence
-- failed approaches and exact reasons not to retry
-- changed files and their current status
-- decisions made and tradeoffs accepted
-- blockers and open questions
-- exact next step
-- checks run and checks still pending
+- 正在构建什么以及原因
+- 已确认工作的行为和证据
+- 失败尝试和不要重试的精确原因
+- 变更文件及当前状态
+- 已做决策和取舍
+- 阻塞项和开放问题
+- 精确下一步
+- 已运行和待运行检查
 
-On resume, read the record before editing, summarize current state, and continue from the exact next step when it is still valid.
+恢复时先读取记录，再编辑；总结当前状态，并在仍然有效时从精确下一步继续。
 
-Do not store secrets, private conversation details, or raw sensitive code in session records. Store only the operational facts needed to continue safely.
+不要在会话记录中存储 secrets、私人对话细节或原始敏感代码。只保存安全继续工作所需的操作事实。

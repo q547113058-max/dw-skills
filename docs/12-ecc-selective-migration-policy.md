@@ -1,120 +1,120 @@
-# ECC Selective Migration Policy
+# ECC 选择性迁移策略
 
-This document defines how ECC modules are used in this local development workflow.
+本文件定义 ECC 模块如何进入本地开发工作流。
 
-Default rule: adopt workflow principles, not ECC files, unless a concrete project stack requires them.
+默认规则：吸收工作流原则，不复制 ECC 文件；只有具体项目技术栈需要时才启用对应模块。
 
-## Migration Boundaries
+## 迁移边界
 
-- Do not bulk copy ECC `commands/`, `agents/`, `hooks/`, platform configs, MCP configs, or scripts into a project.
-- Do not install stack-specific skills before the target stack is known.
-- Do not overwrite local Codex, GitHub, package manager, MCP, or editor configuration from ECC templates.
-- Prefer docs/checklists first; install scripts or hooks only after the project has a repository, toolchain, rollback plan, and explicit approval.
-- Treat domain modules as reference-only until a project requirement names that domain.
+- 不批量复制 ECC 的 `commands/`、`agents/`、`hooks/`、platform configs、MCP configs 或 scripts。
+- 目标技术栈未知前，不安装技术栈专项 skills。
+- 不用 ECC 模板覆盖本地 Codex、GitHub、包管理器、MCP 或编辑器配置。
+- 优先写入 docs/checklists；只有项目已有仓库、工具链、回滚方案并得到明确批准后，才安装脚本或 hooks。
+- 领域模块在项目需求明确命名该领域前，只作为参考。
 
-## Adopted By Default
+## 默认已采纳
 
-These modules are already represented in `AGENT.nd` and `docs/` as project rules:
+以下模块已经以项目规则形式体现在 `AGENT.nd` 和 `docs/` 中：
 
-- `workflow-quality`: TDD, verification loop, eval harness, continuous learning.
-- `rules-core`: common engineering rules, security triggers, review severity, conditional frontend rules.
-- `agents-core`: role triggers for planning, TDD, review, security, build-fix, E2E, and stack-specific review.
-- `commands-core`: command recipes for planning, feature development, checkpoint, quality gate, security scan, build fix, session save/resume, and PR creation.
-- `agentic-patterns`: agentic engineering principles only: completion criteria, small work units, eval-first execution, model/cost discipline, and human-controlled merge gates.
-- `security`: security review and scan triggers, secret hygiene, input validation, dependency and configuration review.
+- `workflow-quality`：TDD、验证循环、eval harness、持续学习。
+- `rules-core`：通用工程规则、安全触发器、审查严重级别、条件前端规则。
+- `agents-core`：规划、TDD、审查、安全、build-fix、E2E 和技术栈专项审查触发器。
+- `commands-core`：规划、功能开发、检查点、质量门禁、安全扫描、构建修复、会话保存/恢复、PR 创建配方。
+- `agentic-patterns`：只采纳 agentic engineering 原则：完成标准、小工作单元、eval-first、模型/成本纪律和人工控制合并门禁。
+- `security`：安全审查和扫描触发器、secret hygiene、输入验证、依赖和配置审查。
 
-## Conditional Modules
+## 条件模块
 
-Enable these only when the project requirement or stack makes them relevant:
+仅在项目需求或技术栈相关时启用：
 
-| Module | Enable when | Adopt as |
+| 模块 | 启用条件 | 采纳方式 |
 | --- | --- | --- |
-| `hooks-runtime` | The project has stable local commands and wants automated guardrails | Hook policy, not raw ECC hook files |
-| `platform-configs` | A specific platform config gap is identified | Reference template only; no overwrite |
-| `framework-language` | Project stack is known | Stack-specific coding/testing rules |
-| `database` | Project uses persistence | Migration, schema, query, and data integrity rules |
-| `optimization-workflows` | Performance, latency, throughput, or cost is a named requirement | Benchmark and measurement loop |
-| `research-apis` | Research/API discovery is required | Search-first and source-quality rules |
-| `operator-workflows` | External apps such as GitHub, Jira, billing, or Google Workspace are configured | Operation runbooks with auth checks |
-| `orchestration` | Multiple agents, branches, worktrees, or parallel tasks are needed | Work item ownership, handoff, merge gates |
-| `devops-infra` | Deployment, Docker, or infrastructure is in scope | Deployment and rollback standards |
-| `media-generation` | Product requires image, audio, video, or demo assets | Existing local media skills first, ECC reference second |
-| `document-processing` | Document conversion or translation exceeds installed document plugin coverage | Reference workflow |
-| `machine-learning` | ML/MLOps is in scope | Data contracts, evals, monitoring, rollback |
-| `swift-apple` | Building Apple platform software | Swift/SwiftUI rules |
-| `social-distribution` | Publishing or distribution is part of the product | Channel-specific checklist |
-| `business-content` | Product needs market, SEO, investor, or content workflows | Content/business checklist |
+| `hooks-runtime` | 项目有稳定本地命令，并需要自动化 guardrails | Hook 策略，不复制原始 ECC hook 文件 |
+| `platform-configs` | 发现具体平台配置缺口 | 只参考模板，不覆盖 |
+| `framework-language` | 项目技术栈已确定 | 技术栈专项编码/测试规则 |
+| `database` | 项目使用持久化 | migration、schema、query、data integrity 规则 |
+| `optimization-workflows` | 性能、延迟、吞吐或成本是明确需求 | benchmark 和 measurement loop |
+| `research-apis` | 需要研究或 API discovery | search-first 和 source-quality 规则 |
+| `operator-workflows` | GitHub、Jira、billing、Google Workspace 等外部应用已配置 | 带认证检查的操作 runbook |
+| `orchestration` | 多 agent、分支、worktrees 或并行任务 | work item ownership、handoff、merge gates |
+| `devops-infra` | 部署、Docker 或基础设施进入范围 | 部署和回滚标准 |
+| `media-generation` | 产品需要图片、音频、视频或 demo assets | 先用本地已有 media skills，再参考 ECC |
+| `document-processing` | 文档转换或翻译超出已安装 document 插件能力 | 参考 workflow |
+| `machine-learning` | ML/MLOps 进入范围 | 数据契约、eval、监控、回滚 |
+| `swift-apple` | 构建 Apple 平台软件 | Swift/SwiftUI 规则 |
+| `social-distribution` | 发布或分发是产品需求 | 渠道专项清单 |
+| `business-content` | 产品需要市场、SEO、投资人或内容工作流 | 内容/商业清单 |
 
-## Reference Or Skip
+## 参考或跳过
 
-- `prediction-market-skills`: reference only if the product is explicitly about prediction markets.
-- `supply-chain-domain`: reference only for supply-chain/logistics/procurement projects.
-- Locale docs: skip by default; use `docs-zh-cn` only as a reading aid if ECC source text needs Chinese reference.
+- `prediction-market-skills`：只有产品明确涉及预测市场时参考。
+- `supply-chain-domain`：只有供应链、物流或采购项目时参考。
+- 多语言文档：默认跳过；`docs-zh-cn` 仅作为阅读辅助。
 
-## Command Recipes
+## 命令配方
 
-Use these command patterns as workflow recipes, not slash commands:
+以下命令模式作为工作流配方使用，不作为 slash commands 安装：
 
-- Plan: restate requirements, inspect local patterns, define phases, risks, and validation, then wait for approval before coding when scope is large.
-- Feature development: discovery, codebase exploration, clarification, architecture design, implementation, quality review, summary.
-- Build fix: detect build system, run the failing command, group errors, fix one root error at a time, rerun the failed command.
-- Checkpoint: verify current state, create a focused Git checkpoint, log the checkpoint, compare current state to checkpoint during recovery.
-- Quality gate: run formatter/linter/type/test/build checks available in the project; do not invent missing scripts.
-- Security scan: scan secrets, permissions, hooks/config, dependencies, raw HTML, API surfaces, and MCP/tool config when present.
-- Session save/resume: preserve completed work, failed attempts, changed files, decisions, blockers, exact next step, and verification status.
-- PR: validate branch state, analyze commits and diff, use PR template if present, push, create PR, verify CI.
+- Plan：复述需求、检查本地模式、定义阶段/风险/验证，大范围任务编码前等待确认。
+- Feature development：discovery、codebase exploration、clarification、architecture design、implementation、quality review、summary。
+- Build fix：检测构建系统、运行失败命令、归类错误、一次修一个根因、重新运行失败命令。
+- Checkpoint：验证当前状态、创建聚焦 Git 检查点、记录检查点、恢复时比较当前状态。
+- 质量门禁：运行项目可用 formatter/linter/type/test/build 检查，不编造缺失脚本。
+- Security scan：扫描 secrets、permissions、hooks/config、dependencies、raw HTML、API surfaces、MCP/tool config。
+- 会话保存/恢复：保留已完成、失败尝试、变更文件、决策、阻塞项、精确下一步和验证状态。
+- PR：验证分支状态、分析 commits 和 diff、使用 PR 模板、push、创建 PR、验证 CI。
 
-## Hook Runtime Policy
+## Hook 运行时策略
 
-Hooks are optional automation, not default behavior.
+Hooks 是可选自动化，不是默认行为。
 
-Before enabling a hook:
+启用 hook 前：
 
-- The project must have local deterministic commands for the hook to run.
-- The hook command must be pinned to local project dependencies or reviewed absolute scripts.
-- Blocking hooks must have clear failure messages and a manual recovery path.
-- Hooks must not silently send code, secrets, prompts, or file contents to remote services.
-- Hooks that modify files must be scoped to edited files and must not rewrite broad config.
-- Hook behavior must be documented in `docs/project-tooling.md` or the project equivalent.
+- 项目必须有本地确定性命令供 hook 运行。
+- hook 命令必须绑定本地项目依赖，或经过审查的绝对脚本。
+- 阻塞 hook 必须有清晰失败消息和手动恢复路径。
+- hook 不得静默发送代码、secrets、prompts 或文件内容到远程服务。
+- 会修改文件的 hook 必须限定到编辑文件，不得大范围重写配置。
+- hook 行为记录在 `docs/project-tooling.md` 或项目等效文档中。
 
-Good hook candidates:
+适合的 hook：
 
-- format edited files
-- lint edited files
-- warn on production `console.log` or debug statements
-- run incremental type checks
-- block commits with obvious secrets or skipped verification
-- save session/checkpoint metadata before compaction or handoff
+- 格式化编辑文件
+- lint 编辑文件
+- 警告生产 `console.log` 或 debug 语句
+- 增量 type check
+- 阻止明显 secrets 或跳过验证的提交
+- compaction 或交接前保存会话/检查点 metadata
 
-Avoid hooks that:
+避免的 hook：
 
-- run long builds on every edit
-- install packages automatically
-- overwrite local configs
-- require tmux/worktrees when the project is not using them
-- hide failures or swallow non-zero exits
+- 每次编辑都跑长 build
+- 自动安装包
+- 覆盖本地配置
+- 在项目未使用 tmux/worktrees 时强制要求
+- 隐藏失败或吞掉非零退出码
 
-## Orchestration Policy
+## 编排策略
 
-Use orchestration only when single-agent execution is insufficient.
+只有单 Agent 执行不足时才使用编排。
 
-Required before parallel work:
+并行工作前必须有：
 
-- work items with owner, scope, branch/worktree, acceptance criteria, and merge gate
-- no overlapping writes without a named integrator
-- handoff artifact for each worker
-- deterministic checks before merge
-- security/risk review for shared code, auth, data, deploy, or config changes
+- 带 owner、scope、branch/worktree、acceptance criteria、merge gate 的 work items
+- 没有命名 integrator 时禁止重叠写入
+- 每个 worker 有 handoff artifact
+- 合并前运行确定性检查
+- 共享代码、auth、data、deploy 或 config 变更要做安全/风险审查
 
-Do not use orchestration to make small tasks look larger. For narrow edits, use a single-agent flow.
+不要为了让小任务显得复杂而使用编排。窄改动使用单 Agent 流程。
 
-## Domain Activation
+## 领域启用
 
-When a project names a stack or domain, add the relevant ECC-derived rules to project-local docs:
+项目明确技术栈或领域后，将对应 ECC 派生规则加入项目本地文档：
 
-- stack rules go into `docs/project-technical-decisions.md` or a stack-specific doc
-- database rules go into migration/schema/runbook docs
-- deployment rules go into deployment/rollback docs
-- business/content/media/domain rules go into product-specific docs
+- 技术栈规则写入 `docs/project-technical-decisions.md` 或栈专项文档。
+- 数据库规则写入 migration/schema/runbook 文档。
+- 部署规则写入部署/回滚文档。
+- business/content/media/domain 规则写入产品专项文档。
 
-Record the activation decision and source module in `dev-logs/YYYY-MM-DD.md`.
+启用决策和来源模块记录到 `dev-logs/YYYY-MM-DD.md`。

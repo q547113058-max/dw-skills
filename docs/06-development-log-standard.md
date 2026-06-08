@@ -1,57 +1,55 @@
-# Development Log Standard
+# 开发日志标准
 
-Daily logs live in `dev-logs/` and use the filename format `YYYY-MM-DD.md`.
+每天使用一个日志文件：
 
-## Automatic Logging Rule
+```text
+dev-logs/YYYY-MM-DD.md
+```
 
-At the start of every work session:
+## 规则
 
-1. Determine today's date.
-2. If `dev-logs/YYYY-MM-DD.md` does not exist, create it from the template below.
-3. Add the active task under "Session".
+1. 会话开始时，如果当天日志不存在就创建。
+2. 会话结束前更新日志。
+3. 在 `会话` 中写明当前任务。
+4. 在 `已完成` 中记录完成事项。
+5. 在 `变更文件` 中记录文件路径。
+6. 在 `决策` 中记录重要选择和原因。
+7. 在 `验证` 中记录运行的检查和结果。
+8. 在 `未解决问题` 中记录阻塞项。
+9. 在 `下一步待办` 中记录后续动作。
 
-At the end of every work session:
-
-1. Append completed items.
-2. Append changed files.
-3. Append validation results.
-4. Append open issues.
-5. Append next todos.
-
-If the agent cannot update the log, it must say why in the final response.
-
-## Template
+## 模板
 
 ```markdown
-# Development Log - YYYY-MM-DD
+# 开发日志 - YYYY-MM-DD
 
-## Session
+## 会话
 
-- Task:
-- Requirement source:
-- Current phase:
+- 任务：
+- 需求来源：
+- 当前阶段：
 
-## Completed
-
-- 
-
-## Changed Files
+## 已完成
 
 - 
 
-## Decisions
+## 变更文件
 
 - 
 
-## Validation
+## 决策
 
 - 
 
-## Open Issues
+## 验证
 
 - 
 
-## Next Todos
+## 未解决问题
+
+- 
+
+## 下一步待办
 
 - 
 ```

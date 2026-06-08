@@ -1,69 +1,90 @@
-# GitHub Update Standard
+# GitHub 更新标准
 
-All code modifications must be updated through GitHub after verification.
+所有代码修改在验证后都必须通过 GitHub 更新。
 
-## Installed Tooling
+## 工具
 
-- GitHub skill: `C:\Users\54711\.codex\skills\github\SKILL.md`
-- GitHub CLI: `gh`
-- Verified CLI version: `gh 2.93.0`
+- GitHub skill：`C:\Users\54711\.codex\skills\github\SKILL.md`
+- GitHub CLI：`gh`
 
-## Required Workflow After Code Changes
+## 代码变更后的必做流程
 
-1. Check repository state:
+1. 检查状态：
 
 ```powershell
 git status
-git remote -v
-```
-
-2. Verify changes:
-
-```powershell
 git diff
 ```
 
-3. Run the relevant tests, build, lint, or manual verification.
-
-4. Stage only relevant files:
+2. 验证变更：
 
 ```powershell
-git add <changed-files>
+# 使用项目实际命令
+npm test
+npm run lint
+npm run build
 ```
 
-5. Commit with a clear message:
+3. 只暂存相关文件：
 
 ```powershell
-git commit -m "short clear message"
+git add <relevant-files>
 ```
 
-6. Push to GitHub:
+4. 创建聚焦提交：
+
+```powershell
+git commit -m "type: concise description"
+```
+
+5. 检查 remote：
+
+```powershell
+git remote -v
+```
+
+6. 推送到 GitHub：
 
 ```powershell
 git push
 ```
 
-If the project uses pull requests, create or update a PR instead of pushing directly to the main branch:
+或创建 Pull Request：
 
 ```powershell
-gh pr create --title "Title" --body "Summary"
+gh pr create
 ```
 
-## Blockers
+## 禁止行为
 
-If any of these are missing, record the issue in the daily development log:
+未经明确要求，不要：
 
-- not inside a Git repository
-- no GitHub remote configured
-- not authenticated with GitHub
-- branch protection requires a PR
-- tests fail
-- user approval is needed for a sensitive repository action
+- force-push
+- 改写历史
+- 合并 PR
+- 删除分支
+- 改仓库设置
+- 提交无关文件
+- 提交 secrets
 
-## Safety Rules
+## 阻塞情况
 
-- Do not commit unrelated user changes.
-- Do not force-push unless the user explicitly requests it.
-- Do not rewrite history unless the user explicitly requests it.
-- Do not merge, close PRs, delete branches, publish releases, or change repository settings unless directly requested.
-- Always report whether the GitHub update was completed, skipped, or blocked.
+以下情况记录到开发日志：
+
+- 不是 Git 仓库
+- 没有 GitHub remote
+- 未登录 GitHub
+- 测试或 build 失败
+- 工作区包含无关用户改动
+- 需要用户决定分支、remote 或 PR 策略
+
+## 交付报告
+
+最终回复必须说明：
+
+- 是否已提交
+- commit hash
+- 是否已推送
+- GitHub repo 或 PR 链接
+- 哪些检查已运行
+- 哪些检查未运行及原因

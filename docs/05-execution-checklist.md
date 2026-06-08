@@ -1,78 +1,78 @@
-# Execution Checklist
+# 执行清单
 
-Use this checklist during each development task.
+每次开发任务都使用本清单。
 
-## Before Work
+## 开始前
 
-- [ ] Treat the session as stateless and rebuild context from files, not memory.
-- [ ] Read `AGENT.nd`.
-- [ ] Read the relevant docs in `docs/`.
-- [ ] For page or frontend work, read and apply `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`.
-- [ ] For architecture, dependency, impact, or large codebase analysis, use Graphify when appropriate.
-- [ ] For code changes, confirm Git repository and GitHub remote status.
-- [ ] Create or open today's `dev-logs/YYYY-MM-DD.md`.
-- [ ] Confirm requirements are complete enough to proceed.
-- [ ] Locate the active feature checklist and TODO list.
-- [ ] Identify the latest Git checkpoint and current working tree status.
-- [ ] Identify the current development phase.
-- [ ] Define the smallest useful next step.
-- [ ] Search the repository for existing patterns, utilities, and tests before writing net-new code.
-- [ ] Verify unfamiliar APIs, package behavior, or framework behavior against primary docs or installed package versions.
-- [ ] Decide whether the task needs role-based support: planning, TDD, code review, security review, build-error resolution, or stack-specific review.
-- [ ] Check whether any ECC conditional module should be activated for this task using `docs/12-ecc-selective-migration-policy.md`.
+- [ ] 按无状态会话处理，从文件而不是记忆重建上下文。
+- [ ] 读取 `AGENT.nd`。
+- [ ] 读取 `docs/` 中与任务相关的文档。
+- [ ] 页面或前端工作读取并应用 `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`。
+- [ ] 架构、依赖、影响或大型代码库分析时，在合适情况下使用 Graphify。
+- [ ] 代码变更前确认 Git 仓库和 GitHub remote 状态。
+- [ ] 创建或打开当天 `dev-logs/YYYY-MM-DD.md`。
+- [ ] 确认需求足够完整，可以继续。
+- [ ] 找到当前功能清单和 TODO。
+- [ ] 确认最新 Git 检查点和当前工作区状态。
+- [ ] 确认当前开发阶段。
+- [ ] 定义最小有效下一步。
+- [ ] 写新代码前，搜索仓库已有模式、工具和测试。
+- [ ] 不熟悉的 API、包行为或框架行为，查官方文档或已安装版本。
+- [ ] 判断任务是否需要角色支持：规划、TDD、代码审查、安全审查、构建错误修复或技术栈专项审查。
+- [ ] 根据 `docs/12-ecc-selective-migration-policy.md` 判断是否需要启用 ECC 条件模块。
 
-## Before Editing
+## 编辑前
 
-- [ ] Inspect existing files and project structure.
-- [ ] Identify files likely to change.
-- [ ] State the intended edit.
-- [ ] Check for user changes that must be preserved.
-- [ ] Identify validation, error handling, and security boundaries affected by the edit.
-- [ ] For TypeScript, React, or web work, identify applicable conditional frontend rules from `docs/03-technical-standards.md`.
-- [ ] For complex features, architecture changes, or broad refactors, write a brief plan with phases, risks, affected files, and verification before editing.
-- [ ] For features, bug fixes, or refactors with a practical test surface, define the TDD target before editing production code.
-- [ ] If a command recipe applies, name it explicitly: plan, feature-dev, checkpoint, quality-gate, security-scan, build-fix, session-save/resume, or PR.
+- [ ] 检查已有文件和项目结构。
+- [ ] 确认可能变更的文件。
+- [ ] 说明准备做的编辑。
+- [ ] 检查需要保留的用户改动。
+- [ ] 确认编辑影响到的验证、错误处理和安全边界。
+- [ ] TypeScript、React 或 Web 工作，确认适用的条件前端规则。
+- [ ] 复杂功能、架构变更或大范围重构，先写简短计划：阶段、风险、影响文件和验证方式。
+- [ ] 功能、Bugfix 或重构且有实际测试面时，先定义 TDD 目标。
+- [ ] 如适用，明确使用的命令配方：plan、feature-dev、checkpoint、quality-gate、security-scan、build-fix、session-save/resume 或 PR。
 
-## During Work
+## 工作中
 
-- [ ] Keep changes scoped to the active step.
-- [ ] Update the feature checklist and TODO list as work progresses.
-- [ ] Update docs when decisions change.
-- [ ] Avoid unrelated refactors.
-- [ ] Keep UI behavior responsive and accessible when applicable.
-- [ ] Prefer immutable updates when changing shared or UI state.
-- [ ] Keep functions focused and split code that mixes unrelated responsibilities.
-- [ ] Avoid production debug output, hardcoded secrets, and unvalidated external input.
+- [ ] 改动只覆盖当前步骤。
+- [ ] 随进展更新功能清单和 TODO。
+- [ ] 决策变化时更新文档。
+- [ ] 避免无关重构。
+- [ ] UI 行为保持响应式和可访问。
+- [ ] 修改共享状态或 UI 状态时优先不可变更新。
+- [ ] 函数保持聚焦，职责混合时拆分。
+- [ ] 避免生产调试输出、硬编码 secrets 和未验证外部输入。
 
-## Verification
+## 验证
 
-- [ ] Run relevant tests, build, lint, or manual checks.
-- [ ] Run deterministic constraints available in the project: formatter, linter, type check, structural tests, and pre-commit.
-- [ ] For substantial changes, run an automated review loop and fix blocking findings.
-- [ ] Separate generation and evaluation; use an independent evaluator or review pass when available.
-- [ ] If code files changed and `graphify-out/graph.json` exists, run `graphify update .` when practical.
-- [ ] For UI work, inspect desktop and mobile layouts when practical.
-- [ ] Record any check that could not be run.
-- [ ] Review security-sensitive changes first: auth, authorization, user data, payments, filesystem, database, external APIs, cryptography, or secrets.
-- [ ] For frontend work, check accessible queries/labels, keyboard behavior, URL safety, raw HTML usage, public env vars, and responsive overflow.
-- [ ] After code edits, review the diff through the code-review role: concrete failure modes only, line references where possible, no speculative filler.
-- [ ] If build, type check, or tests fail, use the build-error resolver role: read the actual error, apply the smallest fix, rerun the failed command.
-- [ ] If hooks are configured, verify they run local deterministic commands and record any hook failures or bypasses.
-- [ ] If security-sensitive configuration changed, run or document a security scan path for config, hooks, MCP, env, permissions, and dependency surfaces.
+- [ ] 运行相关测试、build、lint 或手动检查。
+- [ ] 运行项目已有确定性约束：formatter、linter、type check、structural tests、pre-commit。
+- [ ] 重要变更运行自动审查循环并修复阻塞问题。
+- [ ] 分离生成和评估；可用时使用独立评估或审查轮次。
+- [ ] 如果修改代码且存在 `graphify-out/graph.json`，可行时运行 `graphify update .`。
+- [ ] UI 工作在可行时检查桌面和移动布局。
+- [ ] 记录无法运行的检查。
+- [ ] 敏感变更先做安全审查：auth、authorization、用户数据、支付、文件系统、数据库、外部 API、加密或 secrets。
+- [ ] 前端工作检查可访问查询/标签、键盘行为、URL 安全、原始 HTML、公开环境变量和响应式溢出。
+- [ ] 代码编辑后用代码审查角色审查 diff：只报告具体失败模式，尽量给行引用，不写猜测性填充。
+- [ ] build、type check 或 tests 失败时使用构建错误修复角色：读取真实错误，最小修复，重新运行失败命令。
+- [ ] 如配置 hooks，确认它们运行本地确定性命令，并记录 hook 失败或绕过。
+- [ ] 安全敏感配置变更时，运行或记录安全扫描路径：config、hooks、MCP、env、permissions、dependency surfaces。
 
-## Handoff
+## 交付
 
-- [ ] Update today's development log.
-- [ ] Record execution trace: phase, changed files, commands/checks, results, blockers, and next action.
-- [ ] Assign quality grade: A, B, C, or Blocked.
-- [ ] Check for anomalies: repeated failures, skipped checks, unclear requirements, unexpected diffs, regressions, or tool timeouts.
-- [ ] Attribute user or evaluator feedback to requirement, planning, implementation, design, verification, tooling, or Agent rule cause.
-- [ ] Record which role-based checks were used or skipped, with the reason.
-- [ ] Record which ECC conditional modules were activated or left reference-only.
-- [ ] Create an incremental Git checkpoint after a coherent verified step, or record why not.
-- [ ] Commit and push through GitHub, or record why GitHub update is blocked.
-- [ ] Use a focused conventional commit style when committing: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`, or `ci`.
-- [ ] Summarize completed work.
-- [ ] List verification results.
-- [ ] List open issues.
-- [ ] List next todos.
+- [ ] 更新当天开发日志。
+- [ ] 记录执行轨迹：阶段、变更文件、命令/检查、结果、阻塞项和下一步。
+- [ ] 评定质量等级：A、B、C 或 Blocked。
+- [ ] 检查异常：重复失败、跳过检查、需求不清、意外 diff、回归或工具超时。
+- [ ] 将用户或评估反馈归因到需求、规划、实现、设计、验证、工具或 Agent 规则。
+- [ ] 记录使用或跳过哪些角色检查，以及原因。
+- [ ] 记录启用或保持参考状态的 ECC 条件模块。
+- [ ] 创建连贯且已验证步骤的增量 Git 检查点，或记录为什么没有。
+- [ ] 提交并推送到 GitHub，或记录 GitHub 更新阻塞原因。
+- [ ] 使用聚焦的 conventional commit 类型：`feat`、`fix`、`refactor`、`docs`、`test`、`chore`、`perf` 或 `ci`。
+- [ ] 总结已完成工作。
+- [ ] 列出验证结果。
+- [ ] 列出未解决问题。
+- [ ] 列出下一步待办。
