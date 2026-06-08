@@ -6,6 +6,7 @@
 
 - GitHub skill：`C:\Users\54711\.codex\skills\github\SKILL.md`
 - GitHub CLI：`gh`
+- GitHub CLI 下载地址：`https://cli.github.com/`
 
 ## 代码变更后的必做流程
 

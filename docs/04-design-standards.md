@@ -7,16 +7,17 @@
 页面开发默认使用：
 
 - `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
+- 下载地址：`https://github.com/Ilm-Alan/frontend-design`
 
 高质量落地页、作品集和重设计使用：
 
 - `C:\Users\54711\.codex\skills\taste-skill\SKILL.md`
+- 下载地址：`https://github.com/Leonxlnx/taste-skill`
 
 职责分工：
 
 - `taste-skill`：审美方向、视觉判断、风格选择。
-- `Ilm-Alan/frontend-design`：把已选风格收敛成 CSS/design tokens。
-- 本地 `frontend-design`：基础 UI 质量、交互和视觉 QA。
+- `frontend-design`：把已选风格收敛成 CSS/design tokens，并承担基础 UI 质量、交互和视觉 QA。
 
 ## 设计输入
 

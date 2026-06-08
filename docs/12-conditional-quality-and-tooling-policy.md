@@ -1,35 +1,35 @@
-# ECC 选择性迁移策略
+# 条件质量与工具策略
 
-本文件定义 ECC 模块如何进入本地开发工作流。
+本文件定义哪些质量规则、角色、Hook、编排和领域规则应进入项目工作流。
 
-默认规则：吸收工作流原则，不复制 ECC 文件；只有具体项目技术栈需要时才启用对应模块。
+默认规则：先吸收可执行原则，不复制外部运行时文件；只有具体项目技术栈、工具链和回滚方案明确后，才启用对应自动化。
 
-## 迁移边界
+## 适用边界
 
-- 不批量复制 ECC 的 `commands/`、`agents/`、`hooks/`、platform configs、MCP configs 或 scripts。
+- 不批量复制 `commands/`、`agents/`、`hooks/`、platform configs、MCP configs 或 scripts。
 - 目标技术栈未知前，不安装技术栈专项 skills。
-- 不用 ECC 模板覆盖本地 Codex、GitHub、包管理器、MCP 或编辑器配置。
+- 不用外部模板覆盖本地 Codex、Hermes、GitHub、包管理器、MCP 或编辑器配置。
 - 优先写入 docs/checklists；只有项目已有仓库、工具链、回滚方案并得到明确批准后，才安装脚本或 hooks。
 - 领域模块在项目需求明确命名该领域前，只作为参考。
 
-## 默认已采纳
+## 默认已采纳规则
 
-以下模块已经以项目规则形式体现在 `AGENT.nd` 和 `docs/` 中：
+以下规则已经以项目规则形式体现在 `AGENT.nd` 和 `docs/` 中：
 
 - `workflow-quality`：TDD、验证循环、eval harness、持续学习。
 - `rules-core`：通用工程规则、安全触发器、审查严重级别、条件前端规则。
-- `agents-core`：规划、TDD、审查、安全、build-fix、E2E 和技术栈专项审查触发器。
-- `commands-core`：规划、功能开发、检查点、质量门禁、安全扫描、构建修复、会话保存/恢复、PR 创建配方。
-- `agentic-patterns`：只采纳 agentic engineering 原则：完成标准、小工作单元、eval-first、模型/成本纪律和人工控制合并门禁。
+- `role-triggers`：规划、TDD、审查、安全、build-fix、E2E 和技术栈专项审查触发器。
+- `command-recipes`：规划、功能开发、检查点、质量门禁、安全扫描、构建修复、会话保存/恢复、PR 创建配方。
+- `agentic-patterns`：完成标准、小工作单元、eval-first、模型/成本纪律和人工控制合并门禁。
 - `security`：安全审查和扫描触发器、secret hygiene、输入验证、依赖和配置审查。
 
-## 条件模块
+## 条件规则
 
 仅在项目需求或技术栈相关时启用：
 
-| 模块 | 启用条件 | 采纳方式 |
+| 规则组 | 启用条件 | 采纳方式 |
 | --- | --- | --- |
-| `hooks-runtime` | 项目有稳定本地命令，并需要自动化 guardrails | Hook 策略，不复制原始 ECC hook 文件 |
+| `hooks-runtime` | 项目有稳定本地命令，并需要自动化 guardrails | Hook 策略，不复制未经审查的 hook 文件 |
 | `platform-configs` | 发现具体平台配置缺口 | 只参考模板，不覆盖 |
 | `framework-language` | 项目技术栈已确定 | 技术栈专项编码/测试规则 |
 | `database` | 项目使用持久化 | migration、schema、query、data integrity 规则 |
@@ -38,7 +38,7 @@
 | `operator-workflows` | GitHub、Jira、billing、Google Workspace 等外部应用已配置 | 带认证检查的操作 runbook |
 | `orchestration` | 多 agent、分支、worktrees 或并行任务 | work item ownership、handoff、merge gates |
 | `devops-infra` | 部署、Docker 或基础设施进入范围 | 部署和回滚标准 |
-| `media-generation` | 产品需要图片、音频、视频或 demo assets | 先用本地已有 media skills，再参考 ECC |
+| `media-generation` | 产品需要图片、音频、视频或 demo assets | 先用本地已有 media skills，再补充专项规则 |
 | `document-processing` | 文档转换或翻译超出已安装 document 插件能力 | 参考 workflow |
 | `machine-learning` | ML/MLOps 进入范围 | 数据契约、eval、监控、回滚 |
 | `swift-apple` | 构建 Apple 平台软件 | Swift/SwiftUI 规则 |
@@ -47,9 +47,9 @@
 
 ## 参考或跳过
 
-- `prediction-market-skills`：只有产品明确涉及预测市场时参考。
-- `supply-chain-domain`：只有供应链、物流或采购项目时参考。
-- 多语言文档：默认跳过；`docs-zh-cn` 仅作为阅读辅助。
+- 预测市场规则：只有产品明确涉及预测市场时参考。
+- 供应链、物流或采购领域规则：只有项目领域需要时参考。
+- 多语言文档：默认跳过；只有目标用户或交付语言需要时启用。
 
 ## 命令配方
 
@@ -110,11 +110,21 @@ Hooks 是可选自动化，不是默认行为。
 
 ## 领域启用
 
-项目明确技术栈或领域后，将对应 ECC 派生规则加入项目本地文档：
+项目明确技术栈或领域后，将对应条件规则加入项目本地文档：
 
 - 技术栈规则写入 `docs/project-technical-decisions.md` 或栈专项文档。
 - 数据库规则写入 migration/schema/runbook 文档。
 - 部署规则写入部署/回滚文档。
 - business/content/media/domain 规则写入产品专项文档。
 
-启用决策和来源模块记录到 `dev-logs/YYYY-MM-DD.md`。
+启用决策和规则来源记录到 `dev-logs/YYYY-MM-DD.md`。
+
+## Hermes 适配
+
+未来迁移到 Hermes 时：
+
+- 以 `docs/02-development-workflow.md` 的 skills 表作为依赖清单。
+- 优先迁移下载地址、触发条件、输入输出、质量门禁和日志格式。
+- 本地绝对路径仅作为当前 Codex 环境说明，不作为 Hermes 运行依赖。
+- Hook、命令和多 Agent 编排必须先转成 Hermes 可审查配置，再启用。
+- 迁移完成后运行同样的质量门禁和执行追踪，不降低验证标准。

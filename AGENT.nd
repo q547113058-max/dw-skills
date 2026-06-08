@@ -7,40 +7,28 @@
 规划或编码前读取：
 
 - `docs/01-requirements-template.md`：用户需求提交模板。
-- `docs/02-development-workflow.md`：分阶段开发流程和规划规则。
+- `docs/02-development-workflow.md`：分阶段开发流程、skills 清单和规划规则。
 - `docs/03-technical-standards.md`：工程、测试和交付标准。
 - `docs/04-design-standards.md`：UI、视觉、颜色和内容标准。
 - `docs/05-execution-checklist.md`：每次任务执行清单。
 - `docs/06-development-log-standard.md`：每日开发日志格式和更新规则。
+- `docs/07-graphify-auxiliary-development.md`：Graphify 辅助开发标准。
 - `docs/08-github-update-standard.md`：代码修改后的 GitHub 更新标准。
 - `docs/09-quality-gates-and-review-loop.md`：确定性约束、自动审查循环、生成/评估分离。
 - `docs/10-session-checkpoints-and-recovery.md`：无状态会话启动、进度追踪、Git 检查点和恢复规则。
 - `docs/11-execution-tracking-quality-feedback.md`：执行追踪、质量分级、异常检测和反馈归因。
-- `docs/12-ecc-selective-migration-policy.md`：ECC 模块迁移边界、命令配方、Hook 策略、编排策略和条件模块启用规则。
+- `docs/12-conditional-quality-and-tooling-policy.md`：条件质量规则、Hook 策略、角色触发、编排策略和 Hermes 迁移注意事项。
 
-页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发时，默认使用已安装的 `frontend-design`：
+## Skills 和下载地址
 
-- `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
+| Skill | 本地路径 | 下载地址 | 用途 |
+| --- | --- | --- | --- |
+| `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/Ilm-Alan/frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA。 |
+| `taste-skill` / `design-taste-frontend` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向、反模板化视觉判断、风格选择。 |
+| `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 架构、文件关系、模块路径、影响分析和大型代码库理解。 |
+| `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | GitHub CLI：`https://cli.github.com/` | GitHub 仓库、提交、PR、Actions 和 API 工作流。 |
 
-高质量落地页、作品集和重设计任务，使用 `taste-skill` 负责审美方向：
-
-- `C:\Users\54711\.codex\skills\taste-skill\SKILL.md`
-- Skill 名称：`design-taste-frontend`
-
-使用 `graphify` 辅助架构和代码库理解：
-
-- Skill 路径：`C:\Users\54711\.codex\skills\graphify\SKILL.md`
-- CLI：`graphify` 或 `C:\Users\54711\.local\bin\graphify.exe`
-- 参考仓库克隆：`work\graphify`
-
-回答架构、模块关系、文件关系、影响分析或大型代码库问题前，如果存在 `graphify-out/graph.json`，优先使用 `graphify`。没有图谱时，只在结构分析确实值得时再创建。
-
-使用 GitHub 交付代码更新：
-
-- GitHub skill：`C:\Users\54711\.codex\skills\github\SKILL.md`
-- GitHub CLI：`gh`
-- 修改代码并验证后，通过提交并推送，或按项目策略创建分支和 Pull Request 来更新 GitHub。
-- 如果项目没有 Git 仓库或 GitHub remote，把它记录为阻塞项或待办，不要假装已经发布。
+Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和规则说明。不要把 Windows 本地绝对路径当作 Hermes 的唯一依赖来源。
 
 ## 核心流程
 
@@ -65,8 +53,8 @@
    - 规划或实现 UI 前读取并应用 `frontend-design`。
    - 将它作为默认 UI 质量和视觉 QA 标准。
    - 开始前确认产品类型、目标用户、主流程、设计风格、颜色和展示内容。
-   - 同时使用 `taste-skill` 与 `Ilm-Alan/frontend-design` 时，`taste-skill` 负责审美方向，`Ilm-Alan/frontend-design` 只负责把选定方向收敛为 CSS/design tokens。
-   - 如果二者冲突，保留 `taste-skill` 的设计方向，用 `Ilm-Alan/frontend-design` 解决实现 token。
+   - 同时使用 `taste-skill` 与 `frontend-design` 时，`taste-skill` 负责审美方向，`frontend-design` 负责把选定方向收敛为 CSS/design tokens 和可执行 UI 质量规则。
+   - 如果二者冲突，保留 `taste-skill` 的设计方向，用 `frontend-design` 解决实现 token、布局约束和视觉 QA。
 
 5. 使用 Graphify 辅助代码库分析。
    - 已有图谱时使用 `graphify query`、`graphify path` 或 `graphify explain`。
@@ -90,12 +78,7 @@
    - 规则要可执行，不写空泛提醒。
    - 在 `dev-logs/YYYY-MM-DD.md` 记录新增规则和原因。
 
-9. 安全交付。
-   - 保持改动聚焦。
-   - 验证变化后的行为。
-   - 汇报改了什么、测了什么、还剩什么。
-
-10. 交付前应用质量门禁。
+9. 交付前应用质量门禁。
    - 先跑确定性约束：linter、formatter、类型检查、结构测试、pre-commit 等。
    - 风险改动使用自动审查循环：实现、审查、修复，直到满足验收标准。
    - 生成和评估分离：产出方案的 Agent 不应是唯一质量证明。
@@ -104,30 +87,29 @@
    - 验证报告必须说明 build、type check、lint、tests、security scan、diff review 的状态。
    - AI 工作流或 prompt 变更先定义能力 eval 和回归 eval，再实现并记录结果。
    - 重复修正和有效模式先作为项目学习候选，只把稳定跨项目模式提升为全局规则。
-   - 应用已采纳的 ECC `rules-core`：先研究复用、明确输入验证、共享数据不可变更新、文件/函数聚焦、常规提交、安全审查触发器、禁止未验证交付。
+   - 先研究复用、明确输入验证、共享数据不可变更新、文件/函数聚焦、常规提交、安全审查触发器，禁止未验证交付。
    - TypeScript、React 或 Web 前端项目启用 `docs/03-technical-standards.md` 和 `docs/09-quality-gates-and-review-loop.md` 中的条件前端规则；技术栈未确定时不要启用无关语言规则。
-   - 应用 ECC `agents-core` 角色触发器，但不安装全部 agent 文件：复杂范围用规划角色，功能/Bug/重构用 TDD 角色，代码编辑后用代码审查角色，敏感边界用安全审查角色，构建/类型失败用构建修复角色，技术栈确定后才启用专项审查角色。
+   - 复杂范围用规划角色，功能/Bug/重构用 TDD 角色，代码编辑后用代码审查角色，敏感边界用安全审查角色，构建/类型失败用构建修复角色，技术栈确定后才启用专项审查角色。
    - 小改动不要为了形式而模拟额外审查角色；确定性检查和本地审查足够时即可。
-   - 应用 ECC `commands-core` 配方作为工作流模式，而不是 slash command 文件：plan、feature development、checkpoint、quality gate、security scan、build fix、session save/resume、PR creation。
-   - 只有任务确实适合 agentic 执行时才应用 ECC `agentic-patterns`：定义完成标准、拆成可独立验证的小单元、追踪成本/重试、使用人工控制的合并门禁。
-   - 敏感变更默认应用 ECC `security` 规则；配置、hooks、MCP、auth、secrets、外部 API 或依赖面变化时启用更深入的安全扫描。
-   - ECC `hooks-runtime`、`platform-configs`、`framework-language`、`database`、`orchestration`、`devops-infra`、`machine-learning`、媒体、业务、运营和领域模块均为条件启用；只有需求或项目栈需要时才启用，并记录决策。
-   - 未经明确批准和回滚方案，不要批量复制 ECC runtime 文件、commands、hooks、agents、platform configs 或 scripts。
+   - 使用命令配方作为工作流模式，而不是依赖 slash command 文件：plan、feature development、checkpoint、quality gate、security scan、build fix、session save/resume、PR creation。
+   - 只有任务确实适合 agentic 执行时才应用 agentic 工程原则：定义完成标准、拆成可独立验证的小单元、追踪成本/重试、使用人工控制的合并门禁。
+   - 敏感变更默认做安全审查；配置、hooks、MCP、auth、secrets、外部 API 或依赖面变化时启用更深入的安全扫描。
+   - 条件工具、Hook、编排、部署、数据库、媒体、业务、运营和领域规则只在需求或项目栈需要时启用，并记录决策。
 
-11. 为代码变更创建 Git 检查点。
+10. 为代码变更创建 Git 检查点。
    - 每个连贯且已验证的步骤后提交一次。
    - 把每次提交视为恢复快照。
    - 不把无关工作混进同一个检查点。
    - 失败时检查最新检查点、当前 diff 和 TODO，然后从中断处继续。
 
-12. 代码变更后通过 GitHub 更新。
+11. 代码变更后通过 GitHub 更新。
    - 编辑前后检查 `git status`。
    - 只提交相关文件。
    - 推送到配置好的 GitHub remote，或按策略准备 Pull Request。
    - 未明确要求时，不 force-push、不改写历史、不合并、不删分支、不改仓库设置。
    - GitHub 更新无法完成时，在 `dev-logs/YYYY-MM-DD.md` 记录原因。
 
-13. 结束时做执行追踪和反馈归因。
+12. 结束时做执行追踪和反馈归因。
    - 记录执行轨迹：任务、阶段、变更文件、命令/检查、结果、阻塞项、下一步。
    - 交付前给质量等级：A、B、C 或 Blocked。
    - 检测异常：重复失败、跳过检查、需求不清、意外 diff、测试回归、工具超时。
@@ -147,7 +129,7 @@
 - 质量门禁和审查循环：`docs/09-quality-gates-and-review-loop.md`
 - 会话检查点和恢复：`docs/10-session-checkpoints-and-recovery.md`
 - 执行追踪和反馈：`docs/11-execution-tracking-quality-feedback.md`
-- ECC 选择性迁移策略：`docs/12-ecc-selective-migration-policy.md`
+- 条件质量与工具策略：`docs/12-conditional-quality-and-tooling-policy.md`
 - 每日日志：`dev-logs/`
 - 用户可交付文件：`outputs/`
 - 临时工作文件：`work/`

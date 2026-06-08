@@ -27,6 +27,24 @@ git log -1 --oneline
 
 下一个安全步骤不清楚前，不要开始编辑。
 
+## 阶段 0.5：Skills 准备
+
+工作流会用到的 skills 必须记录来源，便于后续迁移到 Hermes 或其他 Agent 运行环境。
+
+| Skill | 触发场景 | 下载地址 | 本地路径 |
+| --- | --- | --- | --- |
+| `frontend-design` | 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发 | `https://github.com/Ilm-Alan/frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` |
+| `taste-skill` / `design-taste-frontend` | 高质量落地页、作品集、重设计、视觉方向判断 | `https://github.com/Leonxlnx/taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` |
+| `graphify` | 架构、模块关系、文件路径、影响分析和大型代码库理解 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
+| `github` | GitHub 仓库、提交、PR、Actions、GitHub API 工作 | GitHub CLI：`https://cli.github.com/` | `C:\Users\54711\.codex\skills\github\SKILL.md` |
+
+规则：
+
+- 本地路径只用于当前 Codex 环境。
+- 下载地址和触发场景用于跨环境迁移。
+- Hermes 适配时，优先迁移 skill 源、触发条件、输入输出约束和质量规则。
+- 不把 Windows 绝对路径写成跨平台依赖。
+
 ## 阶段 1：需求收集
 
 1. 要求用户填写 `docs/01-requirements-template.md`。
@@ -61,8 +79,8 @@ git log -1 --oneline
 - 当决策改变产品、数据模型或 UI 结构时，停下来修改计划。
 - 维护可见的功能清单和 TODO。
 - 只有实现并验证后，才能把事项标记为完成。
-- 较大任务使用 ECC 派生的 plan 配方：复述需求、检查本地模式、定义文件/风险/验证，等待确认后再编码。
-- 功能开发使用 ECC 派生的 feature-dev 配方：发现、代码库探索、澄清、架构设计、实现、质量审查、总结。
+- 较大任务使用 plan 配方：复述需求、检查本地模式、定义文件/风险/验证，等待确认后再编码。
+- 功能开发使用 feature-dev 配方：发现、代码库探索、澄清、架构设计、实现、质量审查、总结。
 
 ### 前端设计 Skill 优先级
 
@@ -76,18 +94,19 @@ git log -1 --oneline
    - 动效方向
    - 视觉层级
    - 避免通用 AI 感 UI
-3. `Ilm-Alan/frontend-design` 负责把已选风格变成具体实现 token：
+3. `frontend-design` 负责把已选风格变成具体实现 token：
    - 色彩 token
    - 字体 token
    - 间距和质感 token
    - CSS 变量或设计系统值
-4. 本地 `frontend-design` skill 仍是基础 UI 质量和视觉 QA 标准。
+   - 响应式、可访问性和视觉 QA 约束
+4. 最终选择记录在 `docs/project-design-spec.md`。
 
-不要让 `taste-skill` 和 `Ilm-Alan/frontend-design` 同时决定主色、字体或布局方向。冲突时：
+不要让 `taste-skill` 和 `frontend-design` 同时决定主色、字体或布局方向。冲突时：
 
 - 用 `taste-skill` 决定设计方向。
-- 用 `Ilm-Alan/frontend-design` 把方向形式化为 CSS/design tokens。
-- 最终选择记录在 `docs/project-design-spec.md`。
+- 用 `frontend-design` 把方向形式化为 CSS/design tokens。
+- 以用户需求和现有产品约束为最终裁决。
 
 ## 阶段 3：实现
 
