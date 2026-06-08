@@ -179,7 +179,7 @@ build 失败时，先修复，不继续更深验证。
 
 ## 命令配方门禁
 
-ECC command recipes 作为清单使用，不安装 slash commands。
+命令配方作为清单使用，不依赖 slash commands。
 
 - Plan gate：大任务必须复述需求、提供本地模式证据、阶段、风险、验证和用户确认。
 - Feature-dev gate：功能工作通过 discovery、codebase exploration、clarification、design、implementation、review、summary。

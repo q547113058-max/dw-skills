@@ -5,6 +5,7 @@
 ## 已安装位置
 
 - Skill：`C:\Users\54711\.codex\skills\graphify\SKILL.md`
+- 下载地址：`https://github.com/safishamsi/graphify`
 - CLI：`graphify`
 - 备用 CLI：`C:\Users\54711\.local\bin\graphify.exe`
 - 参考仓库：`work\graphify`
@@ -58,7 +59,7 @@ graphify . --update
 
 1. 如果项目根目录存在 `graphify-out/graph.json`，优先查询现有图谱。
 2. 没有图谱时，只有分析价值足够才创建。
-3. 不把 `work/ecc`、`work/graphify` 或其他临时克隆纳入业务项目图谱，除非它们就是分析目标。
+3. 不把 `work/graphify` 或其他临时克隆纳入业务项目图谱，除非它们就是分析目标。
 4. Graphify 结论要与源码或文档交叉确认。
 5. 重要发现记录到每日开发日志。
 
