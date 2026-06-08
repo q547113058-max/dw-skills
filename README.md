@@ -15,7 +15,7 @@
 - 先确认需求，再规划开发。
 - 每次只推进一个稳定、可验证的小步骤。
 - 页面开发默认使用 `frontend-design`，审美方向由 `taste-skill` 负责。
-- 使用 Graphify 辅助理解架构、文件关系和大型代码库。
+- 轻量项目默认先用 `rg`、直接读文件和现有测试；需要代码结构图时再用 codegraph，项目变复杂或已有图谱时才用 Graphify。
 - 所有代码修改后通过 GitHub 提交和更新。
 - 重复出现的 Agent 错误要沉淀成 `AGENT.nd` 中的明确规则。
 
@@ -25,7 +25,8 @@
 | --- | --- | --- |
 | `frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA 规则 | `https://github.com/Ilm-Alan/frontend-design` |
 | `taste-skill` / `design-taste-frontend` | 审美方向、反模板化视觉判断、风格选择 | `https://github.com/Leonxlnx/taste-skill` |
-| `graphify` | 架构、文件关系、模块路径、影响分析和大型代码库理解 | `https://github.com/safishamsi/graphify` |
+| `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | 待确认具体实现仓库后补充 |
+| `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` |
 | `github` | GitHub CLI、仓库、提交、PR 和 GitHub API 工作流 | Codex 本地 skill；GitHub CLI 下载地址：`https://cli.github.com/` |
 
 ## 使用方式

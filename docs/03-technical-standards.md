@@ -8,7 +8,9 @@
 - 在项目结构支持时，将业务逻辑和表现层分离。
 - 不引入无实际必要的新框架、构建工具或服务。
 - 重大技术决策记录到 `docs/project-technical-decisions.md`。
-- 大型代码库、架构、依赖和影响分析需要时使用 Graphify，见 `docs/07-graphify-auxiliary-development.md`。
+- 轻量项目默认先用 `rg`、直接读文件和现有测试理解代码。
+- 需要轻量代码结构图、import/call/dependency graph 或循环依赖检查时，优先使用 codegraph。
+- 项目变复杂、需要长期架构记忆、跨代码/文档分析或已有图谱时，再使用 Graphify，见 `docs/07-code-structure-analysis.md`。
 
 ## 研究和复用
 

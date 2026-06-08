@@ -12,7 +12,7 @@
 - `docs/04-design-standards.md`：UI、视觉、颜色和内容标准。
 - `docs/05-execution-checklist.md`：每次任务执行清单。
 - `docs/06-development-log-standard.md`：每日开发日志格式和更新规则。
-- `docs/07-graphify-auxiliary-development.md`：Graphify 辅助开发标准。
+- `docs/07-code-structure-analysis.md`：轻量代码结构分析、codegraph 和 Graphify 取舍标准。
 - `docs/08-github-update-standard.md`：代码修改后的 GitHub 更新标准。
 - `docs/09-quality-gates-and-review-loop.md`：确定性约束、自动审查循环、生成/评估分离。
 - `docs/10-session-checkpoints-and-recovery.md`：无状态会话启动、进度追踪、Git 检查点和恢复规则。
@@ -25,7 +25,8 @@
 | --- | --- | --- | --- |
 | `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/Ilm-Alan/frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA。 |
 | `taste-skill` / `design-taste-frontend` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向、反模板化视觉判断、风格选择。 |
-| `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 架构、文件关系、模块路径、影响分析和大型代码库理解。 |
+| `codegraph` | 待配置 | 待确认具体实现仓库后补充 | 轻量代码结构图、import/call/dependency graph、循环依赖检查。 |
+| `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析。 |
 | `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | GitHub CLI：`https://cli.github.com/` | GitHub 仓库、提交、PR、Actions 和 API 工作流。 |
 
 Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和规则说明。不要把 Windows 本地绝对路径当作 Hermes 的唯一依赖来源。
@@ -56,9 +57,12 @@ Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和�
    - 同时使用 `taste-skill` 与 `frontend-design` 时，`taste-skill` 负责审美方向，`frontend-design` 负责把选定方向收敛为 CSS/design tokens 和可执行 UI 质量规则。
    - 如果二者冲突，保留 `taste-skill` 的设计方向，用 `frontend-design` 解决实现 token、布局约束和视觉 QA。
 
-5. 使用 Graphify 辅助代码库分析。
+5. 轻量项目优先使用低成本代码理解路径。
+   - 默认先用 `rg`、直接读文件、现有测试和项目文档理解代码。
+   - 需要快速查看 import/call/dependency graph、模块连接或循环依赖时，优先使用 codegraph。
+   - 只有项目出现跨模块架构不清、长期知识沉淀、跨文档分析，或已存在 `graphify-out/graph.json` 时，才启用 Graphify。
    - 已有图谱时使用 `graphify query`、`graphify path` 或 `graphify explain`。
-   - 只有任务值得结构化分析时，才运行 `/graphify .` 或 `graphify extract .`。
+   - 只有任务值得项目级知识图谱时，才运行 `/graphify .` 或 `graphify extract .`。
    - 修改代码后，如果项目已有 `graphify-out/graph.json`，可行时运行 `graphify update .`。
    - 不扫描生成目录、依赖目录或无关克隆工具，除非它们就是分析目标。
 
@@ -124,7 +128,7 @@ Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和�
 - 设计标准：`docs/04-design-standards.md`
 - 执行清单：`docs/05-execution-checklist.md`
 - 日志标准：`docs/06-development-log-standard.md`
-- Graphify 辅助开发标准：`docs/07-graphify-auxiliary-development.md`
+- 代码结构分析标准：`docs/07-code-structure-analysis.md`
 - GitHub 更新标准：`docs/08-github-update-standard.md`
 - 质量门禁和审查循环：`docs/09-quality-gates-and-review-loop.md`
 - 会话检查点和恢复：`docs/10-session-checkpoints-and-recovery.md`
