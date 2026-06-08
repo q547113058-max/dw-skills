@@ -1,0 +1,153 @@
+# Development Skill Instructions
+
+Use this file as the project entrypoint before starting any development task.
+
+## Required Reading
+
+Read these files before planning or coding:
+
+- `docs/01-requirements-template.md` - user requirement intake template.
+- `docs/02-development-workflow.md` - staged development workflow and planning rules.
+- `docs/03-technical-standards.md` - engineering, testing, and delivery standards.
+- `docs/04-design-standards.md` - UI, visual design, color, and content standards.
+- `docs/05-execution-checklist.md` - per-task execution checklist.
+- `docs/06-development-log-standard.md` - daily development log format and update rules.
+- `docs/08-github-update-standard.md` - GitHub update and delivery rules after code changes.
+- `docs/09-quality-gates-and-review-loop.md` - deterministic constraints, automated review loops, and generation/evaluation separation.
+- `docs/10-session-checkpoints-and-recovery.md` - stateless session startup, progress tracking, Git checkpoints, and recovery rules.
+- `docs/11-execution-tracking-quality-feedback.md` - execution tracking, quality grading, anomaly detection, and feedback attribution.
+- `docs/12-ecc-selective-migration-policy.md` - ECC module migration boundaries, command recipes, hook policy, orchestration policy, and conditional module activation.
+
+For any page, frontend, web app, website, dashboard, game, or interactive UI development, also use the installed `frontend-design` skill at:
+
+- `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
+
+For high-quality landing pages, portfolios, and redesigns, use the installed `taste-skill` for aesthetic direction:
+
+- `C:\Users\54711\.codex\skills\taste-skill\SKILL.md`
+- Skill install name: `design-taste-frontend`
+
+Use `graphify` as an auxiliary development tool for architecture and codebase understanding:
+
+- Skill path: `C:\Users\54711\.codex\skills\graphify\SKILL.md`
+- CLI: `graphify` or `C:\Users\54711\.local\bin\graphify.exe`
+- Reference repo clone: `work\graphify`
+
+Before answering architecture, module relationship, file relationship, impact analysis, or large codebase questions, prefer `graphify` when `graphify-out/graph.json` exists. When no graph exists, create one only when the task benefits from structural codebase analysis.
+
+Use GitHub for code update delivery:
+
+- GitHub skill path: `C:\Users\54711\.codex\skills\github\SKILL.md`
+- GitHub CLI: `gh`
+- After code is modified and verified, update through GitHub by committing and pushing, or by preparing a branch and pull request when that is the project policy.
+- If the project has no Git repository or GitHub remote, record that as a blocker or setup todo instead of pretending the update was published.
+
+## Core Workflow
+
+1. Start every session as stateless.
+   - Rebuild context from `AGENT.nd`, `docs/`, today's `dev-logs/YYYY-MM-DD.md`, Git status, and existing TODO/checklists.
+   - Do not assume chat history is complete.
+   - Identify the last completed checkpoint and the next unfinished task before editing.
+
+2. Start with requirements.
+   - Ask the user to complete the requirement template before implementation.
+   - If any field is missing, make a conservative assumption and write it down before coding.
+   - Do not build from vague intent when the target device, main problem, core functions, or visual direction is unknown.
+
+3. Plan in stable increments.
+   - Break work into small phases that can be implemented, tested, and reviewed independently.
+   - Avoid doing too much at once. Prefer a reliable MVP, then add the next feature.
+   - Each phase must define scope, expected result, validation method, and next step.
+   - Maintain a feature checklist and TODO list for active work.
+   - For complex features, architectural changes, or broad refactors, use a planning role before editing: clarify requirements, identify affected files, list risks, define phases, and define verification.
+
+4. Use frontend-design by default for page development.
+   - Before planning or implementing UI, read and apply `frontend-design`.
+   - Treat it as the default design and UI QA standard for frontend work.
+   - Confirm product type, target user, primary workflow, design style, colors, and displayed content before building.
+   - When using `taste-skill` and `Ilm-Alan/frontend-design` together, use `taste-skill` for aesthetic direction and `Ilm-Alan/frontend-design` only to convert that direction into concrete CSS tokens.
+   - If the two conflict, preserve the `taste-skill` design direction and resolve implementation details through `Ilm-Alan/frontend-design` tokens.
+
+5. Use graphify for auxiliary codebase analysis.
+   - Use `graphify query`, `graphify path`, or `graphify explain` when a graph already exists.
+   - Use `/graphify .` or `graphify extract .` only when building a graph is worth the time and scope.
+   - After modifying code files in a project that has `graphify-out/graph.json`, run `graphify update .` when practical.
+   - Avoid scanning generated folders, dependency folders, or unrelated cloned tools unless they are the actual analysis target.
+
+6. Keep project records current.
+   - Use `dev-logs/YYYY-MM-DD.md` for daily records.
+   - At the start of a work session, create today's log if it does not exist.
+   - At the end of a work session, append completed work, decisions, open issues, and next todos.
+
+7. Keep docs synchronized.
+   - Put project requirements, technical choices, design rules, implementation steps, and acceptance criteria in `docs/`.
+   - Update docs when decisions change.
+   - Do not leave important project knowledge only in chat history.
+
+8. Convert repeated Agent mistakes into rules.
+   - When the Agent makes the same type of mistake more than once, add a concise prevention rule to `AGENT.nd`.
+   - The rule must describe the trigger, the required behavior, and the forbidden behavior.
+   - Keep the rule actionable; do not add vague reminders.
+   - Record the added rule and reason in `dev-logs/YYYY-MM-DD.md`.
+
+9. Deliver safely.
+   - Make focused edits.
+   - Verify the changed behavior.
+   - Report what changed, what was tested, and what remains pending.
+
+10. Apply quality gates before delivery.
+   - Use deterministic constraints first: linter, formatter, type checks, structural tests, and pre-commit where available.
+   - Use an automated review loop for risky changes: implementation, review, fix, repeat until acceptance criteria are satisfied.
+   - Separate generation and evaluation: the agent that creates the solution should not be the only evaluator of the result.
+   - For substantial work, use independent review or evaluator agents when available.
+   - For feature, bugfix, and refactor work, prefer TDD: define user journey, write test, confirm valid RED, implement minimal fix, confirm GREEN, then refactor.
+   - Verification must report build, type check, lint, tests, security scan, and diff review when those checks exist.
+   - For AI workflow or prompt changes, define capability and regression evals before implementation and track pass/fail results.
+   - Treat repeated corrections and useful patterns as project-scoped learning candidates; promote only stable cross-project patterns to global rules.
+   - Apply adopted ECC `rules-core` constraints: research and reuse before net-new implementation, explicit input validation, immutable updates for shared data, focused files/functions, conventional commits, security review triggers, and no untested delivery.
+   - For TypeScript, React, or web frontend projects, enable the conditional frontend rules in `docs/03-technical-standards.md` and `docs/09-quality-gates-and-review-loop.md`; do not apply unrelated language rules before the stack is known.
+   - Apply adopted ECC `agents-core` role triggers without installing all agent files: planning role for complex scope, TDD role for feature/bug/refactor work, code review role after code edits, security review role for sensitive boundaries, build resolver role after build/type failures, and stack-specific review roles only after the project stack is known.
+   - Do not spawn or simulate extra review roles for trivial changes when deterministic checks and a local review pass are enough.
+   - Apply adopted ECC `commands-core` recipes as workflow patterns, not slash-command files: plan, feature development, checkpoint, quality gate, security scan, build fix, session save/resume, and PR creation.
+   - Apply adopted ECC `agentic-patterns` only when the task benefits from agentic execution: define completion criteria, split into independently verifiable units, track cost/retries, and use human-controlled merge gates.
+   - Apply ECC `security` rules by default for sensitive changes; activate deeper security scan guidance when configuration, hooks, MCP, auth, secrets, external APIs, or dependency surfaces change.
+   - Treat ECC `hooks-runtime`, `platform-configs`, `framework-language`, `database`, `orchestration`, `devops-infra`, `machine-learning`, media, business, operator, and domain modules as conditional. Activate them only when requirements or project stack justify them, and record the decision.
+   - Never bulk copy ECC runtime files, commands, hooks, agents, platform configs, or scripts into a project without explicit approval and rollback.
+
+11. Create Git checkpoints for code changes.
+   - Commit incrementally after coherent, verified steps.
+   - Treat each commit as a recovery snapshot.
+   - Do not bundle unrelated work into one checkpoint.
+   - If a failure occurs, inspect the latest checkpoint, current diff, and TODO list, then continue from the interrupted task.
+
+12. Update through GitHub after code changes.
+   - Check `git status` before and after edits.
+   - Commit only relevant changed files.
+   - Push to the configured GitHub remote or prepare a pull request.
+   - Never force-push, rewrite history, merge, delete branches, or change repository settings unless explicitly requested.
+   - If GitHub update cannot be completed, record the reason in `dev-logs/YYYY-MM-DD.md`.
+
+13. Close with execution tracking and feedback attribution.
+   - Record execution trace: task, phase, changed files, commands/checks, result, blockers, and next action.
+   - Assign a quality grade before handoff: A, B, C, or Blocked.
+   - Detect anomalies such as repeated failures, skipped checks, unclear requirements, unexpected diffs, test regressions, or tool timeouts.
+   - Attribute feedback to the likely source: requirement gap, planning gap, implementation bug, design issue, verification gap, tooling issue, or Agent rule gap.
+   - If feedback reveals a repeated Agent rule gap, update `AGENT.nd`.
+
+## Project Paths
+
+- Requirements template: `docs/01-requirements-template.md`
+- Development workflow: `docs/02-development-workflow.md`
+- Technical standards: `docs/03-technical-standards.md`
+- Design standards: `docs/04-design-standards.md`
+- Execution checklist: `docs/05-execution-checklist.md`
+- Log standard: `docs/06-development-log-standard.md`
+- Graphify auxiliary development standard: `docs/07-graphify-auxiliary-development.md`
+- GitHub update standard: `docs/08-github-update-standard.md`
+- Quality gates and review loop: `docs/09-quality-gates-and-review-loop.md`
+- Session checkpoints and recovery: `docs/10-session-checkpoints-and-recovery.md`
+- Execution tracking and feedback: `docs/11-execution-tracking-quality-feedback.md`
+- ECC selective migration policy: `docs/12-ecc-selective-migration-policy.md`
+- Daily logs: `dev-logs/`
+- User-facing deliverables: `outputs/`
+- Temporary work files: `work/`
