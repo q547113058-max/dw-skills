@@ -1,182 +1,186 @@
-# Development Workflow
+# 开发流程
 
-Use this workflow for every software project in this folder.
+本流程适用于本文件夹内的每个软件项目。
 
-## Phase 0: Session Startup
+## 阶段 0：会话启动
 
-Treat every session as stateless.
+每次会话都按无状态处理。
 
-1. Read `AGENT.nd`.
-2. Read the current project docs needed for the task.
-3. Open today's `dev-logs/YYYY-MM-DD.md`; create it if missing.
-4. Check Git state:
-   - `git status`
-   - `git branch --show-current`
-   - `git log -1 --oneline`
-5. Find the active feature checklist and TODO list.
-6. Identify:
-   - last completed checkpoint
-   - current unfinished task
-   - files changed since the last checkpoint
-   - checks already run
-   - checks still pending
+1. 读取 `AGENT.nd`。
+2. 读取当前任务需要的项目文档。
+3. 打开当天 `dev-logs/YYYY-MM-DD.md`；不存在就创建。
+4. 检查 Git 状态：
 
-Do not start editing until the next safe step is clear.
+```powershell
+git status
+git branch --show-current
+git log -1 --oneline
+```
 
-## Phase 1: Requirement Intake
+5. 找到当前功能清单和 TODO。
+6. 确认：
+   - 上一个完成的检查点
+   - 当前未完成任务
+   - 检查点之后变更过的文件
+   - 已运行的检查
+   - 待运行的检查
 
-1. Ask the user to fill `docs/01-requirements-template.md`.
-2. Identify missing critical information:
-   - software purpose
-   - target device or platform
-   - core features
-   - problem being solved
-   - design style
-   - main colors
-   - displayed content
-3. Resolve missing details with short questions or explicit assumptions.
-4. Save clarified requirements in `docs/project-requirements.md`.
+下一个安全步骤不清楚前，不要开始编辑。
 
-## Phase 2: Small-Step Planning
+## 阶段 1：需求收集
 
-Create a plan that moves in stable increments.
+1. 要求用户填写 `docs/01-requirements-template.md`。
+2. 找出缺失的关键信息：
+   - 软件目的
+   - 目标设备或平台
+   - 核心功能
+   - 要解决的问题
+   - 设计风格
+   - 主色
+   - 展示内容
+3. 用简短问题或明确假设补齐缺口。
+4. 将确认后的需求保存到 `docs/project-requirements.md`。
 
-Each step must include:
+## 阶段 2：小步规划
 
-- Goal
-- Files or modules likely to change
-- Expected user-visible result
-- Validation method
-- Risk or dependency
+计划必须稳定推进。
 
-Rules:
+每一步都要包含：
 
-- Do not plan a large all-at-once build when an MVP can validate the direction.
-- Prefer one working screen or workflow before adding extra features.
-- Keep each step independently testable.
-- Stop and revise the plan when a decision changes the product, data model, or UI structure.
-- Maintain a visible feature checklist and TODO list.
-- Mark items complete only after implementation and verification.
-- For larger tasks, use the ECC-derived plan recipe: restate requirements, inspect local patterns, define files/risks/validation, and wait for confirmation before coding.
-- For feature work, follow the ECC-derived feature recipe: discovery, codebase exploration, clarification, architecture design, implementation, quality review, and summary.
+- 目标
+- 可能变更的文件或模块
+- 预期用户可见结果
+- 验证方式
+- 风险或依赖
 
-### Frontend Design Skill Priority
+规则：
 
-For page, frontend, web app, website, dashboard, game, or interactive UI work, use this priority order:
+- MVP 能验证方向时，不做一次性大计划。
+- 先做一个可工作的页面或流程，再增加功能。
+- 每一步都要能独立测试。
+- 当决策改变产品、数据模型或 UI 结构时，停下来修改计划。
+- 维护可见的功能清单和 TODO。
+- 只有实现并验证后，才能把事项标记为完成。
+- 较大任务使用 ECC 派生的 plan 配方：复述需求、检查本地模式、定义文件/风险/验证，等待确认后再编码。
+- 功能开发使用 ECC 派生的 feature-dev 配方：发现、代码库探索、澄清、架构设计、实现、质量审查、总结。
 
-1. User requirements, existing product design, and brand constraints are the highest authority.
-2. `taste-skill` is responsible for aesthetic direction:
-   - anti-slop visual judgment
-   - layout character
-   - mood and art direction
-   - motion direction
-   - visual hierarchy
-   - avoiding generic AI-looking UI
-3. `Ilm-Alan/frontend-design` is responsible for turning the selected style into concrete implementation tokens:
-   - color palette tokens
-   - typography tokens
-   - spacing and texture tokens
-   - CSS variables or design-system values
-4. The installed local `frontend-design` skill remains the baseline UI quality and visual QA standard.
+### 前端设计 Skill 优先级
 
-Do not let `taste-skill` and `Ilm-Alan/frontend-design` independently decide the same main color, typography, or layout direction. If they conflict:
+页面、前端、Web App、网站、仪表盘、游戏或交互 UI 工作，按以下优先级：
 
-- Use `taste-skill` for the design direction.
-- Use `Ilm-Alan/frontend-design` only to formalize that direction into CSS/design tokens.
-- Record the final choice in `docs/project-design-spec.md`.
+1. 用户需求、现有产品设计和品牌约束最高。
+2. `taste-skill` 负责审美方向：
+   - 反模板化视觉判断
+   - 布局性格
+   - 氛围和美术方向
+   - 动效方向
+   - 视觉层级
+   - 避免通用 AI 感 UI
+3. `Ilm-Alan/frontend-design` 负责把已选风格变成具体实现 token：
+   - 色彩 token
+   - 字体 token
+   - 间距和质感 token
+   - CSS 变量或设计系统值
+4. 本地 `frontend-design` skill 仍是基础 UI 质量和视觉 QA 标准。
 
-## Phase 3: Implementation
+不要让 `taste-skill` 和 `Ilm-Alan/frontend-design` 同时决定主色、字体或布局方向。冲突时：
 
-Implement only the current planned step.
+- 用 `taste-skill` 决定设计方向。
+- 用 `Ilm-Alan/frontend-design` 把方向形式化为 CSS/design tokens。
+- 最终选择记录在 `docs/project-design-spec.md`。
 
-Before editing:
+## 阶段 3：实现
 
-- Read relevant files.
-- Check existing project patterns.
-- State the intended edit.
+只实现当前计划步骤。
 
-During editing:
+编辑前：
 
-- Keep changes scoped.
-- Avoid unrelated refactors.
-- Preserve user changes.
-- Add comments only when they clarify non-obvious logic.
+- 阅读相关文件。
+- 检查已有项目模式。
+- 说明将要编辑什么。
 
-## Phase 4: Verification
+编辑中：
 
-Verify the changed behavior before reporting completion.
+- 保持改动聚焦。
+- 避免无关重构。
+- 保留用户已有改动。
+- 只在非显而易见逻辑处添加注释。
 
-Use the strongest practical checks:
+## 阶段 4：验证
 
-- automated tests
-- lint or type checks
+报告完成前，先验证变更后的行为。
+
+使用最强且实际可行的检查：
+
+- 自动化测试
+- lint 或类型检查
 - build
-- manual browser or app check
-- screenshot inspection for UI work
+- 手动浏览器或应用检查
+- UI 工作的截图检查
 
-If a check cannot be run, record why in the daily log.
+无法运行的检查，要在当天日志中说明原因。
 
-### Quality Gates
+### 质量门禁
 
-Apply quality gates in this order:
+按顺序应用：
 
-1. Deterministic constraints:
+1. 确定性约束：
    - formatter
    - linter
    - type check
    - structural tests
-   - unit or integration tests
-   - pre-commit hooks when configured
-2. Automated review loop:
-   - review changed files against requirements and acceptance criteria
-   - fix findings
-   - rerun deterministic checks
-   - repeat until no blocking findings remain
-3. Generation/evaluation separation:
-   - implementation and evaluation should be separate passes
-   - for substantial or risky work, use an independent evaluator or review agent when available
-   - evaluator output must focus on correctness, regressions, missing tests, UX failures, and delivery blockers
+   - unit 或 integration tests
+   - 已配置的 pre-commit hooks
+2. 自动审查循环：
+   - 根据需求和验收标准审查变更文件
+   - 修复发现的问题
+   - 重新运行确定性检查
+   - 循环直到没有阻塞问题
+3. 生成/评估分离：
+   - 实现和评估应是不同轮次
+   - 重要或高风险工作，尽量使用独立评估或审查角色
+   - 评估重点是正确性、回归、缺失测试、UX 问题和交付阻塞
 
-Do not treat a self-summary as verification. Verification requires evidence from checks, tests, review output, or explicit manual inspection.
+不要把自我总结当作验证。验证必须来自检查、测试、审查输出或明确的人工检查。
 
-### Build-Fix Recipe
+### 构建修复配方
 
-When build, lint, type, or test checks fail:
+当 build、lint、type 或 test 失败：
 
-1. Identify the exact failing command and first root error.
-2. Group errors by file and dependency order.
-3. Fix one root error at a time with the smallest safe change.
-4. Rerun the failed command after each meaningful fix.
-5. Stop and reassess if the same error persists after three attempts, the fix creates more errors, or the fix requires architecture changes.
+1. 确认失败命令和第一个根因错误。
+2. 按文件和依赖顺序归类错误。
+3. 一次只修复一个根因，使用最小安全改动。
+4. 每次有意义修复后重新运行失败命令。
+5. 同一错误三次仍未解决、修复引入更多错误或需要架构变更时，停止并重新评估。
 
-### PR Recipe
+### PR 配方
 
-Before creating a pull request:
+创建 Pull Request 前：
 
-1. Verify branch state, working tree state, and commits ahead of base.
-2. Discover and follow the repository PR template when present.
-3. Analyze commit history and diff, not only the latest commit.
-4. Include a test plan and known limitations.
-5. Push the branch and verify PR metadata and CI status.
+1. 验证分支状态、工作区状态和相对 base 的提交。
+2. 找到并遵循仓库 PR 模板。
+3. 分析提交历史和 diff，不只看最新提交。
+4. 包含测试计划和已知限制。
+5. 推送分支并验证 PR 元数据和 CI 状态。
 
-## Phase 5: Logging And Handoff
+## 阶段 5：日志和交接
 
-At the end of each session:
+每次会话结束时：
 
-1. Update today's file in `dev-logs/`.
-2. Record completed work.
-3. Record changed files.
-4. Record validation results.
-5. Record open issues and next todos.
-6. Record the latest Git checkpoint or why no checkpoint was created.
-7. Tell the user what changed and what remains.
+1. 更新当天 `dev-logs/` 文件。
+2. 记录已完成工作。
+3. 记录变更文件。
+4. 记录验证结果。
+5. 记录未解决问题和下一步待办。
+6. 记录最新 Git 检查点，或说明为什么没有检查点。
+7. 告诉用户改了什么、还剩什么。
 
-## Phase 6: Checkpoint Recovery
+## 阶段 6：检查点恢复
 
-When a session resumes after failure, interruption, context loss, or tool timeout:
+失败、中断、上下文丢失或工具超时后恢复时：
 
-1. Re-run Phase 0.
-2. Compare Git checkpoint state with current working tree.
-3. Read the active TODO list and today's development log.
-4. Continue from the first unfinished verified step.
-5. Do not restart from scratch unless the previous state is unusable.
+1. 重新运行阶段 0。
+2. 比较 Git 检查点状态和当前工作区。
+3. 阅读当前 TODO 和当天开发日志。
+4. 从第一个未完成且可验证的步骤继续。
+5. 只在之前状态不可用时才从头开始。

@@ -1,86 +1,95 @@
-# Software Development Requirements Template
+# 软件开发需求模板
 
-Complete this template before development starts. If a section is uncertain, write "unknown" and add the current best assumption.
+开发开始前，用户需要先提交或确认以下信息。
 
-## 1. Product Summary
+## 1. 软件目标
 
-- Software name:
-- One-sentence description:
-- Primary user:
-- Business or personal goal:
+- 要做什么软件？
+- 主要解决什么问题？
+- 目标用户是谁？
+- 用户为什么需要它？
 
-## 2. Target Devices
+## 2. 运行设备和平台
 
-- Target platform: Web / desktop / mobile / tablet / CLI / other
-- Target operating systems:
-- Browser or runtime requirements:
-- Screen sizes that must work:
-- Offline support needed: Yes / No
+- 运行在哪些设备上？
+  - 桌面电脑
+  - 手机
+  - 平板
+  - Web 浏览器
+  - Windows / macOS / Linux
+  - iOS / Android
+  - 其他
+- 是否需要响应式适配？
+- 是否需要离线能力？
 
-## 3. Problem To Solve
+## 3. 核心功能
 
-- What problem does this software solve?
-- Who has this problem?
-- What is the current workaround?
-- What result should improve after using this software?
+请列出必须有的功能。
 
-## 4. Core Functions
-
-List must-have features for the first usable version.
-
-| Priority | Feature | User action | Expected result |
+| 优先级 | 功能 | 用户操作 | 预期结果 |
 | --- | --- | --- | --- |
-| P0 |  |  |  |
-| P1 |  |  |  |
-| P2 |  |  |  |
+| 必须 |  |  |  |
+| 应该 |  |  |  |
+| 可选 |  |  |  |
 
-## 5. Displayed Content
+## 4. 要解决的问题
 
-- What data, text, media, or controls must appear on screen?
-- What should be visible on the first screen?
-- What should be hidden behind menus, tabs, or detail views?
-- Empty state content:
-- Error state content:
+- 当前流程有什么痛点？
+- 这个软件如何让流程变得更快、更清晰或更可靠？
+- 成功的判断标准是什么？
 
-## 6. Design Direction
+## 5. 展示内容
 
-- Desired style: quiet / professional / playful / editorial / technical / luxury / minimal / other
-- Main color:
-- Secondary colors:
-- Background color:
-- Typography preference:
-- Icon style:
-- Visual references or products to resemble:
-- Visual styles to avoid:
+- 页面或界面要显示哪些内容？
+- 是否有列表、表格、图表、卡片、表单、地图、媒体或实时数据？
+- 是否有示例数据或真实数据源？
+- 是否需要上传、下载、搜索、筛选、排序或编辑？
 
-## 7. User Flow
+## 6. 设计方向
 
-Describe the main workflow from opening the software to completing the key task.
+- 期望的设计风格是什么？
+  - 极简
+  - 专业商务
+  - 科技感
+  - 奢华
+  - 活泼
+  - 游戏化
+  - 编辑/杂志感
+  - 其他
+- 主要颜色是什么？
+- 是否有品牌色、Logo、字体或参考网站？
+- 不喜欢哪些视觉风格？
 
-1. 
-2. 
-3. 
+## 7. 交互和工作流
 
-## 8. Data And Integrations
+- 用户进入软件后的第一步是什么？
+- 最常用的工作流是什么？
+- 是否需要登录、权限、支付、通知或协作？
+- 是否需要移动端手势、快捷键或拖拽？
 
-- Data source:
-- Authentication needed: Yes / No
-- External APIs:
-- Files to import or export:
-- Privacy or security constraints:
+## 8. 数据和集成
 
-## 9. Acceptance Criteria
+- 数据来自哪里？
+- 是否需要数据库？
+- 是否需要第三方 API？
+- 是否有隐私、安全或合规要求？
 
-The first version is done when:
+## 9. 验收标准
 
-- 
-- 
-- 
+完成后如何判断可交付？
 
-## 10. Constraints
+- [ ] 核心功能可用。
+- [ ] 目标设备上可运行。
+- [ ] 主要界面内容正确。
+- [ ] 设计风格符合要求。
+- [ ] 关键流程已验证。
+- [ ] 已知限制已记录。
 
-- Deadline:
-- Budget or resource limits:
-- Required tech stack:
-- Prohibited tech stack:
-- Other constraints:
+## 10. 约束
+
+- 截止时间：
+- 技术栈偏好：
+- 必须使用的工具：
+- 禁止使用的工具：
+- 部署方式：
+- 预算或性能要求：

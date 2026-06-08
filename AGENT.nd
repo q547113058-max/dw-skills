@@ -1,153 +1,153 @@
-# Development Skill Instructions
+# 开发 Skills 工作说明
 
-Use this file as the project entrypoint before starting any development task.
+开始任何开发任务前，先把本文件作为项目入口读取。
 
-## Required Reading
+## 必读文件
 
-Read these files before planning or coding:
+规划或编码前读取：
 
-- `docs/01-requirements-template.md` - user requirement intake template.
-- `docs/02-development-workflow.md` - staged development workflow and planning rules.
-- `docs/03-technical-standards.md` - engineering, testing, and delivery standards.
-- `docs/04-design-standards.md` - UI, visual design, color, and content standards.
-- `docs/05-execution-checklist.md` - per-task execution checklist.
-- `docs/06-development-log-standard.md` - daily development log format and update rules.
-- `docs/08-github-update-standard.md` - GitHub update and delivery rules after code changes.
-- `docs/09-quality-gates-and-review-loop.md` - deterministic constraints, automated review loops, and generation/evaluation separation.
-- `docs/10-session-checkpoints-and-recovery.md` - stateless session startup, progress tracking, Git checkpoints, and recovery rules.
-- `docs/11-execution-tracking-quality-feedback.md` - execution tracking, quality grading, anomaly detection, and feedback attribution.
-- `docs/12-ecc-selective-migration-policy.md` - ECC module migration boundaries, command recipes, hook policy, orchestration policy, and conditional module activation.
+- `docs/01-requirements-template.md`：用户需求提交模板。
+- `docs/02-development-workflow.md`：分阶段开发流程和规划规则。
+- `docs/03-technical-standards.md`：工程、测试和交付标准。
+- `docs/04-design-standards.md`：UI、视觉、颜色和内容标准。
+- `docs/05-execution-checklist.md`：每次任务执行清单。
+- `docs/06-development-log-standard.md`：每日开发日志格式和更新规则。
+- `docs/08-github-update-standard.md`：代码修改后的 GitHub 更新标准。
+- `docs/09-quality-gates-and-review-loop.md`：确定性约束、自动审查循环、生成/评估分离。
+- `docs/10-session-checkpoints-and-recovery.md`：无状态会话启动、进度追踪、Git 检查点和恢复规则。
+- `docs/11-execution-tracking-quality-feedback.md`：执行追踪、质量分级、异常检测和反馈归因。
+- `docs/12-ecc-selective-migration-policy.md`：ECC 模块迁移边界、命令配方、Hook 策略、编排策略和条件模块启用规则。
 
-For any page, frontend, web app, website, dashboard, game, or interactive UI development, also use the installed `frontend-design` skill at:
+页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发时，默认使用已安装的 `frontend-design`：
 
 - `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
 
-For high-quality landing pages, portfolios, and redesigns, use the installed `taste-skill` for aesthetic direction:
+高质量落地页、作品集和重设计任务，使用 `taste-skill` 负责审美方向：
 
 - `C:\Users\54711\.codex\skills\taste-skill\SKILL.md`
-- Skill install name: `design-taste-frontend`
+- Skill 名称：`design-taste-frontend`
 
-Use `graphify` as an auxiliary development tool for architecture and codebase understanding:
+使用 `graphify` 辅助架构和代码库理解：
 
-- Skill path: `C:\Users\54711\.codex\skills\graphify\SKILL.md`
-- CLI: `graphify` or `C:\Users\54711\.local\bin\graphify.exe`
-- Reference repo clone: `work\graphify`
+- Skill 路径：`C:\Users\54711\.codex\skills\graphify\SKILL.md`
+- CLI：`graphify` 或 `C:\Users\54711\.local\bin\graphify.exe`
+- 参考仓库克隆：`work\graphify`
 
-Before answering architecture, module relationship, file relationship, impact analysis, or large codebase questions, prefer `graphify` when `graphify-out/graph.json` exists. When no graph exists, create one only when the task benefits from structural codebase analysis.
+回答架构、模块关系、文件关系、影响分析或大型代码库问题前，如果存在 `graphify-out/graph.json`，优先使用 `graphify`。没有图谱时，只在结构分析确实值得时再创建。
 
-Use GitHub for code update delivery:
+使用 GitHub 交付代码更新：
 
-- GitHub skill path: `C:\Users\54711\.codex\skills\github\SKILL.md`
-- GitHub CLI: `gh`
-- After code is modified and verified, update through GitHub by committing and pushing, or by preparing a branch and pull request when that is the project policy.
-- If the project has no Git repository or GitHub remote, record that as a blocker or setup todo instead of pretending the update was published.
+- GitHub skill：`C:\Users\54711\.codex\skills\github\SKILL.md`
+- GitHub CLI：`gh`
+- 修改代码并验证后，通过提交并推送，或按项目策略创建分支和 Pull Request 来更新 GitHub。
+- 如果项目没有 Git 仓库或 GitHub remote，把它记录为阻塞项或待办，不要假装已经发布。
 
-## Core Workflow
+## 核心流程
 
-1. Start every session as stateless.
-   - Rebuild context from `AGENT.nd`, `docs/`, today's `dev-logs/YYYY-MM-DD.md`, Git status, and existing TODO/checklists.
-   - Do not assume chat history is complete.
-   - Identify the last completed checkpoint and the next unfinished task before editing.
+1. 每次会话都按无状态启动。
+   - 从 `AGENT.nd`、`docs/`、当天 `dev-logs/YYYY-MM-DD.md`、Git 状态和现有 TODO/清单重建上下文。
+   - 不假设聊天历史完整。
+   - 编辑前确认最后完成的检查点和下一个未完成任务。
 
-2. Start with requirements.
-   - Ask the user to complete the requirement template before implementation.
-   - If any field is missing, make a conservative assumption and write it down before coding.
-   - Do not build from vague intent when the target device, main problem, core functions, or visual direction is unknown.
+2. 从需求开始。
+   - 要求用户先填写需求模板。
+   - 如有缺失，先做保守假设并写明，再编码。
+   - 目标设备、主要问题、核心功能或视觉方向不清楚时，不要直接开工。
 
-3. Plan in stable increments.
-   - Break work into small phases that can be implemented, tested, and reviewed independently.
-   - Avoid doing too much at once. Prefer a reliable MVP, then add the next feature.
-   - Each phase must define scope, expected result, validation method, and next step.
-   - Maintain a feature checklist and TODO list for active work.
-   - For complex features, architectural changes, or broad refactors, use a planning role before editing: clarify requirements, identify affected files, list risks, define phases, and define verification.
+3. 小步规划，稳定推进。
+   - 拆成可以独立实现、测试和审查的小阶段。
+   - 不要一次做太多；先交付可靠 MVP，再加下一项功能。
+   - 每个阶段必须定义范围、预期结果、验证方式和下一步。
+   - 维护功能清单和 TODO。
+   - 复杂功能、架构变更或大范围重构前，使用规划角色：明确需求、影响文件、风险、阶段和验证方式。
 
-4. Use frontend-design by default for page development.
-   - Before planning or implementing UI, read and apply `frontend-design`.
-   - Treat it as the default design and UI QA standard for frontend work.
-   - Confirm product type, target user, primary workflow, design style, colors, and displayed content before building.
-   - When using `taste-skill` and `Ilm-Alan/frontend-design` together, use `taste-skill` for aesthetic direction and `Ilm-Alan/frontend-design` only to convert that direction into concrete CSS tokens.
-   - If the two conflict, preserve the `taste-skill` design direction and resolve implementation details through `Ilm-Alan/frontend-design` tokens.
+4. 页面开发默认使用 `frontend-design`。
+   - 规划或实现 UI 前读取并应用 `frontend-design`。
+   - 将它作为默认 UI 质量和视觉 QA 标准。
+   - 开始前确认产品类型、目标用户、主流程、设计风格、颜色和展示内容。
+   - 同时使用 `taste-skill` 与 `Ilm-Alan/frontend-design` 时，`taste-skill` 负责审美方向，`Ilm-Alan/frontend-design` 只负责把选定方向收敛为 CSS/design tokens。
+   - 如果二者冲突，保留 `taste-skill` 的设计方向，用 `Ilm-Alan/frontend-design` 解决实现 token。
 
-5. Use graphify for auxiliary codebase analysis.
-   - Use `graphify query`, `graphify path`, or `graphify explain` when a graph already exists.
-   - Use `/graphify .` or `graphify extract .` only when building a graph is worth the time and scope.
-   - After modifying code files in a project that has `graphify-out/graph.json`, run `graphify update .` when practical.
-   - Avoid scanning generated folders, dependency folders, or unrelated cloned tools unless they are the actual analysis target.
+5. 使用 Graphify 辅助代码库分析。
+   - 已有图谱时使用 `graphify query`、`graphify path` 或 `graphify explain`。
+   - 只有任务值得结构化分析时，才运行 `/graphify .` 或 `graphify extract .`。
+   - 修改代码后，如果项目已有 `graphify-out/graph.json`，可行时运行 `graphify update .`。
+   - 不扫描生成目录、依赖目录或无关克隆工具，除非它们就是分析目标。
 
-6. Keep project records current.
-   - Use `dev-logs/YYYY-MM-DD.md` for daily records.
-   - At the start of a work session, create today's log if it does not exist.
-   - At the end of a work session, append completed work, decisions, open issues, and next todos.
+6. 保持项目记录更新。
+   - 使用 `dev-logs/YYYY-MM-DD.md` 做每日记录。
+   - 会话开始时，如果当天日志不存在就创建。
+   - 会话结束时追加已完成事项、决策、未解决问题和下一步待办。
 
-7. Keep docs synchronized.
-   - Put project requirements, technical choices, design rules, implementation steps, and acceptance criteria in `docs/`.
-   - Update docs when decisions change.
-   - Do not leave important project knowledge only in chat history.
+7. 保持文档同步。
+   - 需求、技术选择、设计规则、执行步骤和验收标准放入 `docs/`。
+   - 决策变化时同步更新文档。
+   - 不把重要项目知识只留在聊天里。
 
-8. Convert repeated Agent mistakes into rules.
-   - When the Agent makes the same type of mistake more than once, add a concise prevention rule to `AGENT.nd`.
-   - The rule must describe the trigger, the required behavior, and the forbidden behavior.
-   - Keep the rule actionable; do not add vague reminders.
-   - Record the added rule and reason in `dev-logs/YYYY-MM-DD.md`.
+8. 把重复 Agent 错误转成规则。
+   - 同类错误出现超过一次时，在 `AGENT.nd` 中添加简洁预防规则。
+   - 规则必须写清触发条件、必须行为和禁止行为。
+   - 规则要可执行，不写空泛提醒。
+   - 在 `dev-logs/YYYY-MM-DD.md` 记录新增规则和原因。
 
-9. Deliver safely.
-   - Make focused edits.
-   - Verify the changed behavior.
-   - Report what changed, what was tested, and what remains pending.
+9. 安全交付。
+   - 保持改动聚焦。
+   - 验证变化后的行为。
+   - 汇报改了什么、测了什么、还剩什么。
 
-10. Apply quality gates before delivery.
-   - Use deterministic constraints first: linter, formatter, type checks, structural tests, and pre-commit where available.
-   - Use an automated review loop for risky changes: implementation, review, fix, repeat until acceptance criteria are satisfied.
-   - Separate generation and evaluation: the agent that creates the solution should not be the only evaluator of the result.
-   - For substantial work, use independent review or evaluator agents when available.
-   - For feature, bugfix, and refactor work, prefer TDD: define user journey, write test, confirm valid RED, implement minimal fix, confirm GREEN, then refactor.
-   - Verification must report build, type check, lint, tests, security scan, and diff review when those checks exist.
-   - For AI workflow or prompt changes, define capability and regression evals before implementation and track pass/fail results.
-   - Treat repeated corrections and useful patterns as project-scoped learning candidates; promote only stable cross-project patterns to global rules.
-   - Apply adopted ECC `rules-core` constraints: research and reuse before net-new implementation, explicit input validation, immutable updates for shared data, focused files/functions, conventional commits, security review triggers, and no untested delivery.
-   - For TypeScript, React, or web frontend projects, enable the conditional frontend rules in `docs/03-technical-standards.md` and `docs/09-quality-gates-and-review-loop.md`; do not apply unrelated language rules before the stack is known.
-   - Apply adopted ECC `agents-core` role triggers without installing all agent files: planning role for complex scope, TDD role for feature/bug/refactor work, code review role after code edits, security review role for sensitive boundaries, build resolver role after build/type failures, and stack-specific review roles only after the project stack is known.
-   - Do not spawn or simulate extra review roles for trivial changes when deterministic checks and a local review pass are enough.
-   - Apply adopted ECC `commands-core` recipes as workflow patterns, not slash-command files: plan, feature development, checkpoint, quality gate, security scan, build fix, session save/resume, and PR creation.
-   - Apply adopted ECC `agentic-patterns` only when the task benefits from agentic execution: define completion criteria, split into independently verifiable units, track cost/retries, and use human-controlled merge gates.
-   - Apply ECC `security` rules by default for sensitive changes; activate deeper security scan guidance when configuration, hooks, MCP, auth, secrets, external APIs, or dependency surfaces change.
-   - Treat ECC `hooks-runtime`, `platform-configs`, `framework-language`, `database`, `orchestration`, `devops-infra`, `machine-learning`, media, business, operator, and domain modules as conditional. Activate them only when requirements or project stack justify them, and record the decision.
-   - Never bulk copy ECC runtime files, commands, hooks, agents, platform configs, or scripts into a project without explicit approval and rollback.
+10. 交付前应用质量门禁。
+   - 先跑确定性约束：linter、formatter、类型检查、结构测试、pre-commit 等。
+   - 风险改动使用自动审查循环：实现、审查、修复，直到满足验收标准。
+   - 生成和评估分离：产出方案的 Agent 不应是唯一质量证明。
+   - 重要任务尽量使用独立审查或评估角色。
+   - 功能、Bugfix、重构优先使用 TDD：定义用户旅程，写测试，确认有效 RED，最小实现，确认 GREEN，再重构。
+   - 验证报告必须说明 build、type check、lint、tests、security scan、diff review 的状态。
+   - AI 工作流或 prompt 变更先定义能力 eval 和回归 eval，再实现并记录结果。
+   - 重复修正和有效模式先作为项目学习候选，只把稳定跨项目模式提升为全局规则。
+   - 应用已采纳的 ECC `rules-core`：先研究复用、明确输入验证、共享数据不可变更新、文件/函数聚焦、常规提交、安全审查触发器、禁止未验证交付。
+   - TypeScript、React 或 Web 前端项目启用 `docs/03-technical-standards.md` 和 `docs/09-quality-gates-and-review-loop.md` 中的条件前端规则；技术栈未确定时不要启用无关语言规则。
+   - 应用 ECC `agents-core` 角色触发器，但不安装全部 agent 文件：复杂范围用规划角色，功能/Bug/重构用 TDD 角色，代码编辑后用代码审查角色，敏感边界用安全审查角色，构建/类型失败用构建修复角色，技术栈确定后才启用专项审查角色。
+   - 小改动不要为了形式而模拟额外审查角色；确定性检查和本地审查足够时即可。
+   - 应用 ECC `commands-core` 配方作为工作流模式，而不是 slash command 文件：plan、feature development、checkpoint、quality gate、security scan、build fix、session save/resume、PR creation。
+   - 只有任务确实适合 agentic 执行时才应用 ECC `agentic-patterns`：定义完成标准、拆成可独立验证的小单元、追踪成本/重试、使用人工控制的合并门禁。
+   - 敏感变更默认应用 ECC `security` 规则；配置、hooks、MCP、auth、secrets、外部 API 或依赖面变化时启用更深入的安全扫描。
+   - ECC `hooks-runtime`、`platform-configs`、`framework-language`、`database`、`orchestration`、`devops-infra`、`machine-learning`、媒体、业务、运营和领域模块均为条件启用；只有需求或项目栈需要时才启用，并记录决策。
+   - 未经明确批准和回滚方案，不要批量复制 ECC runtime 文件、commands、hooks、agents、platform configs 或 scripts。
 
-11. Create Git checkpoints for code changes.
-   - Commit incrementally after coherent, verified steps.
-   - Treat each commit as a recovery snapshot.
-   - Do not bundle unrelated work into one checkpoint.
-   - If a failure occurs, inspect the latest checkpoint, current diff, and TODO list, then continue from the interrupted task.
+11. 为代码变更创建 Git 检查点。
+   - 每个连贯且已验证的步骤后提交一次。
+   - 把每次提交视为恢复快照。
+   - 不把无关工作混进同一个检查点。
+   - 失败时检查最新检查点、当前 diff 和 TODO，然后从中断处继续。
 
-12. Update through GitHub after code changes.
-   - Check `git status` before and after edits.
-   - Commit only relevant changed files.
-   - Push to the configured GitHub remote or prepare a pull request.
-   - Never force-push, rewrite history, merge, delete branches, or change repository settings unless explicitly requested.
-   - If GitHub update cannot be completed, record the reason in `dev-logs/YYYY-MM-DD.md`.
+12. 代码变更后通过 GitHub 更新。
+   - 编辑前后检查 `git status`。
+   - 只提交相关文件。
+   - 推送到配置好的 GitHub remote，或按策略准备 Pull Request。
+   - 未明确要求时，不 force-push、不改写历史、不合并、不删分支、不改仓库设置。
+   - GitHub 更新无法完成时，在 `dev-logs/YYYY-MM-DD.md` 记录原因。
 
-13. Close with execution tracking and feedback attribution.
-   - Record execution trace: task, phase, changed files, commands/checks, result, blockers, and next action.
-   - Assign a quality grade before handoff: A, B, C, or Blocked.
-   - Detect anomalies such as repeated failures, skipped checks, unclear requirements, unexpected diffs, test regressions, or tool timeouts.
-   - Attribute feedback to the likely source: requirement gap, planning gap, implementation bug, design issue, verification gap, tooling issue, or Agent rule gap.
-   - If feedback reveals a repeated Agent rule gap, update `AGENT.nd`.
+13. 结束时做执行追踪和反馈归因。
+   - 记录执行轨迹：任务、阶段、变更文件、命令/检查、结果、阻塞项、下一步。
+   - 交付前给质量等级：A、B、C 或 Blocked。
+   - 检测异常：重复失败、跳过检查、需求不清、意外 diff、测试回归、工具超时。
+   - 将反馈归因到：需求缺口、规划缺口、实现 Bug、设计问题、验证缺口、工具问题或 Agent 规则缺口。
+   - 如果反馈暴露重复 Agent 规则缺口，更新 `AGENT.nd`。
 
-## Project Paths
+## 项目路径
 
-- Requirements template: `docs/01-requirements-template.md`
-- Development workflow: `docs/02-development-workflow.md`
-- Technical standards: `docs/03-technical-standards.md`
-- Design standards: `docs/04-design-standards.md`
-- Execution checklist: `docs/05-execution-checklist.md`
-- Log standard: `docs/06-development-log-standard.md`
-- Graphify auxiliary development standard: `docs/07-graphify-auxiliary-development.md`
-- GitHub update standard: `docs/08-github-update-standard.md`
-- Quality gates and review loop: `docs/09-quality-gates-and-review-loop.md`
-- Session checkpoints and recovery: `docs/10-session-checkpoints-and-recovery.md`
-- Execution tracking and feedback: `docs/11-execution-tracking-quality-feedback.md`
-- ECC selective migration policy: `docs/12-ecc-selective-migration-policy.md`
-- Daily logs: `dev-logs/`
-- User-facing deliverables: `outputs/`
-- Temporary work files: `work/`
+- 需求模板：`docs/01-requirements-template.md`
+- 开发流程：`docs/02-development-workflow.md`
+- 技术标准：`docs/03-technical-standards.md`
+- 设计标准：`docs/04-design-standards.md`
+- 执行清单：`docs/05-execution-checklist.md`
+- 日志标准：`docs/06-development-log-standard.md`
+- Graphify 辅助开发标准：`docs/07-graphify-auxiliary-development.md`
+- GitHub 更新标准：`docs/08-github-update-standard.md`
+- 质量门禁和审查循环：`docs/09-quality-gates-and-review-loop.md`
+- 会话检查点和恢复：`docs/10-session-checkpoints-and-recovery.md`
+- 执行追踪和反馈：`docs/11-execution-tracking-quality-feedback.md`
+- ECC 选择性迁移策略：`docs/12-ecc-selective-migration-policy.md`
+- 每日日志：`dev-logs/`
+- 用户可交付文件：`outputs/`
+- 临时工作文件：`work/`

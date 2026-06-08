@@ -1,78 +1,86 @@
-# Design Standards
+# 设计标准
 
-Use these standards for frontend, app, website, dashboard, and interactive tool work.
+本标准用于前端、App、网站、仪表盘和交互工具。
 
-## Default Skill
+## 默认 Skill
 
-For any page, frontend, web app, website, dashboard, game, or interactive UI development, use the installed `frontend-design` skill by default:
+页面开发默认使用：
 
 - `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
 
-Apply it before choosing layout, visual hierarchy, controls, responsive behavior, typography, colors, icons, imagery, interaction states, or visual QA criteria.
-
-For landing pages, portfolios, and redesigns that need stronger aesthetic direction, use installed `taste-skill`:
+高质量落地页、作品集和重设计使用：
 
 - `C:\Users\54711\.codex\skills\taste-skill\SKILL.md`
-- Install name: `design-taste-frontend`
 
-## Taste And Token Roles
+职责分工：
 
-When using `taste-skill` together with `Ilm-Alan/frontend-design`, assign clear responsibilities:
+- `taste-skill`：审美方向、视觉判断、风格选择。
+- `Ilm-Alan/frontend-design`：把已选风格收敛成 CSS/design tokens。
+- 本地 `frontend-design`：基础 UI 质量、交互和视觉 QA。
 
-- `taste-skill` decides the aesthetic direction and anti-generic visual quality.
-- `Ilm-Alan/frontend-design` converts that selected direction into concrete CSS tokens and design-system values.
-- Local `frontend-design` provides baseline frontend UI guardrails and visual QA.
+## 设计输入
 
-If these sources conflict, do not blend competing directions. Keep the chosen aesthetic from `taste-skill`, then use `Ilm-Alan/frontend-design` only for palette, typography, spacing, texture, and CSS token formalization.
+设计前确认：
 
-## Product Fit
+- 软件类型
+- 目标用户
+- 主要工作流
+- 运行设备
+- 展示内容
+- 设计风格
+- 主色和辅助色
+- 参考产品或禁用风格
 
-- Design for the target user and actual workflow.
-- Put the primary task on the first screen when building an app or tool.
-- Avoid marketing-style landing pages unless the user specifically asks for one.
-- Make common actions easy to find and repeat.
+## 体验原则
 
-## Visual Direction
+- 为目标用户和真实工作流设计。
+- 第一个屏幕直接展示可用体验，不默认做营销式落地页。
+- 信息层级要清楚：主操作、次操作、状态和反馈必须容易区分。
+- 常用流程要高效，重复操作要省力。
+- 每个交互状态都要考虑：默认、hover、focus、active、disabled、loading、empty、error、success。
 
-Before designing, confirm:
+## 布局
 
-- desired style
-- main color
-- secondary colors
-- typography direction
-- visible first-screen content
-- examples to resemble or avoid
+- 页面区域使用全宽区块或不加框的约束布局。
+- 不把卡片套在卡片里。
+- 卡片只用于重复项、模态框或确实需要框住的工具。
+- 固定格式元素使用稳定尺寸：棋盘、网格、工具栏、图标按钮、计数器、列表项等不能因 hover、标签或加载文字导致布局跳动。
+- 文本不能重叠、裁切或溢出容器。
+- 移动端和桌面端都要检查可读性。
 
-If the user has not specified these, make conservative choices and document them in `docs/project-design-spec.md`.
+## 控件
 
-## Layout
+- 工具按钮优先使用图标，存在合适图标时使用 lucide 或项目已有图标库。
+- 颜色选择使用 swatches。
+- 模式选择使用 segmented controls。
+- 二元设置使用 checkbox 或 toggle。
+- 数值设置使用 slider、stepper 或输入框。
+- 选项集合使用 menu 或 tabs。
+- 命令按钮使用清晰文本或图标+文本。
 
-- Use stable dimensions for fixed-format UI elements.
-- Ensure text does not overlap or overflow containers.
-- Keep controls near the content they affect.
-- Use tabs, menus, segmented controls, checkboxes, sliders, and icon buttons where they match expected UI behavior.
-- Avoid cards inside cards.
+## 颜色
 
-## Color
+- 使用有意图的调色板：一个主色、支持中性色和明确状态色。
+- 避免单一色相的界面。
+- 避免默认紫蓝渐变、米色/沙色、深蓝/石板色、棕橙咖啡色成为无理由主视觉。
+- 状态色要语义清楚：成功、警告、错误、信息。
 
-- Use a deliberate palette with one main color, supporting neutrals, and clear status colors.
-- Avoid a one-note palette dominated by only one hue family.
-- Ensure sufficient contrast for text and controls.
-- Document final colors in `docs/project-design-spec.md`.
+## 字体和文案
 
-## Content
+- 文案简洁。
+- 标题大小匹配容器；不要在紧凑面板里使用 hero 级字体。
+- 不用视口宽度缩放字体。
+- 字距保持 `0`，不使用负字距。
+- 按钮、卡片、面板内文字必须适配最长词。
 
-- Use concise labels.
-- Avoid in-app text that explains obvious features or implementation details.
-- Include useful empty and error states.
-- Match text size to the density of the surface.
+## UI 验收
 
-## Visual QA
+交付前检查：
 
-For UI work, verify:
-
-- desktop layout
-- mobile layout when applicable
-- text fit
-- hover, active, disabled, loading, empty, and error states
-- image or media rendering when assets are used
+- [ ] 视觉方向符合需求。
+- [ ] 主色、字体和间距已记录。
+- [ ] 主要流程可完成。
+- [ ] 桌面和移动端无重叠、裁切或横向溢出。
+- [ ] 可点击元素有清晰状态。
+- [ ] 空、加载、错误和成功状态已处理。
+- [ ] UI 不像默认模板或未打磨组件库。

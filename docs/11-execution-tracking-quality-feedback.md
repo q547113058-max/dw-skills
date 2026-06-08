@@ -1,72 +1,91 @@
-# Execution Tracking Quality Feedback
+# 执行追踪、质量分级和反馈归因
 
-Use this standard at the end of each task and whenever feedback arrives.
+每个任务结束时，以及收到反馈时，使用本标准。
 
-## Execution Tracking
+## 执行追踪
 
-Every task should leave a trace in `dev-logs/YYYY-MM-DD.md`.
+记录：
 
-Record:
+- 任务
+- 阶段
+- 变更文件
+- 运行的命令或检查
+- 结果
+- 阻塞项
+- 下一步
 
-- task name
-- current phase
-- changed files
-- commands or checks run
-- command results
-- skipped checks and reasons
-- blockers
-- next action
-- latest Git checkpoint, when available
+建议格式：
 
-## Quality Grading
+```text
+执行轨迹：
+- Task:
+- Phase:
+- Files:
+- Checks:
+- Result:
+- Blockers:
+- Next:
+```
 
-Assign one grade before handoff:
+## 质量分级
 
-- `A`: Requirements met, relevant checks passed, no known blocking issues.
-- `B`: Requirements mostly met, minor known issues or skipped low-risk checks recorded.
-- `C`: Partial completion, important checks missing, or notable risk remains.
-- `Blocked`: Cannot safely proceed without user input, missing environment, failing dependency, or unresolved critical issue.
+交付前给出等级：
 
-Do not grade `A` when tests, build, or required manual verification were skipped without a strong reason.
+- `A`：需求满足，相关检查通过，没有已知阻塞问题。
+- `B`：需求基本满足，有轻微已知问题或跳过的低风险检查已记录。
+- `C`：部分完成，但存在明显限制、未验证行为或需要后续修复。
+- `Blocked`：无法安全交付，需要用户输入或外部状态变化。
 
-## Anomaly Detection
+质量等级必须与证据一致，不能因为接近结束就给高分。
 
-Flag anomalies when any of these occur:
+## 异常检测
 
-- same failure repeats
-- command times out
-- generated output is unexpectedly missing
-- Git diff contains unrelated changes
-- tests pass but visible behavior is broken
-- UI has overlap, clipping, unreadable text, or broken responsive layout
-- requirements are ambiguous after implementation starts
-- a tool, dependency, or API behaves differently than expected
-- verification was skipped
+检查以下异常：
 
-For each anomaly, record:
+- 同一命令或检查重复失败
+- 跳过关键验证
+- 需求仍不清楚
+- 出现意外 diff
+- 测试回归
+- 工具超时或网络失败
+- 生成文件缺失
+- UI 重叠、裁切或不可读
+- 安全敏感路径未审查
 
-- what happened
-- likely cause
-- affected files or commands
-- recovery action
+异常要记录到当天日志。
 
-## Feedback Attribution
+## 反馈归因
 
-When the user, evaluator, tests, or review identifies a problem, attribute it to one primary source:
+反馈出现时，归因到一个主要来源：
 
-- requirement gap
-- planning gap
-- implementation bug
-- design issue
-- verification gap
-- tooling or environment issue
-- Agent rule gap
+- 需求缺口
+- 规划缺口
+- 实现 Bug
+- 设计问题
+- 验证缺口
+- 工具问题
+- Agent 规则缺口
 
-Then record:
+归因格式：
 
-- feedback summary
-- attributed cause
-- fix applied or next action
-- whether `AGENT.nd` needs a new prevention rule
+```text
+反馈归因：
+- Feedback:
+- Likely source:
+- Evidence:
+- Fix:
+- Rule update needed:
+```
 
-If the same Agent rule gap repeats, update `AGENT.nd` with an actionable prevention rule.
+## 规则更新
+
+如果反馈暴露重复 Agent 规则缺口：
+
+1. 在 `AGENT.nd` 添加简洁规则。
+2. 规则写清：
+   - 触发条件
+   - 必须行为
+   - 禁止行为
+3. 在当天日志记录新增规则和原因。
+
+不要添加模糊提醒。规则必须能被未来任务直接执行。

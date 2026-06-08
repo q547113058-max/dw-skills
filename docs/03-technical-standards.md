@@ -1,110 +1,110 @@
-# Technical Standards
+# 技术标准
 
-Use these standards unless the project requirements define stricter rules.
+除非项目需求定义了更严格规则，否则使用本标准。
 
-## Architecture
+## 架构
 
-- Prefer the simplest architecture that supports the current requirements.
-- Keep business logic separate from presentation when the project structure supports it.
-- Avoid introducing new frameworks, build tools, or services unless they solve a real project need.
-- Document major technical decisions in `docs/project-technical-decisions.md`.
-- Use Graphify for large codebase, architecture, dependency, and impact analysis when it adds value. See `docs/07-graphify-auxiliary-development.md`.
+- 使用能满足当前需求的最简单架构。
+- 在项目结构支持时，将业务逻辑和表现层分离。
+- 不引入无实际必要的新框架、构建工具或服务。
+- 重大技术决策记录到 `docs/project-technical-decisions.md`。
+- 大型代码库、架构、依赖和影响分析需要时使用 Graphify，见 `docs/07-graphify-auxiliary-development.md`。
 
-## Research And Reuse
+## 研究和复用
 
-- Before net-new implementation, search the existing repository for matching patterns and reusable helpers.
-- For external APIs, packages, or framework behavior, verify against primary documentation or the installed package version before coding.
-- Prefer proven libraries or local project utilities over hand-rolled infrastructure when they meet the requirement.
-- Record major reuse, dependency, or build-tool decisions in the technical decision log.
+- 新实现前，先搜索现有仓库中的模式和可复用工具。
+- 外部 API、包或框架行为，要根据官方文档或已安装版本确认。
+- 能满足需求时，优先使用成熟库或本地工具，不手写基础设施。
+- 重大复用、依赖或构建工具决策记录到技术决策日志。
 
-## Code Quality
+## 代码质量
 
-- Follow existing code style and naming conventions.
-- Keep functions focused and understandable.
-- Avoid duplicated logic when a local helper or shared module is appropriate.
-- Keep edits scoped to the active task.
-- Do not make broad rewrites unless the user requested them or the current task requires them.
-- Prefer simple, direct code over speculative abstraction.
-- Add abstractions only after real repetition or complexity exists.
-- Prefer immutable updates for shared state, request data, and UI state where the language and framework support it.
-- Keep functions small enough to review easily; split functions that mix unrelated responsibilities.
-- Keep files cohesive; consider extracting modules when a file grows beyond roughly 800 lines.
-- Replace meaningful magic numbers, delays, thresholds, and limits with named constants or config.
-- Do not leave production `console.log`, debug output, placeholder names, or mock-only behavior in shipped code.
+- 遵循已有代码风格和命名习惯。
+- 函数保持聚焦、容易理解。
+- 有本地 helper 或共享模块时，避免重复逻辑。
+- 改动只覆盖当前任务。
+- 除非用户要求或任务必须，不做大范围重写。
+- 优先写简单直接的代码，不做投机抽象。
+- 只有真实重复或复杂度出现后才添加抽象。
+- 语言和框架支持时，共享状态、请求数据和 UI 状态优先不可变更新。
+- 函数要足够小，便于审查；混合多个职责时拆分。
+- 文件保持高内聚；超过约 800 行时考虑拆分。
+- 有意义的魔法数字、延迟、阈值和限制用命名常量或配置表达。
+- 生产代码中不保留 `console.log`、调试输出、占位名或只用于 mock 的行为。
 
-## Data
+## 数据
 
-- Define data shapes clearly before building UI around them.
-- Validate user input at the boundary where data enters the system.
-- Handle empty, loading, error, and success states.
-- Do not store secrets in source files.
-- Treat external data, file contents, API responses, and user input as untrusted until validated.
-- Use schema-based validation when available in the project stack.
-- Handle errors explicitly and provide user-safe messages for UI-facing failures.
+- 围绕数据构建 UI 前，先定义数据形状。
+- 在数据进入系统的边界验证用户输入。
+- 处理空、加载、错误和成功状态。
+- 不把 secrets 存进源码。
+- 外部数据、文件内容、API 响应和用户输入在验证前都视为不可信。
+- 项目栈支持时使用 schema 验证。
+- 错误必须显式处理；面向 UI 的失败给用户安全的提示。
 
-## Security
+## 安全
 
-- Never hardcode API keys, tokens, passwords, credentials, or private endpoints.
-- Validate and authorize state-changing operations on the server or trusted boundary, not only in the UI.
-- Use parameterized queries or framework-safe database APIs when database access exists.
-- Sanitize or avoid raw HTML injection.
-- Do not leak sensitive data through error messages, logs, public environment variables, source maps, or client bundles.
-- Trigger a security review for changes involving authentication, authorization, payments, user data, database queries, filesystem access, external API calls, cryptography, or secrets.
+- 不硬编码 API key、token、密码、凭证或私有端点。
+- 状态变更操作必须在服务端或可信边界验证和授权，不只依赖 UI。
+- 有数据库访问时使用参数化查询或框架安全 API。
+- 避免或净化原始 HTML 注入。
+- 不通过错误消息、日志、公开环境变量、source maps 或客户端 bundle 泄露敏感数据。
+- 以下变更触发安全审查：认证、授权、支付、用户数据、数据库查询、文件系统、外部 API、加密、secrets。
 
-## Conditional TypeScript, React, And Web Rules
+## TypeScript、React 和 Web 条件规则
 
-Apply these rules only when the project uses TypeScript, React, or a web frontend stack.
+仅在项目使用 TypeScript、React 或 Web 前端栈时启用。
 
-- Exported functions, shared utilities, public APIs, and component props should have explicit types.
-- Avoid `any`; use `unknown` plus narrowing for external or untrusted values.
-- Prefer typed schema validation for API inputs, form inputs, and server actions.
-- In React, obey Hooks rules through linting: top-level hooks only, complete dependency arrays, and cleanup for subscriptions, timers, listeners, and in-flight requests.
-- Do not use `useEffect` for derived state that can be computed during render.
-- Validate URLs before putting user-controlled values into `href`, `src`, or similar attributes.
-- Use `rel="noopener noreferrer"` with `target="_blank"`.
-- Treat `dangerouslySetInnerHTML` or raw `innerHTML` as a security review trigger; sanitize at the call site when raw HTML is unavoidable.
-- Keep client-exposed environment variables public by assumption; never put secrets behind frontend public prefixes.
-- Prefer semantic HTML, accessible labels, keyboard support, and stable layout dimensions.
-- For visual web work, verify responsive breakpoints and avoid text overlap, clipping, and horizontal overflow.
+- 导出函数、共享工具、公共 API 和组件 props 应有显式类型。
+- 避免 `any`；外部或不可信值使用 `unknown` 并做类型收窄。
+- API 输入、表单输入和 server actions 优先使用类型化 schema 验证。
+- React Hooks 通过 lint 约束：只在顶层调用、依赖数组完整、订阅/定时器/监听器/请求要清理。
+- 不用 `useEffect` 存储可在 render 中计算的派生状态。
+- 用户控制的 URL 放入 `href`、`src` 等属性前必须验证。
+- `target="_blank"` 搭配 `rel="noopener noreferrer"`。
+- `dangerouslySetInnerHTML` 或原始 `innerHTML` 触发安全审查；必须使用原始 HTML 时在调用点净化。
+- 前端公开前缀的环境变量一律视为公开，不放 secrets。
+- 优先语义化 HTML、可访问标签、键盘支持和稳定布局尺寸。
+- 视觉 Web 工作要验证响应式断点，避免文字重叠、裁切和横向溢出。
 
-## Testing
+## 测试
 
-Use test depth based on risk:
+按风险决定测试深度：
 
-- Narrow UI or copy change: manual check may be enough.
-- Shared logic or data behavior: add or update automated tests.
-- Authentication, payment, persistence, or external API behavior: test normal, failure, and edge cases.
+- 窄 UI 或文案变更：手动检查可能足够。
+- 共享逻辑或数据行为：添加或更新自动化测试。
+- 认证、支付、持久化或外部 API：测试正常、失败和边界场景。
 
-Record test results in the daily log.
+测试结果记录到当天日志。
 
-## Deterministic Constraints
+## 确定性约束
 
-- Prefer deterministic project checks before subjective review.
-- Use existing formatters, linters, type checks, structural tests, and test suites.
-- If pre-commit is configured, run it before commit or rely on it during commit and fix any failure.
-- Add missing deterministic checks when the project risk justifies it and the stack supports it.
-- Record skipped checks and reasons in the daily log.
+- 主观审查前，优先运行确定性检查。
+- 使用项目已有 formatter、linter、类型检查、结构测试和测试套件。
+- 配置了 pre-commit 时，提交前运行或让提交过程触发，并修复失败。
+- 项目风险需要且技术栈支持时，补充缺失的确定性检查。
+- 被跳过的检查和原因写入当天日志。
 
-## Review And Evaluation
+## 审查和评估
 
-- Separate generation from evaluation for meaningful changes.
-- Review should look for bugs, regressions, missing tests, unclear contracts, accessibility issues, layout failures, and unmet requirements.
-- For substantial changes, use a multi-pass review loop: implement, review, fix, rerun checks, repeat.
-- Independent evaluator output should be treated as findings to resolve or explicitly reject with reasons.
+- 有意义的变更要分离生成和评估。
+- 审查关注 Bug、回归、缺失测试、契约不清、可访问性问题、布局失败和未满足需求。
+- 重要变更使用多轮审查：实现、审查、修复、重新检查，直到阻塞问题解决。
+- 独立评估输出要么解决，要么记录拒绝理由。
 
-## Delivery
+## 交付
 
-Every completed development step should include:
+每个完成的开发步骤都应包含：
 
-- summary of changes
-- files changed
-- verification performed
-- known limitations
-- next recommended step
+- 变更摘要
+- 变更文件
+- 已执行验证
+- 已知限制
+- 下一步建议
 
-## GitHub Updates
+## GitHub 更新
 
-- After code changes are verified, update the project through GitHub.
-- Use `git status`, `git diff`, a focused commit, and `git push` or a pull request.
-- If the project is not a Git repository or has no GitHub remote, record that blocker in the daily development log.
-- See `docs/08-github-update-standard.md`.
+- 代码变更验证后，通过 GitHub 更新项目。
+- 使用 `git status`、`git diff`、聚焦提交，以及 `git push` 或 Pull Request。
+- 如果项目不是 Git 仓库或没有 GitHub remote，把阻塞项记录到每日开发日志。
+- 见 `docs/08-github-update-standard.md`。
