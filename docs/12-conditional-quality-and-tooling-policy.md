@@ -14,7 +14,7 @@
 
 ## 默认已采纳规则
 
-以下规则已经以项目规则形式体现在 `AGENT.nd` 和 `docs/` 中：
+以下规则已经以项目规则形式体现在 `AGENTS.md` 和 `docs/` 中：
 
 - `workflow-quality`：TDD、验证循环、eval harness、持续学习。
 - `rules-core`：通用工程规则、安全触发器、审查严重级别、条件前端规则。
