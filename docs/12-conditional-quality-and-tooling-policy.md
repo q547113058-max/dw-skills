@@ -36,6 +36,7 @@
 | `optimization-workflows` | 性能、延迟、吞吐或成本是明确需求 | benchmark 和 measurement loop |
 | `research-apis` | 需要研究或 API discovery | search-first 和 source-quality 规则 |
 | `operator-workflows` | GitHub、Jira、billing、Google Workspace 等外部应用已配置 | 带认证检查的操作 runbook |
+| `agentmemory` | 长期多会话、多 Agent、跨 Hermes/Codex 记忆共享或重复解释成本高 | 可选记忆层；默认核心工具、零 LLM、无自动注入 |
 | `orchestration` | 多 agent、分支、worktrees 或并行任务 | work item ownership、handoff、merge gates |
 | `devops-infra` | 部署、Docker 或基础设施进入范围 | 部署和回滚标准 |
 | `media-generation` | 产品需要图片、音频、视频或 demo assets | 先用本地已有 media skills，再补充专项规则 |
@@ -128,3 +129,4 @@ Hooks 是可选自动化，不是默认行为。
 - 本地绝对路径仅作为当前 Codex 环境说明，不作为 Hermes 运行依赖。
 - Hook、命令和多 Agent 编排必须先转成 Hermes 可审查配置，再启用。
 - 迁移完成后运行同样的质量门禁和执行追踪，不降低验证标准。
+- 如果需要跨 Hermes 和 Codex 共享长期记忆，可按 `docs/13-agentmemory-adaptation.md` 评估 agentmemory；未明确需要时不要默认启用。

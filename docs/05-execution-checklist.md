@@ -11,6 +11,7 @@
 - [ ] 轻量项目先用 `rg`、直接读文件和现有测试理解代码。
 - [ ] 需要轻量代码结构图、依赖图或循环依赖检查时，优先使用 codegraph。
 - [ ] 只有项目复杂、需要长期图谱记忆、跨文档分析或已有 `graphify-out/graph.json` 时，才使用 Graphify。
+- [ ] 长期多会话或 Hermes 迁移需要记忆层时，根据 `docs/13-agentmemory-adaptation.md` 评估 agentmemory；轻量项目不默认启用。
 - [ ] 代码变更前确认 Git 仓库和 GitHub remote 状态。
 - [ ] 创建或打开当天 `dev-logs/YYYY-MM-DD.md`。
 - [ ] 确认需求足够完整，可以继续。
