@@ -35,8 +35,9 @@ git log -1 --oneline
 | --- | --- | --- | --- |
 | `frontend-design` | 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发 | `https://github.com/Ilm-Alan/frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` |
 | `taste-skill` / `design-taste-frontend` | 高质量落地页、作品集、重设计、视觉方向判断 | `https://github.com/Leonxlnx/taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` |
-| `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | 待确认具体实现仓库后补充 | 待配置 |
+| `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` | 待配置 |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
+| `agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景 | `https://github.com/rohitg00/agentmemory` | 待配置 |
 | `github` | GitHub 仓库、提交、PR、Actions、GitHub API 工作 | GitHub CLI：`https://cli.github.com/` | `C:\Users\54711\.codex\skills\github\SKILL.md` |
 
 规则：
@@ -46,6 +47,7 @@ git log -1 --oneline
 - Hermes 适配时，优先迁移 skill 源、触发条件、输入输出约束和质量规则。
 - 不把 Windows 绝对路径写成跨平台依赖。
 - 轻量项目默认不创建 Graphify 图谱；先用 `rg`、直接读文件和现有测试。
+- 轻量项目默认不启用 agentmemory；只有长期记忆需求明确时才评估。
 
 ## 阶段 1：需求收集
 
