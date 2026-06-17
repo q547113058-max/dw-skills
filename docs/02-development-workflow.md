@@ -91,26 +91,33 @@ git log -1 --oneline
 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 工作，按以下优先级：
 
 1. 用户需求、现有产品设计和品牌约束最高。
-2. `taste-skill` 负责审美方向：
+2. 先按 `docs/04-design-standards.md` 判断界面类型：
+   - 品牌型界面：落地页、营销页、作品集、官网、活动页、长文内容页，设计本身影响第一印象。
+   - 产品型界面：App UI、后台、仪表盘、工具、表单、数据表，设计服务任务完成。
+3. `taste-skill` 负责审美方向：
    - 反模板化视觉判断
    - 布局性格
    - 氛围和美术方向
    - 动效方向
    - 视觉层级
    - 避免通用 AI 感 UI
-3. `frontend-design` 负责把已选风格变成具体实现 token：
+4. `frontend-design` 负责把已选风格变成具体实现 token：
    - 色彩 token
    - 字体 token
    - 间距和质感 token
    - CSS 变量或设计系统值
    - 响应式、可访问性和视觉 QA 约束
-4. 最终选择记录在 `docs/project-design-spec.md`。
+5. 持续 UI 项目要记录：
+   - `docs/project-product-context.md`：产品、用户、任务、场景和约束。
+   - `docs/project-design-spec.md`：设计方向、参考/反参考、token、组件、动效和审查规则。
 
 不要让 `taste-skill` 和 `frontend-design` 同时决定主色、字体或布局方向。冲突时：
 
 - 用 `taste-skill` 决定设计方向。
 - 用 `frontend-design` 把方向形式化为 CSS/design tokens。
 - 以用户需求和现有产品约束为最终裁决。
+
+设计审查时使用 `docs/04-design-standards.md` 的配方：design read、设计系统发现、布局、字体、颜色、交互、反模板化和证据审查。`pbakaus/impeccable` 只作为参考来源；未明确批准前不安装其 CLI、hooks 或运行时文件。
 
 ## 阶段 3：实现
 

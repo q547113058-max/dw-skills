@@ -8,6 +8,8 @@
 - [ ] 读取 `AGENTS.md`。
 - [ ] 读取 `docs/` 中与任务相关的文档。
 - [ ] 页面或前端工作读取并应用 `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`。
+- [ ] 页面或前端工作按 `docs/04-design-standards.md` 判断品牌型或产品型界面。
+- [ ] 持续 UI 项目确认或创建 `docs/project-product-context.md` 和 `docs/project-design-spec.md` 的最小可用版本。
 - [ ] 轻量项目先用 `rg`、直接读文件和现有测试理解代码。
 - [ ] 需要轻量代码结构图、依赖图或循环依赖检查时，优先使用 codegraph。
 - [ ] 只有项目复杂、需要长期图谱记忆、跨文档分析或已有 `graphify-out/graph.json` 时，才使用 Graphify。
@@ -32,6 +34,8 @@
 - [ ] 检查需要保留的用户改动。
 - [ ] 确认编辑影响到的验证、错误处理和安全边界。
 - [ ] TypeScript、React 或 Web 工作，确认适用的条件前端规则。
+- [ ] UI 工作先查找已有设计系统、tokens、组件、相邻页面和品牌资产。
+- [ ] UI 工作明确参考风格、反参考风格和需要规避的默认 AI 感模式。
 - [ ] 复杂功能、架构变更或大范围重构，先写简短计划：阶段、风险、影响文件和验证方式。
 - [ ] 功能、Bugfix 或重构且有实际测试面时，先定义 TDD 目标。
 - [ ] 如适用，明确使用的命令配方：plan、feature-dev、checkpoint、quality-gate、security-scan、build-fix、session-save/resume 或 PR。
@@ -55,6 +59,8 @@
 - [ ] 分离生成和评估；可用时使用独立评估或审查轮次。
 - [ ] 如果修改代码且存在 `graphify-out/graph.json`，可行时运行 `graphify update .`。
 - [ ] UI 工作在可行时检查桌面和移动布局。
+- [ ] UI 工作完成布局、字体、颜色、交互状态和反模板化审查。
+- [ ] 品牌型界面确认真实视觉资产、截图、生成图片或可信占位方案；产品型界面确认标准控件和状态一致。
 - [ ] 记录无法运行的检查。
 - [ ] 敏感变更先做安全审查：auth、authorization、用户数据、支付、文件系统、数据库、外部 API、加密或 secrets。
 - [ ] 前端工作检查可访问查询/标签、键盘行为、URL 安全、原始 HTML、公开环境变量和响应式溢出。
