@@ -28,6 +28,7 @@
 | `codegraph` | 待配置 | `https://github.com/colbymchenry/codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查。 |
 | `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析。 |
 | `agentmemory` | 待配置 | `https://github.com/rohitg00/agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景。 |
+| `ponytail` | 待配置 | `https://github.com/DietrichGebert/ponytail` | 精简实现、YAGNI、复用优先和反过度工程审查参考。 |
 | `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | GitHub CLI：`https://cli.github.com/` | GitHub 仓库、提交、PR、Actions 和 API 工作流。 |
 
 Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和规则说明。不要把 Windows 本地绝对路径当作 Hermes 的唯一依赖来源。
@@ -74,23 +75,30 @@ Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和�
    - 默认只考虑本地零 LLM 模式和 `AGENTMEMORY_TOOLS=core`；不要默认打开自动注入、自动压缩或全量 hooks。
    - 适配评估见 `docs/13-agentmemory-adaptation.md`。
 
-7. 保持项目记录更新。
+7. 默认应用 Ponytail 精简实现原则。
+   - 写代码前先走精简阶梯：是否真的需要、仓库已有实现、标准库、平台原生能力、已安装依赖、单行表达、最小可工作实现。
+   - Bugfix 先定位根因和共享入口；不要只在报错路径加补丁。
+   - 禁止未请求的抽象、脚手架、未来扩展、单实现接口和无实际变化的配置层。
+   - 删除优于新增；少文件、短 diff 优先，但必须建立在读懂真实调用链和需求之后。
+   - Ponytail 只作为规则和审查参考；未明确批准前不安装其 hooks、commands、platform configs 或运行时文件。
+
+8. 保持项目记录更新。
    - 使用 `dev-logs/YYYY-MM-DD.md` 做每日记录。
    - 会话开始时，如果当天日志不存在就创建。
    - 会话结束时追加已完成事项、决策、未解决问题和下一步待办。
 
-8. 保持文档同步。
+9. 保持文档同步。
    - 需求、技术选择、设计规则、执行步骤和验收标准放入 `docs/`。
    - 决策变化时同步更新文档。
    - 不把重要项目知识只留在聊天里。
 
-9. 把重复 Agent 错误转成规则。
+10. 把重复 Agent 错误转成规则。
    - 同类错误出现超过一次时，在 `AGENTS.md` 中添加简洁预防规则。
    - 规则必须写清触发条件、必须行为和禁止行为。
    - 规则要可执行，不写空泛提醒。
    - 在 `dev-logs/YYYY-MM-DD.md` 记录新增规则和原因。
 
-10. 交付前应用质量门禁。
+11. 交付前应用质量门禁。
    - 先跑确定性约束：linter、formatter、类型检查、结构测试、pre-commit 等。
    - 风险改动使用自动审查循环：实现、审查、修复，直到满足验收标准。
    - 生成和评估分离：产出方案的 Agent 不应是唯一质量证明。
@@ -108,20 +116,20 @@ Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和�
    - 敏感变更默认做安全审查；配置、hooks、MCP、auth、secrets、外部 API 或依赖面变化时启用更深入的安全扫描。
    - 条件工具、Hook、编排、部署、数据库、媒体、业务、运营和领域规则只在需求或项目栈需要时启用，并记录决策。
 
-11. 为代码变更创建 Git 检查点。
+12. 为代码变更创建 Git 检查点。
    - 每个连贯且已验证的步骤后提交一次。
    - 把每次提交视为恢复快照。
    - 不把无关工作混进同一个检查点。
    - 失败时检查最新检查点、当前 diff 和 TODO，然后从中断处继续。
 
-12. 代码变更后通过 GitHub 更新。
+13. 代码变更后通过 GitHub 更新。
    - 编辑前后检查 `git status`。
    - 只提交相关文件。
    - 推送到配置好的 GitHub remote，或按策略准备 Pull Request。
    - 未明确要求时，不 force-push、不改写历史、不合并、不删分支、不改仓库设置。
    - GitHub 更新无法完成时，在 `dev-logs/YYYY-MM-DD.md` 记录原因。
 
-13. 结束时做执行追踪和反馈归因。
+14. 结束时做执行追踪和反馈归因。
    - 记录执行轨迹：任务、阶段、变更文件、命令/检查、结果、阻塞项、下一步。
    - 交付前给质量等级：A、B、C 或 Blocked。
    - 检测异常：重复失败、跳过检查、需求不清、意外 diff、测试回归、工具超时。

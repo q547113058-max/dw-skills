@@ -17,6 +17,7 @@
 - 页面开发默认使用 `frontend-design`，审美方向由 `taste-skill` 负责。
 - 轻量项目默认先用 `rg`、直接读文件和现有测试；需要代码结构图时再用 codegraph，项目变复杂或已有图谱时才用 Graphify。
 - 长期多会话项目可选用 agentmemory 作为记忆层；轻量项目不默认启用。
+- 默认应用 Ponytail 精简实现原则：先判断是否需要写，再优先复用仓库已有实现、标准库、平台能力和已安装依赖，最后才写最小可工作代码。
 - 所有代码修改后通过 GitHub 提交和更新。
 - 重复出现的 Agent 错误要沉淀成 `AGENTS.md` 中的明确规则。
 
@@ -29,6 +30,7 @@
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` |
 | `agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景 | `https://github.com/rohitg00/agentmemory` |
+| `ponytail` | 精简实现、YAGNI、复用优先和反过度工程审查参考 | `https://github.com/DietrichGebert/ponytail` |
 | `github` | GitHub CLI、仓库、提交、PR 和 GitHub API 工作流 | Codex 本地 skill；GitHub CLI 下载地址：`https://cli.github.com/` |
 
 ## 使用方式
