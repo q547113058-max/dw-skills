@@ -122,6 +122,25 @@ pre-commit run --all-files
 | MEDIUM | 可维护性、清晰度、性能或覆盖率弱点 | 可行时修复，或记录理由 |
 | LOW | 风格、命名或轻微打磨 | 可选 |
 
+## 反过度工程审查
+
+代码编辑后，除正确性审查外，按 Ponytail 原则做一次精简审查：
+
+- 是否有未请求的抽象、接口、工厂、配置层、脚手架或未来扩展点。
+- 是否重复实现了仓库已有 helper、标准库、平台原生能力或已安装依赖。
+- 是否新增了可以删除的文件、包装层、转换层或样板代码。
+- Bugfix 是否修在根因和共享入口，而不是只修报错路径。
+- 是否为了短 diff 跳过了必要的验证、安全、错误处理或边界情况。
+
+审查输出只记录有证据的可删减项。格式：
+
+```text
+Over-engineering:
+- file:line - cut [thing]; replace with [existing/stdlib/native/minimal path].
+```
+
+没有证据时写“未发现阻塞性过度工程问题”，不要为了形式制造发现。
+
 以下敏感变更必须先做安全审查：
 
 - authentication 或 authorization
@@ -186,6 +205,7 @@ build 失败时，先修复，不继续更深验证。
 - 质量门禁配方：运行项目已有 formatter、linter、type check、tests、build、pre-commit；不编造缺失脚本。
 - Security-scan recipe：相关时扫描 secrets、permissions、hooks/config、MCP/tool config、dependencies、auth、raw HTML、public bundle、external API。
 - Build-fix recipe：用最小改动修复第一个根因错误，重新运行失败命令；重复失败或架构漂移时停止。
+- Ponytail review：审查过度工程、重复实现、不必要依赖、投机抽象和可删除代码。
 - PR recipe：验证分支状态、对比 base、遵循模板、包含测试计划、push、创建 PR、验证 CI。
 
 ## Hook 运行时门禁

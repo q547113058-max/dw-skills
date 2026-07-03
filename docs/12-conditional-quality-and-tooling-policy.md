@@ -22,6 +22,7 @@
 - `command-recipes`：规划、功能开发、检查点、质量门禁、安全扫描、构建修复、会话保存/恢复、PR 创建配方。
 - `agentic-patterns`：完成标准、小工作单元、eval-first、模型/成本纪律和人工控制合并门禁。
 - `security`：安全审查和扫描触发器、secret hygiene、输入验证、依赖和配置审查。
+- `ponytail-pragmatism`：YAGNI、复用优先、标准库/平台优先、最小可工作实现和反过度工程审查。
 
 ## 条件规则
 
@@ -30,6 +31,7 @@
 | 规则组 | 启用条件 | 采纳方式 |
 | --- | --- | --- |
 | `hooks-runtime` | 项目有稳定本地命令，并需要自动化 guardrails | Hook 策略，不复制未经审查的 hook 文件 |
+| `ponytail-runtime` | 用户明确要求安装 Ponytail 插件、hooks、commands 或 platform configs | 先审查运行时文件、权限、网络行为和回滚方案，再安装 |
 | `platform-configs` | 发现具体平台配置缺口 | 只参考模板，不覆盖 |
 | `framework-language` | 项目技术栈已确定 | 技术栈专项编码/测试规则 |
 | `database` | 项目使用持久化 | migration、schema、query、data integrity 规则 |
@@ -51,6 +53,7 @@
 - 预测市场规则：只有产品明确涉及预测市场时参考。
 - 供应链、物流或采购领域规则：只有项目领域需要时参考。
 - 多语言文档：默认跳过；只有目标用户或交付语言需要时启用。
+- Ponytail 外部运行时：默认跳过；只移植规则。安装 hooks、commands、statusline 或平台配置前必须得到明确批准并完成安全审查。
 
 ## 命令配方
 

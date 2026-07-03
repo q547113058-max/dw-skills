@@ -38,6 +38,7 @@ git log -1 --oneline
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` | 待配置 |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
 | `agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景 | `https://github.com/rohitg00/agentmemory` | 待配置 |
+| `ponytail` | 精简实现、YAGNI、复用优先和反过度工程审查参考 | `https://github.com/DietrichGebert/ponytail` | 待配置 |
 | `github` | GitHub 仓库、提交、PR、Actions、GitHub API 工作 | GitHub CLI：`https://cli.github.com/` | `C:\Users\54711\.codex\skills\github\SKILL.md` |
 
 规则：
@@ -48,6 +49,7 @@ git log -1 --oneline
 - 不把 Windows 绝对路径写成跨平台依赖。
 - 轻量项目默认不创建 Graphify 图谱；先用 `rg`、直接读文件和现有测试。
 - 轻量项目默认不启用 agentmemory；只有长期记忆需求明确时才评估。
+- Ponytail 默认只移植为文档化工程规则和审查清单；未明确批准前不安装其 hooks、commands、platform configs 或运行时文件。
 
 ## 阶段 1：需求收集
 
@@ -85,6 +87,26 @@ git log -1 --oneline
 - 只有实现并验证后，才能把事项标记为完成。
 - 较大任务使用 plan 配方：复述需求、检查本地模式、定义文件/风险/验证，等待确认后再编码。
 - 功能开发使用 feature-dev 配方：发现、代码库探索、澄清、架构设计、实现、质量审查、总结。
+
+### Ponytail 精简实现阶梯
+
+规划和编码前先走精简阶梯，停在第一个能满足需求且可验证的层级：
+
+1. 这个需求是否真的需要实现；投机性需求先跳过并说明。
+2. 仓库里是否已有 helper、组件、类型、配置或相邻模式可以复用。
+3. 标准库是否已经覆盖。
+4. 平台原生能力是否已经覆盖，例如 HTML、CSS、数据库约束、框架内建能力。
+5. 已安装依赖是否已经覆盖；不要为几行代码新增依赖。
+6. 是否能用更直接的一行或小函数表达。
+7. 只有以上都不成立时，写最小可工作的实现。
+
+规则：
+
+- 精简不是跳过理解。先读任务触达的代码和调用链，再选择最少改动点。
+- Bugfix 优先修根因和共享入口；不要只在单一路径加症状补丁。
+- 禁止未请求的抽象、脚手架、未来扩展、单实现接口、单产品工厂和不会变化的配置层。
+- 删除优于新增；短 diff 优先，但错误位置的短 diff 不是好改动。
+- 复杂请求可先交付覆盖真实需求的精简版本，并在交付说明中写清何时需要扩展。
 
 ### 前端设计 Skill 优先级
 
@@ -127,6 +149,7 @@ git log -1 --oneline
 
 - 阅读相关文件。
 - 检查已有项目模式。
+- 走 Ponytail 精简阶梯，确认是否能复用、删除或使用平台/标准库能力。
 - 说明将要编辑什么。
 
 编辑中：
