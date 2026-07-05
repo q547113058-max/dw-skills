@@ -39,6 +39,7 @@ git log -1 --oneline
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
 | `agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景 | `https://github.com/rohitg00/agentmemory` | 待配置 |
 | `ponytail` | 精简实现、YAGNI、复用优先和反过度工程审查参考 | `https://github.com/DietrichGebert/ponytail` | 待配置 |
+| `vpn-mihomo` | GitHub、包下载、外部 API、浏览器登录或其他网络任务延迟/失败时启动可用代理节点 | 本地技能 | `C:\Users\54711\.codex\skills\vpn-mihomo\SKILL.md` |
 | `github` | GitHub 仓库、提交、PR、Actions、GitHub API 工作 | GitHub CLI：`https://cli.github.com/` | `C:\Users\54711\.codex\skills\github\SKILL.md` |
 
 规则：
@@ -50,6 +51,30 @@ git log -1 --oneline
 - 轻量项目默认不创建 Graphify 图谱；先用 `rg`、直接读文件和现有测试。
 - 轻量项目默认不启用 agentmemory；只有长期记忆需求明确时才评估。
 - Ponytail 默认只移植为文档化工程规则和审查清单；未明确批准前不安装其 hooks、commands、platform configs 或运行时文件。
+- `vpn-mihomo` 只用于需要网络连通性的任务；订阅链接和节点凭据视为 secrets，不打印、不写入日志。
+
+## 网络故障与 VPN 配方
+
+当 GitHub、包下载、外部 API、浏览器登录或其他联网任务出现超时、DNS 错误、连接失败、明显高延迟时：
+
+1. 先确认任务确实需要外网访问，并记录失败命令或现象。
+2. 运行 `vpn-mihomo status` 检查当前代理状态，不直接改系统代理。
+3. 如果需要继续联网任务，运行 `vpn-mihomo start` 并用 `vpn-mihomo test` 找到可用节点。
+4. 命令行任务优先只在当前 shell 设置：
+
+```powershell
+$env:HTTP_PROXY="http://127.0.0.1:17890"
+$env:HTTPS_PROXY="http://127.0.0.1:17890"
+```
+
+5. 只有用户明确要求浏览器、系统应用或全局流量走代理时，才允许启用系统代理。
+6. 任务结束后，如果本次启用了代理，运行 `vpn-mihomo stop` 或恢复原代理状态。
+
+禁止：
+
+- 仅检查订阅、解析配置或查看节点数量时启动代理或改系统代理。
+- 在回复、日志、diff 或命令输出中暴露订阅 URL、token、节点服务器、UUID、密码或完整配置。
+- 在网络错误未确认前反复重试长命令；先切换到可用节点或记录阻塞。
 
 ## 阶段 1：需求收集
 
