@@ -8,6 +8,8 @@
 - [ ] 读取 `AGENTS.md`。
 - [ ] 读取 `docs/` 中与任务相关的文档。
 - [ ] 页面或前端工作读取并应用 `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`。
+- [ ] 调用任何 DW 登记技能前，运行 `scripts/check-dw-skill-updates.ps1 check -Skill <skill-name>`，确认最近 7 天内已检查。
+- [ ] 如果技能检查显示 `Due=True`，先按 `docs/14-skill-update-policy.md` 做更新检查或记录待处理，再继续使用该技能。
 - [ ] 页面或前端工作按 `docs/04-design-standards.md` 判断品牌型或产品型界面。
 - [ ] 持续 UI 项目确认或创建 `docs/project-product-context.md` 和 `docs/project-design-spec.md` 的最小可用版本。
 - [ ] 轻量项目先用 `rg`、直接读文件和现有测试理解代码。
@@ -85,6 +87,7 @@
 - [ ] 检查异常：重复失败、跳过检查、需求不清、意外 diff、回归或工具超时。
 - [ ] 将用户或评估反馈归因到需求、规划、实现、设计、验证、工具或 Agent 规则。
 - [ ] 记录使用或跳过哪些角色检查，以及原因。
+- [ ] 记录本次调用的技能是否已完成周更新检测，或说明跳过原因。
 - [ ] 记录启用、跳过或保持参考状态的条件质量规则。
 - [ ] 创建连贯且已验证步骤的增量 Git 检查点，或记录为什么没有。
 - [ ] 提交并推送到 GitHub，或记录 GitHub 更新阻塞原因。
