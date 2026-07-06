@@ -14,7 +14,7 @@
 
 - 先确认需求，再规划开发。
 - 每次只推进一个稳定、可验证的小步骤。
-- 页面开发默认使用 `frontend-design`，审美方向由 `taste-skill` 负责。
+- 页面开发默认使用 `frontend-design`，审美方向由 `taste-skill` 负责；用户提到品牌、行业、竞品或视觉关键词时，主动用 `awesome-design-md` 匹配对应 DESIGN.md。
 - 轻量项目默认先用 `rg`、直接读文件和现有测试；需要代码结构图时再用 codegraph，项目变复杂或已有图谱时才用 Graphify。
 - 长期多会话项目可选用 agentmemory 作为记忆层；轻量项目不默认启用。
 - 默认应用 Ponytail 精简实现原则：先判断是否需要写，再优先复用仓库已有实现、标准库、平台能力和已安装依赖，最后才写最小可工作代码。
@@ -26,6 +26,7 @@
 | Skill | 用途 | 下载地址 |
 | --- | --- | --- |
 | `frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA 规则 | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` |
+| `awesome-design-md` | DESIGN.md 风格库；按品牌、行业、竞品或视觉关键词匹配对应设计系统 | `https://github.com/VoltAgent/awesome-design-md` |
 | `taste-skill` / `design-taste-frontend` | 审美方向、反模板化视觉判断、风格选择 | `https://github.com/Leonxlnx/taste-skill` |
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` |
