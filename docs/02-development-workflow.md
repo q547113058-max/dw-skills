@@ -34,6 +34,7 @@ git log -1 --oneline
 | Skill | 触发场景 | 下载地址 | 本地路径 |
 | --- | --- | --- | --- |
 | `frontend-design` | 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发 | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` |
+| `awesome-design-md` | 用户提到品牌、网站、行业、竞品或视觉风格，需要匹配现成 DESIGN.md 风格系统 | `https://github.com/VoltAgent/awesome-design-md` | 按需远端读取 |
 | `taste-skill` / `design-taste-frontend` | 高质量落地页、作品集、重设计、视觉方向判断 | `https://github.com/Leonxlnx/taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` |
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` | 待配置 |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
@@ -55,6 +56,7 @@ git log -1 --oneline
 - 所有登记技能每周至少检查一次更新状态；准备调用某个技能前，先运行 `scripts/check-dw-skill-updates.ps1 check -Skill <skill-name>`。
 - 如果检测显示 `Due=True`，先按 `docs/14-skill-update-policy.md` 检查来源、权限、secrets 风险和回滚方式，再决定是否更新。
 - 非 Git checkout 的本地技能不得自动覆盖；只允许人工审查后更新或记录为待处理。
+- `awesome-design-md` 是远端 DESIGN.md 风格库，不默认克隆全库；按需求只读取最匹配的 `design-md/<slug>/DESIGN.md`。
 
 ## 网络故障与 VPN 配方
 
@@ -144,26 +146,32 @@ $env:HTTPS_PROXY="http://127.0.0.1:17890"
 2. 先按 `docs/04-design-standards.md` 判断界面类型：
    - 品牌型界面：落地页、营销页、作品集、官网、活动页、长文内容页，设计本身影响第一印象。
    - 产品型界面：App UI、后台、仪表盘、工具、表单、数据表，设计服务任务完成。
-3. `taste-skill` 负责审美方向：
+3. 如果用户需求包含品牌、网站、行业、竞品、参考产品或视觉关键词，主动用 `awesome-design-md` 匹配对应或相近的 DESIGN.md：
+   - 精确命中时使用对应 `design-md/<slug>/DESIGN.md`。
+   - 没有精确命中时，按行业、产品类型、密度、色彩和交互气质选 1 个最接近参考。
+   - 只读取选中的 DESIGN.md，不批量拉取整个库。
+   - 将采用的颜色、字体、组件、布局、Do/Don't 写入 `docs/project-design-spec.md` 或任务说明。
+4. `taste-skill` 负责审美方向：
    - 反模板化视觉判断
    - 布局性格
    - 氛围和美术方向
    - 动效方向
    - 视觉层级
    - 避免通用 AI 感 UI
-4. `frontend-design` 负责把已选风格变成具体实现 token：
+5. `frontend-design` 负责把已选风格变成具体实现 token：
    - 色彩 token
    - 字体 token
    - 间距和质感 token
    - CSS 变量或设计系统值
    - 响应式、可访问性和视觉 QA 约束
-5. 持续 UI 项目要记录：
+6. 持续 UI 项目要记录：
    - `docs/project-product-context.md`：产品、用户、任务、场景和约束。
    - `docs/project-design-spec.md`：设计方向、参考/反参考、token、组件、动效和审查规则。
 
 不要让 `taste-skill` 和 `frontend-design` 同时决定主色、字体或布局方向。冲突时：
 
 - 用 `taste-skill` 决定设计方向。
+- 用 `awesome-design-md` 提供具体品牌/行业 DESIGN.md token 和禁用项。
 - 用 `frontend-design` 把方向形式化为 CSS/design tokens。
 - 以用户需求和现有产品约束为最终裁决。
 
