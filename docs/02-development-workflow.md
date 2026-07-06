@@ -33,7 +33,7 @@ git log -1 --oneline
 
 | Skill | 触发场景 | 下载地址 | 本地路径 |
 | --- | --- | --- | --- |
-| `frontend-design` | 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发 | `https://github.com/Ilm-Alan/frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` |
+| `frontend-design` | 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发 | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` |
 | `taste-skill` / `design-taste-frontend` | 高质量落地页、作品集、重设计、视觉方向判断 | `https://github.com/Leonxlnx/taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` |
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` | 待配置 |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
