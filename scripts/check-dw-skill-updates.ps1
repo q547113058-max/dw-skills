@@ -18,6 +18,7 @@ if (-not $StatePath) {
 
 $Skills = @(
   [pscustomobject]@{ Name = "frontend-design"; Source = "https://github.com/anthropics/skills/tree/main/skills/frontend-design"; LocalPath = "C:\Users\54711\.codex\skills\frontend-design\SKILL.md"; Kind = "github-skill" },
+  [pscustomobject]@{ Name = "awesome-design-md"; Source = "https://github.com/VoltAgent/awesome-design-md"; LocalPath = ""; Kind = "design-library" },
   [pscustomobject]@{ Name = "taste-skill"; Source = "https://github.com/Leonxlnx/taste-skill"; LocalPath = "C:\Users\54711\.codex\skills\taste-skill\SKILL.md"; Kind = "github-skill" },
   [pscustomobject]@{ Name = "codegraph"; Source = "https://github.com/colbymchenry/codegraph"; LocalPath = ""; Kind = "pending" },
   [pscustomobject]@{ Name = "graphify"; Source = "https://github.com/safishamsi/graphify"; LocalPath = "C:\Users\54711\.codex\skills\graphify\SKILL.md"; Kind = "github-skill" },
@@ -150,6 +151,9 @@ $results = foreach ($entry in $selected) {
   if ($entry.Kind -eq "pending") {
     $status = "pending-config"
     $note = "No local path configured; review source before installation."
+  } elseif ($entry.Kind -eq "design-library") {
+    $status = "reference-source"
+    $note = "Remote DESIGN.md library; fetch only the matched design-md slug on demand."
   } elseif ($entry.Kind -eq "local-private") {
     $status = "local-private"
     $note = "Local private skill; do not upload secrets while updating public docs."
