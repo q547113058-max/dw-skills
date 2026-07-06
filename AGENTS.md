@@ -18,6 +18,7 @@
 - `docs/10-session-checkpoints-and-recovery.md`：无状态会话启动、进度追踪、Git 检查点和恢复规则。
 - `docs/11-execution-tracking-quality-feedback.md`：执行追踪、质量分级、异常检测和反馈归因。
 - `docs/12-conditional-quality-and-tooling-policy.md`：条件质量规则、Hook 策略、角色触发、编排策略和 Hermes 迁移注意事项。
+- `docs/14-skill-update-policy.md`：Skills 每周更新、调用前检测和状态记录规则。
 
 ## Skills 和下载地址
 
@@ -33,6 +34,14 @@
 | `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | GitHub CLI：`https://cli.github.com/` | GitHub 仓库、提交、PR、Actions 和 API 工作流。 |
 
 Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和规则说明。不要把 Windows 本地绝对路径当作 Hermes 的唯一依赖来源。
+
+## Skills 周更新规则
+
+- DW 登记的所有技能每周至少检查一次更新状态，使用 `scripts/check-dw-skill-updates.ps1` 记录到 `work/skill-update-state.json`。
+- 准备调用任一 DW 登记技能前，先运行单技能检测：`powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" check -Skill <skill-name>`。
+- 如果检测结果显示 `Due=True`，先检查来源仓库或工具版本，再决定是否更新；不是 Git checkout 的本地技能不得强行覆盖。
+- `vpn-mihomo` 等本地私有技能只同步脱敏说明或模板，禁止上传真实订阅 URL、token、节点服务器、UUID、密码或完整配置。
+- `codegraph`、`agentmemory`、`ponytail` 等待配置技能只记录来源和状态；未明确需要前不安装运行时、hooks、commands 或 platform configs。
 
 ## 核心流程
 
