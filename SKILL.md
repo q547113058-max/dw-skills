@@ -19,6 +19,7 @@ When this skill is triggered, read only the files needed for the current task:
 6. For GitHub syncing, read `docs/08-github-update-standard.md`.
 7. For session resume or multi-turn continuity, read `docs/10-session-checkpoints-and-recovery.md`.
 8. For dev-log expectations, read `docs/06-development-log-standard.md` and the latest file in `dev-logs/`.
+9. Before invoking a registered DW skill, read `docs/14-skill-update-policy.md` and run the weekly skill check when needed.
 
 ## Working Rules
 
