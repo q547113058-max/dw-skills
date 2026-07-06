@@ -24,7 +24,7 @@
 
 | Skill | 本地路径 | 下载地址 | 用途 |
 | --- | --- | --- | --- |
-| `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/Ilm-Alan/frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA。 |
+| `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA。 |
 | `taste-skill` / `design-taste-frontend` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向、反模板化视觉判断、风格选择。 |
 | `codegraph` | 待配置 | `https://github.com/colbymchenry/codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查。 |
 | `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析。 |
