@@ -17,7 +17,7 @@ if (-not $StatePath) {
 }
 
 $Skills = @(
-  [pscustomobject]@{ Name = "frontend-design"; Source = "https://github.com/Ilm-Alan/frontend-design"; LocalPath = "C:\Users\54711\.codex\skills\frontend-design\SKILL.md"; Kind = "github-skill" },
+  [pscustomobject]@{ Name = "frontend-design"; Source = "https://github.com/anthropics/skills/tree/main/skills/frontend-design"; LocalPath = "C:\Users\54711\.codex\skills\frontend-design\SKILL.md"; Kind = "github-skill" },
   [pscustomobject]@{ Name = "taste-skill"; Source = "https://github.com/Leonxlnx/taste-skill"; LocalPath = "C:\Users\54711\.codex\skills\taste-skill\SKILL.md"; Kind = "github-skill" },
   [pscustomobject]@{ Name = "codegraph"; Source = "https://github.com/colbymchenry/codegraph"; LocalPath = ""; Kind = "pending" },
   [pscustomobject]@{ Name = "graphify"; Source = "https://github.com/safishamsi/graphify"; LocalPath = "C:\Users\54711\.codex\skills\graphify\SKILL.md"; Kind = "github-skill" },
@@ -66,7 +66,31 @@ function Get-GitHubSlug([string]$Url) {
   return ""
 }
 
+function Get-GitHubTreeSource([string]$Url) {
+  if ($Url -match "github\.com/([^/]+)/([^/]+)/tree/([^/]+)/(.*)$") {
+    return [pscustomobject]@{
+      Slug = $Matches[1] + "/" + $Matches[2]
+      Ref = $Matches[3]
+      Path = $Matches[4].Trim("/")
+    }
+  }
+  return $null
+}
+
 function Get-RemoteSha([string]$Url) {
+  $tree = Get-GitHubTreeSource $Url
+  if ($tree) {
+    foreach ($candidate in @("$($tree.Path)/SKILL.md", $tree.Path)) {
+      try {
+        $encoded = [Uri]::EscapeDataString($candidate).Replace("%2F", "/")
+        $result = gh api "repos/$($tree.Slug)/contents/$encoded`?ref=$($tree.Ref)" --jq .sha 2>$null
+        if ($result) { return $result }
+      } catch {
+        continue
+      }
+    }
+  }
+
   $slug = Get-GitHubSlug $Url
   if (-not $slug) { return "" }
 
