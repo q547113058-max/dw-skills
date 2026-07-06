@@ -9,6 +9,12 @@
 - `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
 - 下载地址：`https://github.com/anthropics/skills/tree/main/skills/frontend-design`
 
+品牌、网站、行业或视觉方向匹配使用：
+
+- `VoltAgent/awesome-design-md`
+- 下载地址：`https://github.com/VoltAgent/awesome-design-md`
+- 读取方式：按需读取 `design-md/<slug>/DESIGN.md`，不默认克隆全库。
+
 高质量落地页、作品集和重设计使用：
 
 - `C:\Users\54711\.codex\skills\taste-skill\SKILL.md`
@@ -17,7 +23,8 @@
 职责分工：
 
 - `taste-skill`：审美方向、视觉判断、风格选择。
-- `frontend-design`：把已选风格收敛成 CSS/design tokens，并承担基础 UI 质量、交互和视觉 QA。
+- `awesome-design-md`：按用户需求主动匹配具体品牌、行业或视觉方向，提供 DESIGN.md 级别的颜色、字体、组件、布局、Do/Don't 和响应式规则。
+- `frontend-design`：在选定方向和参考系统之上做设计判断、token 收敛、交互完整性和视觉 QA。
 
 外部参考：
 
@@ -37,6 +44,46 @@
 - 设计风格
 - 主色和辅助色
 - 参考产品或禁用风格
+
+## awesome-design-md 主动匹配规则
+
+当用户需求出现以下任一信号时，主动匹配 `awesome-design-md`：
+
+- 明确品牌或网站：如 Claude、Linear、Vercel、Stripe、Apple、Nike、Tesla。
+- 行业或产品类型：AI 平台、开发者工具、SaaS、金融、加密、零售、媒体、汽车、复古网页等。
+- 视觉关键词：极简、暗色、编辑感、开发者文档感、奢华汽车感、交易终端感、品牌官网感、复古 Y2K 等。
+- 用户只说“好看一点”“像某某产品”“参考某个网站”但没有完整设计系统。
+
+匹配步骤：
+
+1. 精确匹配品牌或网站名，优先读取对应 `design-md/<slug>/DESIGN.md`。
+2. 无精确匹配时，按行业和视觉气质选择一个最接近的参考：
+   - AI / LLM：`claude`、`cohere`、`mistral.ai`、`together.ai`、`x.ai`、`voltagent`。
+   - 开发者工具 / 部署 / IDE：`vercel`、`cursor`、`warp`、`expo`、`raycast`。
+   - 数据库 / DevOps / 文档：`supabase`、`clickhouse`、`mongodb`、`hashicorp`、`mintlify`。
+   - SaaS / 生产力：`linear.app`、`notion`、`intercom`、`resend`、`zapier`。
+   - 设计 / 创意工具：`figma`、`framer`、`webflow`、`miro`。
+   - 金融 / 加密：`stripe`、`coinbase`、`wise`、`revolut`、`binance`、`kraken`。
+   - 电商 / 消费品牌：`shopify`、`airbnb`、`nike`、`starbucks`。
+   - 媒体 / 消费科技：`apple`、`spotify`、`wired`、`theverge`、`playstation`。
+   - 汽车 / 高端产品：`bmw`、`bmw-m`、`bugatti`、`ferrari`、`lamborghini`、`tesla`。
+   - 复古网页：`dell-1996`、`nintendo-2001`。
+3. 只读取选中的 `DESIGN.md`，提取：
+   - 视觉主题和氛围
+   - 颜色 token 和语义角色
+   - 字体层级
+   - 组件样式
+   - 布局原则
+   - Do/Don't
+   - 响应式规则
+4. 将匹配结果写入 `docs/project-design-spec.md` 或任务说明：选了哪个 slug、为什么匹配、哪些 token 被采用、哪些规则被禁用。
+5. 如果用户要求“像某品牌”，只借鉴视觉系统和交互规则；不要复制商标、专有图片、真实文案或受保护品牌资产，除非用户明确拥有使用权。
+
+与其他设计技能的关系：
+
+- `awesome-design-md` 提供具体参考系统和 token。
+- `taste-skill` 判断这个参考是否审美上适合当前目标。
+- `frontend-design` 把参考转成可实现 UI，并检查交互状态、响应式、可访问性和反模板化。
 
 ## 设计分流
 
