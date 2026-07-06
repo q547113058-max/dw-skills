@@ -7,6 +7,7 @@ DW 登记的外部或本地技能需要每周做一次更新检查；准备调�
 覆盖 `AGENTS.md` 和 `docs/02-development-workflow.md` 中登记的技能：
 
 - `frontend-design`
+- `awesome-design-md`
 - `taste-skill` / `design-taste-frontend`
 - `codegraph`
 - `graphify`
