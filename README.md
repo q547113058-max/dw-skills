@@ -25,7 +25,7 @@
 
 | Skill | 用途 | 下载地址 |
 | --- | --- | --- |
-| `frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA 规则 | `https://github.com/Ilm-Alan/frontend-design` |
+| `frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA 规则 | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` |
 | `taste-skill` / `design-taste-frontend` | 审美方向、反模板化视觉判断、风格选择 | `https://github.com/Leonxlnx/taste-skill` |
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` |
