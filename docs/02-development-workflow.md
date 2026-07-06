@@ -52,6 +52,9 @@ git log -1 --oneline
 - 轻量项目默认不启用 agentmemory；只有长期记忆需求明确时才评估。
 - Ponytail 默认只移植为文档化工程规则和审查清单；未明确批准前不安装其 hooks、commands、platform configs 或运行时文件。
 - `vpn-mihomo` 只用于需要网络连通性的任务；订阅链接和节点凭据视为 secrets，不打印、不写入日志。
+- 所有登记技能每周至少检查一次更新状态；准备调用某个技能前，先运行 `scripts/check-dw-skill-updates.ps1 check -Skill <skill-name>`。
+- 如果检测显示 `Due=True`，先按 `docs/14-skill-update-policy.md` 检查来源、权限、secrets 风险和回滚方式，再决定是否更新。
+- 非 Git checkout 的本地技能不得自动覆盖；只允许人工审查后更新或记录为待处理。
 
 ## 网络故障与 VPN 配方
 
