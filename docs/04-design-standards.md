@@ -7,7 +7,7 @@
 页面开发默认使用：
 
 - `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`
-- 下载地址：`https://github.com/Ilm-Alan/frontend-design`
+- 下载地址：`https://github.com/anthropics/skills/tree/main/skills/frontend-design`
 
 高质量落地页、作品集和重设计使用：
 
