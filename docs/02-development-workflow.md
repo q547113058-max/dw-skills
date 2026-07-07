@@ -34,7 +34,7 @@ git log -1 --oneline
 | Skill | 触发场景 | 下载地址 | 本地路径 |
 | --- | --- | --- | --- |
 | `frontend-design` | 页面、前端、Web App、网站、仪表盘、游戏或交互 UI 开发 | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` |
-| `awesome-design-md` | 用户提到品牌、网站、行业、竞品或视觉风格，需要匹配现成 DESIGN.md 风格系统 | `https://github.com/VoltAgent/awesome-design-md` | 按需远端读取 |
+| `awesome-design-md` | UI 任务中按品牌、网站、行业、竞品、视觉风格，或在风格不明确时按产品类型假设匹配现成 DESIGN.md 风格系统 | `https://github.com/VoltAgent/awesome-design-md` | 按需远端读取 |
 | `taste-skill` / `design-taste-frontend` | 高质量落地页、作品集、重设计、视觉方向判断 | `https://github.com/Leonxlnx/taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` |
 | `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` | 待配置 |
 | `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` |
@@ -146,9 +146,10 @@ $env:HTTPS_PROXY="http://127.0.0.1:17890"
 2. 先按 `docs/04-design-standards.md` 判断界面类型：
    - 品牌型界面：落地页、营销页、作品集、官网、活动页、长文内容页，设计本身影响第一印象。
    - 产品型界面：App UI、后台、仪表盘、工具、表单、数据表，设计服务任务完成。
-3. 如果用户需求包含品牌、网站、行业、竞品、参考产品或视觉关键词，主动用 `awesome-design-md` 匹配对应或相近的 DESIGN.md：
+3. UI 任务默认主动用 `awesome-design-md` 匹配对应或相近的 DESIGN.md；用户需求包含品牌、网站、行业、竞品、参考产品或视觉关键词时按这些信号匹配，需求不明确时按产品类型、目标用户、界面密度和任务气质做保守假设：
    - 精确命中时使用对应 `design-md/<slug>/DESIGN.md`。
    - 没有精确命中时，按行业、产品类型、密度、色彩和交互气质选 1 个最接近参考。
+   - 用户没有说明视觉风格时，也要选 1 个最接近参考并在任务说明或 `docs/project-design-spec.md` 写明假设；只有产品目的、目标用户或核心流程不清楚到无法判断时才暂停澄清。
    - 只读取选中的 DESIGN.md，不批量拉取整个库。
    - 将采用的颜色、字体、组件、布局、Do/Don't 写入 `docs/project-design-spec.md` 或任务说明。
 4. `taste-skill` 负责审美方向：
