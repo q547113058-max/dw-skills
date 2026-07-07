@@ -10,7 +10,7 @@
 - [ ] 页面或前端工作读取并应用 `C:\Users\54711\.codex\skills\frontend-design\SKILL.md`。
 - [ ] 调用任何 DW 登记技能前，运行 `scripts/check-dw-skill-updates.ps1 check -Skill <skill-name>`，确认最近 7 天内已检查。
 - [ ] 如果技能检查显示 `Due=True`，先按 `docs/14-skill-update-policy.md` 做更新检查或记录待处理，再继续使用该技能。
-- [ ] UI 工作中如果用户提到品牌、网站、行业、竞品或视觉关键词，主动匹配 `awesome-design-md` 的对应 `design-md/<slug>/DESIGN.md`。
+- [ ] UI 工作默认主动匹配 `awesome-design-md`；用户提到品牌、网站、行业、竞品或视觉关键词时按信号匹配，需求不明确时按产品类型、目标用户、界面密度和任务气质选择最近的 `design-md/<slug>/DESIGN.md`。
 - [ ] 页面或前端工作按 `docs/04-design-standards.md` 判断品牌型或产品型界面。
 - [ ] 持续 UI 项目确认或创建 `docs/project-product-context.md` 和 `docs/project-design-spec.md` 的最小可用版本。
 - [ ] 轻量项目先用 `rg`、直接读文件和现有测试理解代码。
@@ -42,7 +42,7 @@
 - [ ] 确认没有新增未请求的抽象、脚手架、未来扩展、单实现接口或不必要依赖。
 - [ ] TypeScript、React 或 Web 工作，确认适用的条件前端规则。
 - [ ] UI 工作先查找已有设计系统、tokens、组件、相邻页面和品牌资产。
-- [ ] 如使用 `awesome-design-md`，记录匹配的 slug、采用的 token、禁用项和不复制商标/专有资产的边界。
+- [ ] 如使用 `awesome-design-md`，记录匹配的 slug、匹配假设、采用的 token、禁用项和不复制商标/专有资产的边界。
 - [ ] UI 工作明确参考风格、反参考风格和需要规避的默认 AI 感模式。
 - [ ] 复杂功能、架构变更或大范围重构，先写简短计划：阶段、风险、影响文件和验证方式。
 - [ ] 功能、Bugfix 或重构且有实际测试面时，先定义 TDD 目标。
