@@ -23,7 +23,7 @@
 职责分工：
 
 - `taste-skill`：审美方向、视觉判断、风格选择。
-- `awesome-design-md`：按用户需求主动匹配具体品牌、行业或视觉方向，提供 DESIGN.md 级别的颜色、字体、组件、布局、Do/Don't 和响应式规则。
+- `awesome-design-md`：按用户需求主动匹配具体品牌、行业或视觉方向；用户未说明风格时，按产品类型、目标用户、界面密度和任务气质做保守假设，提供 DESIGN.md 级别的颜色、字体、组件、布局、Do/Don't 和响应式规则。
 - `frontend-design`：在选定方向和参考系统之上做设计判断、token 收敛、交互完整性和视觉 QA。
 
 外部参考：
@@ -47,17 +47,18 @@
 
 ## awesome-design-md 主动匹配规则
 
-当用户需求出现以下任一信号时，主动匹配 `awesome-design-md`：
+UI、页面、Web App、仪表盘、游戏或交互工具任务默认主动匹配 `awesome-design-md`。当用户需求出现以下任一信号时，按信号匹配；没有明确信号时，仍按产品类型和任务气质选择最接近的参考：
 
 - 明确品牌或网站：如 Claude、Linear、Vercel、Stripe、Apple、Nike、Tesla。
 - 行业或产品类型：AI 平台、开发者工具、SaaS、金融、加密、零售、媒体、汽车、复古网页等。
 - 视觉关键词：极简、暗色、编辑感、开发者文档感、奢华汽车感、交易终端感、品牌官网感、复古 Y2K 等。
 - 用户只说“好看一点”“像某某产品”“参考某个网站”但没有完整设计系统。
+- 用户没有说明品牌、颜色或视觉风格，但任务本身是 UI/页面/前端设计；此时不要跳过 `awesome-design-md`，先选择 1 个合理参考并说明假设。
 
 匹配步骤：
 
 1. 精确匹配品牌或网站名，优先读取对应 `design-md/<slug>/DESIGN.md`。
-2. 无精确匹配时，按行业和视觉气质选择一个最接近的参考：
+2. 无精确匹配或需求不明确时，按行业、产品类型、界面密度和视觉气质选择一个最接近的参考：
    - AI / LLM：`claude`、`cohere`、`mistral.ai`、`together.ai`、`x.ai`、`voltagent`。
    - 开发者工具 / 部署 / IDE：`vercel`、`cursor`、`warp`、`expo`、`raycast`。
    - 数据库 / DevOps / 文档：`supabase`、`clickhouse`、`mongodb`、`hashicorp`、`mintlify`。
@@ -68,6 +69,8 @@
    - 媒体 / 消费科技：`apple`、`spotify`、`wired`、`theverge`、`playstation`。
    - 汽车 / 高端产品：`bmw`、`bmw-m`、`bugatti`、`ferrari`、`lamborghini`、`tesla`。
    - 复古网页：`dell-1996`、`nintendo-2001`。
+   - 无明显行业线索但属于通用产品 UI：优先从 `linear.app`、`vercel`、`mintlify`、`supabase` 中按密度和信息架构选择。
+   - 无明显行业线索但属于品牌或展示页：优先从 `apple`、`stripe`、`figma`、`framer` 中按语气和视觉强度选择。
 3. 只读取选中的 `DESIGN.md`，提取：
    - 视觉主题和氛围
    - 颜色 token 和语义角色
@@ -76,7 +79,7 @@
    - 布局原则
    - Do/Don't
    - 响应式规则
-4. 将匹配结果写入 `docs/project-design-spec.md` 或任务说明：选了哪个 slug、为什么匹配、哪些 token 被采用、哪些规则被禁用。
+4. 将匹配结果写入 `docs/project-design-spec.md` 或任务说明：选了哪个 slug、为什么匹配、哪些假设成立、哪些 token 被采用、哪些规则被禁用。
 5. 如果用户要求“像某品牌”，只借鉴视觉系统和交互规则；不要复制商标、专有图片、真实文案或受保护品牌资产，除非用户明确拥有使用权。
 
 与其他设计技能的关系：
