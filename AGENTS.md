@@ -25,7 +25,7 @@
 | Skill | 本地路径 | 下载地址 | 用途 |
 | --- | --- | --- | --- |
 | `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA。 |
-| `awesome-design-md` | 按需远端读取 | `https://github.com/VoltAgent/awesome-design-md` | DESIGN.md 风格库；按用户需求主动匹配品牌、行业或视觉方向并读取对应设计系统。 |
+| `awesome-design-md` | 按需远端读取 | `https://github.com/VoltAgent/awesome-design-md` | DESIGN.md 风格库；UI 需求明确或不明确时，都按品牌、行业、产品类型或默认视觉方向主动匹配并读取对应设计系统。 |
 | `taste-skill` / `design-taste-frontend` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向、反模板化视觉判断、风格选择。 |
 | `codegraph` | 待配置 | `https://github.com/colbymchenry/codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查。 |
 | `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析。 |
@@ -54,7 +54,8 @@ Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和�
 2. 从需求开始。
    - 要求用户先填写需求模板。
    - 如有缺失，先做保守假设并写明，再编码。
-   - 目标设备、主要问题、核心功能或视觉方向不清楚时，不要直接开工。
+   - 目标设备、主要问题或核心功能不清楚到会影响实现时，不要直接开工。
+   - UI 视觉方向不清楚但产品类型、目标用户或主流程足够判断时，先做保守假设并用 `awesome-design-md` 主动匹配最近的 DESIGN.md，不因为缺少风格描述而跳过设计匹配。
 
 3. 小步规划，稳定推进。
    - 拆成可以独立实现、测试和审查的小阶段。
@@ -68,6 +69,7 @@ Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和�
    - 将它作为默认 UI 质量和视觉 QA 标准。
    - 开始前确认产品类型、目标用户、主流程、设计风格、颜色和展示内容。
    - 如果用户提到品牌、网站、行业、竞品或视觉风格，主动用 `awesome-design-md` 匹配最接近的 `design-md/<slug>/DESIGN.md`，再提取颜色、字体、组件、布局和禁用项作为项目设计上下文。
+   - 如果用户没有说明设计风格，也要按产品类型、界面密度、目标用户和任务气质选择一个最接近的 `awesome-design-md` 参考，说明假设后继续。
    - 同时使用 `taste-skill` 与 `frontend-design` 时，`taste-skill` 负责审美方向，`frontend-design` 负责把选定方向收敛为 CSS/design tokens 和可执行 UI 质量规则。
    - 如果二者冲突，保留 `taste-skill` 的设计方向，用 `frontend-design` 解决实现 token、布局约束和视觉 QA。
 
