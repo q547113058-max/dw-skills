@@ -1,47 +1,48 @@
 # DW Skills
 
-这是一个面向 Agent 辅助开发的项目级开发工作流仓库。
+DW Skills 是一套面向 Agent 辅助开发的项目治理层。它不再重复实现完整的软件开发方法论；在支持的 Agent 环境中，通用开发主流程由 [obra/superpowers](https://github.com/obra/superpowers) 执行，DW 负责补充项目上下文、UI 设计、会话恢复、工具治理、交付记录和规则沉淀。
 
-目标是把需求确认、分阶段开发、设计规范、质量门禁、GitHub 更新、会话恢复、执行追踪和可复用质量规则整理成稳定标准。后续如果迁移到 Hermes，应优先迁移这些文档化规则，而不是依赖某个本地运行时目录。
+## 分工
 
-## 目录
+| 能力 | 默认负责人 |
+| --- | --- |
+| 需求澄清、方案设计 | Superpowers `brainstorming` |
+| 实施计划 | Superpowers `writing-plans` |
+| 隔离工作区 | Superpowers `using-git-worktrees` |
+| TDD | Superpowers `test-driven-development` |
+| 执行与子 Agent 编排 | Superpowers `executing-plans` / `subagent-driven-development` |
+| 调试 | Superpowers `systematic-debugging` |
+| 代码审查与完成验证 | Superpowers review / verification skills |
+| UI 方向、设计 token、视觉 QA | DW 设计规则和登记的设计 Skills |
+| 项目日志、会话恢复、工具选型 | DW |
+| 安全、技术栈和领域附加门禁 | DW 条件规则 |
+| GitHub 交付记录、反馈归因 | DW |
 
-- `AGENTS.md`：开发会话入口说明，规定 Agent 开始工作前必须读取的标准文件、可用 skills 和核心流程。
-- `docs/`：项目开发标准，包括需求模板、开发流程、技术规范、设计规范、执行清单、质量门禁、GitHub 更新、恢复机制和条件质量策略。
-- `dev-logs/`：每日开发日志，用于记录已完成事项、决策、验证结果、阻塞项和待办事项。
+原则是“一项能力只有一个主流程”。DW 不要求重复生成 Superpowers 已经产出的需求、计划、TDD 记录或审查报告，只补充缺失的项目级信息。
 
-## 核心原则
+## 运行模式
 
-- 先确认需求，再规划开发。
-- 每次只推进一个稳定、可验证的小步骤。
-- 页面开发默认使用 `frontend-design`，审美方向由 `taste-skill` 负责；UI 需求明确或不明确时，都主动用 `awesome-design-md` 按品牌、行业、产品类型或默认视觉方向匹配对应 DESIGN.md。
-- 轻量项目默认先用 `rg`、直接读文件和现有测试；需要代码结构图时再用 codegraph，项目变复杂或已有图谱时才用 Graphify。
-- 长期多会话项目可选用 agentmemory 作为记忆层；轻量项目不默认启用。
-- 默认应用 Ponytail 精简实现原则：先判断是否需要写，再优先复用仓库已有实现、标准库、平台能力和已安装依赖，最后才写最小可工作代码。
-- 所有代码修改后通过 GitHub 提交和更新。
-- 重复出现的 Agent 错误要沉淀成 `AGENTS.md` 中的明确规则。
+- **组合模式**：环境已安装 Superpowers。使用 Superpowers 执行通用开发生命周期，DW 只运行增量门禁。
+- **独立模式**：环境没有 Superpowers。DW 使用 `docs/02-development-workflow.md` 中的精简降级流程，保证工作仍可完成。
 
-## 已用 Skills 和下载地址
+模式在任务开始时确定，并记录到当天 `dev-logs/YYYY-MM-DD.md`。不要在任务中途无故切换。
 
-| Skill | 用途 | 下载地址 |
-| --- | --- | --- |
-| `frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA 规则 | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` |
-| `awesome-design-md` | DESIGN.md 风格库；按品牌、行业、竞品、视觉关键词或不明确 UI 需求下的产品类型假设匹配对应设计系统 | `https://github.com/VoltAgent/awesome-design-md` |
-| `taste-skill` / `design-taste-frontend` | 审美方向、反模板化视觉判断、风格选择 | `https://github.com/Leonxlnx/taste-skill` |
-| `codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查 | `https://github.com/colbymchenry/codegraph` |
-| `graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析 | `https://github.com/safishamsi/graphify` |
-| `agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景 | `https://github.com/rohitg00/agentmemory` |
-| `ponytail` | 精简实现、YAGNI、复用优先和反过度工程审查参考 | `https://github.com/DietrichGebert/ponytail` |
-| `github` | GitHub CLI、仓库、提交、PR 和 GitHub API 工作流 | Codex 本地 skill；GitHub CLI 下载地址：`https://cli.github.com/` |
+## DW 保留的差异化能力
+
+- UI 任务的产品上下文、设计方向、token 和视觉 QA。
+- 轻量代码理解、codegraph、Graphify 和 agentmemory 的成本分级。
+- Ponytail 精简实现审查。
+- 无状态会话恢复、项目 TODO 和开发日志。
+- 安全敏感、技术栈专项、AI eval 和领域规则等条件门禁。
+- Skill 来源、更新和迁移治理。
+- GitHub 更新、交付状态和反馈归因。
 
 ## 使用方式
 
-开始一个开发任务前，先读取：
+1. 读取 `AGENTS.md`。
+2. 读取 `docs/15-superpowers-integration.md` 并确定运行模式。
+3. 只读取当前任务需要的 DW 文档。
+4. 组合模式下按 Superpowers 当前阶段执行，再运行 DW 增量清单。
+5. 独立模式下使用 DW 精简降级流程。
 
-1. `AGENTS.md`
-2. `docs/01-requirements-template.md`
-3. `docs/02-development-workflow.md`
-4. `docs/05-execution-checklist.md`
-5. 当天的 `dev-logs/YYYY-MM-DD.md`
-
-如果项目已经确定技术栈，再根据 `docs/12-conditional-quality-and-tooling-policy.md` 启用对应的条件规则。
+详细分工和冲突处理见 `docs/15-superpowers-integration.md`。

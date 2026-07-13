@@ -1,177 +1,62 @@
-# 开发 Skills 工作说明
+# DW Skills 工作说明
 
-开始任何开发任务前，先把本文件作为项目入口读取。
+DW 是项目治理层，不是第二套通用开发生命周期。开始任务时先确定运行模式：
 
-## 必读文件
+- **组合模式**：Superpowers 可用，由它负责需求、计划、TDD、调试、执行编排、代码审查、验证和分支完成。
+- **独立模式**：Superpowers 不可用，使用 `docs/02-development-workflow.md` 的精简降级流程。
 
-规划或编码前读取：
+完整分工见 `docs/15-superpowers-integration.md`。
 
-- `docs/01-requirements-template.md`：用户需求提交模板。
-- `docs/02-development-workflow.md`：分阶段开发流程、skills 清单和规划规则。
-- `docs/03-technical-standards.md`：工程、测试和交付标准。
-- `docs/04-design-standards.md`：UI、视觉、颜色和内容标准。
-- `docs/05-execution-checklist.md`：每次任务执行清单。
-- `docs/06-development-log-standard.md`：每日开发日志格式和更新规则。
-- `docs/07-code-structure-analysis.md`：轻量代码结构分析、codegraph 和 Graphify 取舍标准。
-- `docs/08-github-update-standard.md`：代码修改后的 GitHub 更新标准。
-- `docs/09-quality-gates-and-review-loop.md`：确定性约束、自动审查循环、生成/评估分离。
-- `docs/10-session-checkpoints-and-recovery.md`：无状态会话启动、进度追踪、Git 检查点和恢复规则。
-- `docs/11-execution-tracking-quality-feedback.md`：执行追踪、质量分级、异常检测和反馈归因。
-- `docs/12-conditional-quality-and-tooling-policy.md`：条件质量规则、Hook 策略、角色触发、编排策略和 Hermes 迁移注意事项。
-- `docs/14-skill-update-policy.md`：Skills 每周更新、调用前检测和状态记录规则。
+## 启动
 
-## Skills 和下载地址
+1. 检查 Git 状态、当前分支、最近提交和用户已有改动。
+2. 读取当天或最近的 `dev-logs/`、项目 TODO 和任务相关文档。
+3. 检测 Superpowers 是否在当前 Agent 环境可用，记录运行模式。
+4. 组合模式下继续 Superpowers 当前阶段；不要重新生成它已有的产物。
+5. 只加载当前任务需要的 DW 规则。
 
-| Skill | 本地路径 | 下载地址 | 用途 |
-| --- | --- | --- | --- |
-| `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | 页面、前端、Web App、仪表盘、游戏和交互 UI 的基础设计与视觉 QA。 |
-| `awesome-design-md` | 按需远端读取 | `https://github.com/VoltAgent/awesome-design-md` | DESIGN.md 风格库；UI 需求明确或不明确时，都按品牌、行业、产品类型或默认视觉方向主动匹配并读取对应设计系统。 |
-| `taste-skill` / `design-taste-frontend` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向、反模板化视觉判断、风格选择。 |
-| `codegraph` | 待配置 | `https://github.com/colbymchenry/codegraph` | 轻量代码结构图、import/call/dependency graph、循环依赖检查。 |
-| `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 项目级知识图谱、长期架构记忆、跨代码/文档/资料分析。 |
-| `agentmemory` | 待配置 | `https://github.com/rohitg00/agentmemory` | 可选持久化记忆层，用于长期多会话、多 Agent 或 Hermes 迁移场景。 |
-| `ponytail` | 待配置 | `https://github.com/DietrichGebert/ponytail` | 精简实现、YAGNI、复用优先和反过度工程审查参考。 |
-| `vpn-mihomo` | `C:\Users\54711\.codex\skills\vpn-mihomo\SKILL.md` | 本地技能 | Mihomo VPN/代理启动、状态检查和节点可用性测试。 |
-| `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | GitHub CLI：`https://cli.github.com/` | GitHub 仓库、提交、PR、Actions 和 API 工作流。 |
+## DW 增量规则
 
-Hermes 适配时，优先迁移上表的下载地址、用途、触发条件和规则说明。不要把 Windows 本地绝对路径当作 Hermes 的唯一依赖来源。
+### UI 与产品上下文
 
-## Skills 周更新规则
+- UI 任务读取 `docs/04-design-standards.md` 并使用可用的 `frontend-design`。
+- 审美方向由 `taste-skill` / `design-taste-frontend` 负责；`frontend-design` 将方向落实为 token 和视觉 QA。
+- 使用 `awesome-design-md` 时只读取最匹配的 DESIGN.md，并记录采用与禁用项。
+- 持续 UI 项目维护 `docs/project-product-context.md` 和 `docs/project-design-spec.md`。
 
-- DW 登记的所有技能每周至少检查一次更新状态，使用 `scripts/check-dw-skill-updates.ps1` 记录到 `work/skill-update-state.json`。
-- 准备调用任一 DW 登记技能前，先运行单技能检测：`powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" check -Skill <skill-name>`。
-- 如果检测结果显示 `Due=True`，先检查来源仓库或工具版本，再决定是否更新；不是 Git checkout 的本地技能不得强行覆盖。
-- `vpn-mihomo` 等本地私有技能只同步脱敏说明或模板，禁止上传真实订阅 URL、token、节点服务器、UUID、密码或完整配置。
-- `codegraph`、`agentmemory`、`ponytail` 等待配置技能只记录来源和状态；未明确需要前不安装运行时、hooks、commands 或 platform configs。
+### 工具成本分级
 
-## 核心流程
+- 默认先用 `rg`、直接读文件和现有测试。
+- 需要轻量依赖图时使用 codegraph。
+- 只有跨模块理解或长期知识沉淀确有价值时才使用 Graphify。
+- agentmemory 只用于长期多会话、多 Agent 或跨环境共享需求。
+- 调用登记 Skill 前遵守 `docs/14-skill-update-policy.md`。
 
-1. 每次会话都按无状态启动。
-   - 从 `AGENTS.md`、`docs/`、当天 `dev-logs/YYYY-MM-DD.md`、Git 状态和现有 TODO/清单重建上下文。
-   - 不假设聊天历史完整。
-   - 编辑前确认最后完成的检查点和下一个未完成任务。
+### 精简实现
 
-2. 从需求开始。
-   - 要求用户先填写需求模板。
-   - 如有缺失，先做保守假设并写明，再编码。
-   - 目标设备、主要问题或核心功能不清楚到会影响实现时，不要直接开工。
-   - UI 视觉方向不清楚但产品类型、目标用户或主流程足够判断时，先做保守假设并用 `awesome-design-md` 主动匹配最近的 DESIGN.md，不因为缺少风格描述而跳过设计匹配。
+写代码前依次检查：是否需要、仓库已有实现、标准库、平台能力、已安装依赖、最小实现。禁止未请求的抽象、脚手架和投机扩展。Bugfix 修根因和共享入口。
 
-3. 小步规划，稳定推进。
-   - 拆成可以独立实现、测试和审查的小阶段。
-   - 不要一次做太多；先交付可靠 MVP，再加下一项功能。
-   - 每个阶段必须定义范围、预期结果、验证方式和下一步。
-   - 维护功能清单和 TODO。
-   - 复杂功能、架构变更或大范围重构前，使用规划角色：明确需求、影响文件、风险、阶段和验证方式。
+### 条件门禁
 
-4. 页面开发默认使用 `frontend-design`。
-   - 规划或实现 UI 前读取并应用 `frontend-design`。
-   - 将它作为默认 UI 质量和视觉 QA 标准。
-   - 开始前确认产品类型、目标用户、主流程、设计风格、颜色和展示内容。
-   - 如果用户提到品牌、网站、行业、竞品或视觉风格，主动用 `awesome-design-md` 匹配最接近的 `design-md/<slug>/DESIGN.md`，再提取颜色、字体、组件、布局和禁用项作为项目设计上下文。
-   - 如果用户没有说明设计风格，也要按产品类型、界面密度、目标用户和任务气质选择一个最接近的 `awesome-design-md` 参考，说明假设后继续。
-   - 同时使用 `taste-skill` 与 `frontend-design` 时，`taste-skill` 负责审美方向，`frontend-design` 负责把选定方向收敛为 CSS/design tokens 和可执行 UI 质量规则。
-   - 如果二者冲突，保留 `taste-skill` 的设计方向，用 `frontend-design` 解决实现 token、布局约束和视觉 QA。
+- 项目已有 formatter、lint、type check、tests、build 时运行相关检查。
+- 敏感边界启用安全审查；技术栈已确定时才启用专项规则。
+- UI 交付补充响应式、可访问性和视觉检查。
+- AI 工作流或 prompt 变更按需使用 eval，而不是把 eval 强加给普通文档改动。
 
-5. 轻量项目优先使用低成本代码理解路径。
-   - 默认先用 `rg`、直接读文件、现有测试和项目文档理解代码。
-   - 需要快速查看 import/call/dependency graph、模块连接或循环依赖时，优先使用 codegraph。
-   - 只有项目出现跨模块架构不清、长期知识沉淀、跨文档分析，或已存在 `graphify-out/graph.json` 时，才启用 Graphify。
-   - 已有图谱时使用 `graphify query`、`graphify path` 或 `graphify explain`。
-   - 只有任务值得项目级知识图谱时，才运行 `/graphify .` 或 `graphify extract .`。
-   - 修改代码后，如果项目已有 `graphify-out/graph.json`，可行时运行 `graphify update .`。
-   - 不扫描生成目录、依赖目录或无关克隆工具，除非它们就是分析目标。
+Superpowers 已完成的 TDD、review 或 verification 可直接作为 DW 的证据，不重复执行同目的流程。DW 只补充项目特有的检查。
 
-6. agentmemory 只作为条件记忆层。
-   - 轻量项目、短期任务、单次需求不默认启用 agentmemory。
-   - 只有长期多会话项目、多 Agent 协作、重复解释成本高、需要跨 Hermes/Codex 共享记忆，或用户明确要求时才评估启用。
-   - 启用前必须确认 Node.js >= 20、端口、MCP/Hook 边界、隐私边界、成本开关和回滚方式。
-   - 默认只考虑本地零 LLM 模式和 `AGENTMEMORY_TOOLS=core`；不要默认打开自动注入、自动压缩或全量 hooks。
-   - 适配评估见 `docs/13-agentmemory-adaptation.md`。
+## 记录与交付
 
-7. 默认应用 Ponytail 精简实现原则。
-   - 写代码前先走精简阶梯：是否真的需要、仓库已有实现、标准库、平台原生能力、已安装依赖、单行表达、最小可工作实现。
-   - Bugfix 先定位根因和共享入口；不要只在报错路径加补丁。
-   - 禁止未请求的抽象、脚手架、未来扩展、单实现接口和无实际变化的配置层。
-   - 删除优于新增；少文件、短 diff 优先，但必须建立在读懂真实调用链和需求之后。
-   - Ponytail 只作为规则和审查参考；未明确批准前不安装其 hooks、commands、platform configs 或运行时文件。
+- 实质性任务更新当天 `dev-logs/YYYY-MM-DD.md`；窄小、无后续价值的任务可不创建日志。
+- 记录运行模式、DW 增量规则、变更文件、验证结果、阻塞项和下一步。
+- 重要决策同步到项目文档，不只留在聊天中。
+- 重复 Agent 错误有明确证据时，才提升为项目规则。
+- GitHub 操作遵守 `docs/08-github-update-standard.md` 和用户授权；不要把“修改文件”自动解释为获准 push、建 PR 或合并。
 
-8. 网络延迟或失败时按需启用可用 VPN 节点。
-   - 当 GitHub、包下载、外部 API、浏览器登录或模型/工具网络请求出现超时、DNS、连接失败或明显高延迟时，先检查是否需要代理。
-   - 需要联网完成任务时，使用 `vpn-mihomo` 启动并测试可用节点，再只给当前命令设置 `HTTP_PROXY` / `HTTPS_PROXY`，优先避免改全局系统代理。
-   - 只有用户明确要求浏览器或全局流量走代理时，才启用系统代理；任务结束后必须恢复代理状态。
-   - 仅检查订阅或配置有效性时，不启动代理、不改系统代理、不设置全局代理环境变量。
-   - 不在日志或回复中打印订阅链接、节点服务器、UUID、密码、token 或完整配置。
+## 禁止重复
 
-9. 保持项目记录更新。
-   - 使用 `dev-logs/YYYY-MM-DD.md` 做每日记录。
-   - 会话开始时，如果当天日志不存在就创建。
-   - 会话结束时追加已完成事项、决策、未解决问题和下一步待办。
-
-10. 保持文档同步。
-   - 需求、技术选择、设计规则、执行步骤和验收标准放入 `docs/`。
-   - 决策变化时同步更新文档。
-   - 不把重要项目知识只留在聊天里。
-
-11. 把重复 Agent 错误转成规则。
-   - 同类错误出现超过一次时，在 `AGENTS.md` 中添加简洁预防规则。
-   - 规则必须写清触发条件、必须行为和禁止行为。
-   - 规则要可执行，不写空泛提醒。
-   - 在 `dev-logs/YYYY-MM-DD.md` 记录新增规则和原因。
-
-12. 交付前应用质量门禁。
-   - 先跑确定性约束：linter、formatter、类型检查、结构测试、pre-commit 等。
-   - 风险改动使用自动审查循环：实现、审查、修复，直到满足验收标准。
-   - 生成和评估分离：产出方案的 Agent 不应是唯一质量证明。
-   - 重要任务尽量使用独立审查或评估角色。
-   - 功能、Bugfix、重构优先使用 TDD：定义用户旅程，写测试，确认有效 RED，最小实现，确认 GREEN，再重构。
-   - 验证报告必须说明 build、type check、lint、tests、security scan、diff review 的状态。
-   - AI 工作流或 prompt 变更先定义能力 eval 和回归 eval，再实现并记录结果。
-   - 重复修正和有效模式先作为项目学习候选，只把稳定跨项目模式提升为全局规则。
-   - 先研究复用、明确输入验证、共享数据不可变更新、文件/函数聚焦、常规提交、安全审查触发器，禁止未验证交付。
-   - TypeScript、React 或 Web 前端项目启用 `docs/03-technical-standards.md` 和 `docs/09-quality-gates-and-review-loop.md` 中的条件前端规则；技术栈未确定时不要启用无关语言规则。
-   - 复杂范围用规划角色，功能/Bug/重构用 TDD 角色，代码编辑后用代码审查角色，敏感边界用安全审查角色，构建/类型失败用构建修复角色，技术栈确定后才启用专项审查角色。
-   - 小改动不要为了形式而模拟额外审查角色；确定性检查和本地审查足够时即可。
-   - 使用命令配方作为工作流模式，而不是依赖 slash command 文件：plan、feature development、checkpoint、quality gate、security scan、build fix、session save/resume、PR creation。
-   - 只有任务确实适合 agentic 执行时才应用 agentic 工程原则：定义完成标准、拆成可独立验证的小单元、追踪成本/重试、使用人工控制的合并门禁。
-   - 敏感变更默认做安全审查；配置、hooks、MCP、auth、secrets、外部 API 或依赖面变化时启用更深入的安全扫描。
-   - 条件工具、Hook、编排、部署、数据库、媒体、业务、运营和领域规则只在需求或项目栈需要时启用，并记录决策。
-
-13. 为代码变更创建 Git 检查点。
-   - 每个连贯且已验证的步骤后提交一次。
-   - 把每次提交视为恢复快照。
-   - 不把无关工作混进同一个检查点。
-   - 失败时检查最新检查点、当前 diff 和 TODO，然后从中断处继续。
-
-14. 代码变更后通过 GitHub 更新。
-   - 编辑前后检查 `git status`。
-   - 只提交相关文件。
-   - 推送到配置好的 GitHub remote，或按策略准备 Pull Request。
-   - 未明确要求时，不 force-push、不改写历史、不合并、不删分支、不改仓库设置。
-   - GitHub 更新无法完成时，在 `dev-logs/YYYY-MM-DD.md` 记录原因。
-
-15. 结束时做执行追踪和反馈归因。
-   - 记录执行轨迹：任务、阶段、变更文件、命令/检查、结果、阻塞项、下一步。
-   - 交付前给质量等级：A、B、C 或 Blocked。
-   - 检测异常：重复失败、跳过检查、需求不清、意外 diff、测试回归、工具超时。
-   - 将反馈归因到：需求缺口、规划缺口、实现 Bug、设计问题、验证缺口、工具问题或 Agent 规则缺口。
-   - 如果反馈暴露重复 Agent 规则缺口，更新 `AGENTS.md`。
-
-## 项目路径
-
-- 需求模板：`docs/01-requirements-template.md`
-- 开发流程：`docs/02-development-workflow.md`
-- 技术标准：`docs/03-technical-standards.md`
-- 设计标准：`docs/04-design-standards.md`
-- 执行清单：`docs/05-execution-checklist.md`
-- 日志标准：`docs/06-development-log-standard.md`
-- 代码结构分析标准：`docs/07-code-structure-analysis.md`
-- GitHub 更新标准：`docs/08-github-update-standard.md`
-- 质量门禁和审查循环：`docs/09-quality-gates-and-review-loop.md`
-- 会话检查点和恢复：`docs/10-session-checkpoints-and-recovery.md`
-- 执行追踪和反馈：`docs/11-execution-tracking-quality-feedback.md`
-- 条件质量与工具策略：`docs/12-conditional-quality-and-tooling-policy.md`
-- agentmemory 适配评估：`docs/13-agentmemory-adaptation.md`
-- 每日日志：`dev-logs/`
-- 用户可交付文件：`outputs/`
-- 临时工作文件：`work/`
+- 不在 brainstorming 之后再次要求用户填写完整需求模板。
+- 不在 writing-plans 之后再生成 DW 阶段计划。
+- 不在 Superpowers TDD 之外再运行一套 DW TDD 仪式。
+- 不在 review/verification 已通过后仅为形式重复同类审查。
+- 不同时维护两套任务状态；优先使用当前执行计划，DW 日志只保存恢复摘要。

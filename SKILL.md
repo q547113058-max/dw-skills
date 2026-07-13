@@ -1,38 +1,42 @@
 ---
 name: dw-skills
-description: Use when the user asks to apply dw-skills, DW Skills, project development workflow standards, requirement confirmation, staged implementation, design standards, execution checklists, quality gates, GitHub update rules, session recovery, or reusable agent development rules from the local dw-skills repository.
+description: Project governance layer for Agent-assisted development. Use for DW Skills, project context, UI design standards, session recovery, tool governance, conditional quality gates, GitHub delivery records, and integration with Superpowers.
 ---
 
 # DW Skills
 
-Use this skill as the project-level development workflow standard.
+Use DW as a project governance layer. When Superpowers is available, let it own the generic development lifecycle and apply DW only where it adds project-specific policy.
 
-## Quick Start
+## Start
 
-When this skill is triggered, read only the files needed for the current task:
+1. Read `AGENTS.md`.
+2. Read `docs/15-superpowers-integration.md` and select combined or standalone mode.
+3. Read only the DW references needed for the task.
+4. Open the latest relevant `dev-logs/` entry for substantive or resumed work.
 
-1. Start with `AGENTS.md` for the overall workflow and required standards.
-2. For requirements or planning, read `docs/01-requirements-template.md` and `docs/02-development-workflow.md`.
-3. For implementation standards, read `docs/03-technical-standards.md`.
-4. For frontend or UI work, read `docs/04-design-standards.md` and also use the existing `frontend-design` skill.
-5. For execution and verification, read `docs/05-execution-checklist.md` and `docs/09-quality-gates-and-review-loop.md`.
-6. For GitHub syncing, read `docs/08-github-update-standard.md`.
-7. For session resume or multi-turn continuity, read `docs/10-session-checkpoints-and-recovery.md`.
-8. For dev-log expectations, read `docs/06-development-log-standard.md` and the latest file in `dev-logs/`.
-9. Before invoking a registered DW skill, read `docs/14-skill-update-policy.md` and run the weekly skill check when needed.
+## Ownership
 
-## Working Rules
+In combined mode, do not duplicate Superpowers outputs:
 
-- Keep changes small, staged, and verifiable.
-- Update relevant project docs when code behavior changes.
-- Run appropriate checks before delivery.
-- Record important decisions and verification results in the project dev log when the task is substantive.
-- Push or sync to GitHub after completed code/documentation changes when the target project requires it.
+- brainstorming owns requirements and design approval;
+- writing-plans owns implementation plans;
+- test-driven-development owns RED/GREEN/REFACTOR;
+- systematic-debugging owns root-cause debugging;
+- review and verification skills own code review and completion proof;
+- worktree and branch-finishing skills own workspace lifecycle.
 
-## Bundled References
+DW owns UI design policy, project context, session recovery, tool selection, conditional security/domain gates, skill governance, delivery records, and reusable project rules.
 
-- `AGENTS.md`: main operating guide.
-- `docs/`: detailed workflow, design, quality, GitHub, and recovery standards.
-- `dev-logs/`: historical development notes.
-- `outputs/`: user-facing deliverables.
-- `work/`: temporary working material.
+## Fallback
+
+If Superpowers is unavailable, state that once and use the compact standalone workflow in `docs/02-development-workflow.md`. Do not emulate unavailable hooks or subagents merely to reproduce the shape of Superpowers.
+
+## References
+
+- UI: `docs/04-design-standards.md`
+- execution: `docs/05-execution-checklist.md`
+- GitHub: `docs/08-github-update-standard.md`
+- incremental quality: `docs/09-quality-gates-and-review-loop.md`
+- recovery: `docs/10-session-checkpoints-and-recovery.md`
+- conditional policy: `docs/12-conditional-quality-and-tooling-policy.md`
+- integration: `docs/15-superpowers-integration.md`
