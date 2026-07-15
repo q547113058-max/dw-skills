@@ -2,6 +2,14 @@
 
 组合模式下，Superpowers 负责通用 TDD、代码审查和完成验证。DW 质量门禁只补充项目特有风险，不创建第二套同目的流程。
 
+## 分级门禁
+
+- `quick`：只运行最接近改动的测试、lint/build 片段或人工检查，并审查 diff。
+- `standard`：运行相关确定性检查；combined 复用 Superpowers 证据，standalone 有测试面时使用 TDD。
+- `high-risk`：增加完整相关检查、独立专项审查、安全审查、回滚验证和可行的集成/E2E 检查。
+
+任务升级后使用更高等级；不因为 combined 模式已经提供通用证据而跳过 DW 的项目特有风险门禁。
+
 ## 证据复用
 
 以下 Superpowers 产物可直接作为 DW 证据：
@@ -75,6 +83,8 @@ DW 日志记录引用和结论即可，不复制整段输出。若证据过期�
 窄小文档、文案或低风险配置变更不要求多 Agent 审查。
 
 ## 验证摘要
+
+`standard`、`high-risk` 或需要正式交付记录时使用完整摘要；`quick` 只列实际运行项和剩余问题。
 
 ```text
 Mode: combined / standalone

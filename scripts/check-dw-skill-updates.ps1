@@ -24,6 +24,7 @@ $Skills = @(
   [pscustomobject]@{ Name = "graphify"; Source = "https://github.com/safishamsi/graphify"; LocalPath = "C:\Users\54711\.codex\skills\graphify\SKILL.md"; Kind = "github-skill" },
   [pscustomobject]@{ Name = "agentmemory"; Source = "https://github.com/rohitg00/agentmemory"; LocalPath = ""; Kind = "pending" },
   [pscustomobject]@{ Name = "ponytail"; Source = "https://github.com/DietrichGebert/ponytail"; LocalPath = ""; Kind = "pending" },
+  [pscustomobject]@{ Name = "superpowers"; Source = "https://github.com/obra/superpowers"; LocalPath = ""; Kind = "pending" },
   [pscustomobject]@{ Name = "vpn-mihomo"; Source = "local-private"; LocalPath = "C:\Users\54711\.codex\skills\vpn-mihomo\SKILL.md"; Kind = "local-private" },
   [pscustomobject]@{ Name = "github"; Source = "https://cli.github.com/"; LocalPath = "C:\Users\54711\.codex\skills\github\SKILL.md"; Kind = "tool" }
 )

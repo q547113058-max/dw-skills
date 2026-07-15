@@ -1,8 +1,14 @@
 # 会话检查点和恢复
 
-本标准用于让工作能在无状态 LLM 会话之间恢复。
+本标准用于 `standard`、`high-risk`、跨会话或中断任务的恢复。已在当前会话完成的 `quick` 不需要建立完整恢复记录。
 
 组合模式下，Superpowers 的设计文档、实施计划、worktree 和当前任务状态是主记录。DW 日志只保存恢复摘要和项目特有决策，不维护平行计划。
+
+## 第二大脑环境边界
+
+- 云盘迁移前，只有 `CODEX_HOME=D:\Codex\home` 可以读取和更新 `D:\Codex\vault`。
+- 其他电脑、Codex Home 或 Agent 环境保持第二大脑关闭，不复制全局路由，不创建平行项目记忆。
+- 迁移后先验证双向同步、冲突副本处理、离线恢复和统一项目键，再扩大启用范围。
 
 ## 会话启动
 
@@ -12,7 +18,7 @@
 
 1. 读取 `AGENTS.md`。
 2. 读取相关 `docs/` 文件。
-3. 打开当天 `dev-logs/YYYY-MM-DD.md`。
+3. 打开已有的当天日志；只有 `standard`、`high-risk`、恢复任务或重要决策需要记录时才创建。
 4. 检查 Git 状态：
 
 ```powershell
@@ -61,7 +67,7 @@ git log -1 --oneline
 
 使用 Git commit 作为恢复快照。
 
-按 Superpowers 当前执行策略或仓库策略，在连贯且已验证的步骤后创建检查点：
+`standard`、`high-risk` 或跨会话工作按 Superpowers 当前执行策略或仓库策略，在连贯且已验证的步骤后创建检查点：
 
 ```powershell
 git status
@@ -78,6 +84,7 @@ git commit -m "checkpoint: concise description"
 - 优先使用已验证的小检查点，而不是大批未验证变更。
 - 按 GitHub 更新标准推送检查点。
 - 如果项目不能创建 Git commit，记录阻塞项，并临时使用每日日志作为恢复记录。
+- `quick` 不为恢复仪式强制提交；用户或仓库策略要求时再创建聚焦提交。
 
 ## 检查点恢复
 

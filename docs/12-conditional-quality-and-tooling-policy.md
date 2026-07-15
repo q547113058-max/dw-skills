@@ -4,6 +4,8 @@
 
 默认规则：先吸收可执行原则，不复制外部运行时文件；只有具体项目技术栈、工具链和回滚方案明确后，才启用对应自动化。
 
+先按 `quick`、`standard`、`high-risk` 分级。本文件中的规则组不会因为被登记而自动启用；只有任务触发条件成立时才加载和执行。
+
 ## 适用边界
 
 - 不批量复制 `commands/`、`agents/`、`hooks/`、platform configs、MCP configs 或 scripts。

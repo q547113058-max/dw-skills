@@ -10,9 +10,12 @@ Use DW as a project governance layer. When Superpowers is available, let it own 
 ## Start
 
 1. Read `AGENTS.md`.
-2. Read `docs/15-superpowers-integration.md` and select combined or standalone mode.
-3. Read only the DW references needed for the task.
-4. Open the latest relevant `dev-logs/` entry for substantive or resumed work.
+2. Classify the task as `quick`, `standard`, or `high-risk`.
+3. Detect Superpowers and select combined or standalone mode. For `standard`, `high-risk`, or combined work, read `docs/15-superpowers-integration.md`.
+4. Read only the DW references triggered by the task tier and scope.
+5. Open the latest relevant `dev-logs/` entry for substantive or resumed work; do not create one for a completed low-value `quick` task.
+
+Task tier controls workflow depth. Runtime mode controls ownership of the generic lifecycle. They are independent.
 
 ## Ownership
 
@@ -30,6 +33,10 @@ DW owns UI design policy, project context, session recovery, tool selection, con
 ## Fallback
 
 If Superpowers is unavailable, state that once and use the compact standalone workflow in `docs/02-development-workflow.md`. Do not emulate unavailable hooks or subagents merely to reproduce the shape of Superpowers.
+
+## Deployment Scope
+
+Until cloud-drive migration is completed and verified, only `CODEX_HOME=D:\Codex\home` may use the second brain at `D:\Codex\vault`. Other computers and Agent environments keep second-brain routing disabled.
 
 ## References
 

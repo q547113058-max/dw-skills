@@ -1,6 +1,6 @@
 # Skill 周更新策略
 
-DW 登记的外部或本地技能需要每周做一次更新检查；准备调用某个技能时，也要先确认该技能最近 7 天内已经检查过。
+DW 登记的外部或本地技能需要每周做一次更新检查；实际准备调用某个技能时，也要先确认该技能最近 7 天内已经检查过。任务分级、读取 DW 核心文档或某个 skill 仅被列在清单中，不构成调用，不触发检查。
 
 ## 覆盖范围
 
@@ -13,6 +13,7 @@ DW 登记的外部或本地技能需要每周做一次更新检查；准备调�
 - `graphify`
 - `agentmemory`
 - `ponytail`
+- `superpowers`
 - `vpn-mihomo`
 - `github`
 
@@ -52,7 +53,8 @@ powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" 
 2. 如果 `Due=True`，先检查来源仓库或工具版本是否需要更新。
 3. 如果技能目录是 Git checkout，可在审查 diff 后更新；不是 Git checkout 时，不要强行覆盖本地文件。
 4. 对 `vpn-mihomo` 这类本地私有技能，只更新公开说明或脱敏模板；不得上传真实订阅 URL、token、节点服务器、UUID、密码或完整配置。
-5. 对 `codegraph`、`agentmemory`、`ponytail` 等待配置技能，只记录来源和状态；未明确需要前不安装运行时、hooks 或 platform configs。
+5. 对 `codegraph`、`agentmemory`、`ponytail`、`superpowers` 等待配置技能，只记录来源和状态；未明确需要前不安装运行时、hooks、plugins、marketplace 或 platform configs。
+6. 只检查本次实际调用的 skill；不要在 `quick` 或无关任务中逐项检查全部登记技能。
 
 ## 每周更新规则
 
@@ -69,5 +71,5 @@ powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" 
 如果本策略、脚本或技能说明发生变化：
 
 - 更新当天 `dev-logs/YYYY-MM-DD.md`。
-- 提交 `dw-skills` 相关文档和脚本。
-- 推送到 GitHub；如果普通 `git push` 因网络问题失败，可按 `docs/08-github-update-standard.md` 使用 GitHub API 同步并记录原因。
+- 用户已授权或仓库有明确交付策略时，提交 `dw-skills` 相关文档和脚本并推送到 GitHub。
+- 未获得 GitHub mutation 授权时只保留本地变更并记录待办；已授权但普通 `git push` 因网络问题失败时，可按 `docs/08-github-update-standard.md` 使用 GitHub API 同步并记录原因。
