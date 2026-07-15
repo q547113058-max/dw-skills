@@ -2,6 +2,8 @@
 
 DW Skills 是一套面向 Agent 辅助开发的项目治理层。它不再重复实现完整的软件开发方法论；在支持的 Agent 环境中，通用开发主流程由 [obra/superpowers](https://github.com/obra/superpowers) 执行，DW 负责补充项目上下文、UI 设计、会话恢复、工具治理、交付记录和规则沉淀。
 
+通用规划、编码、调试、普通审查和 Git 常识由当前模型或 Superpowers 负责，不在 DW 默认入口重复。DW 文档只保留会改变项目路由、权限、外部状态、持久记录或验收证据的规则。
+
 ## 第二大脑部署范围
 
 - 当前只在 `CODEX_HOME=D:\Codex\home` 启用第二大脑，`D:\Codex\vault` 是云盘迁移前的唯一权威 Vault。
@@ -38,6 +40,7 @@ DW Skills 是一套面向 Agent 辅助开发的项目治理层。它不再重复
 
 - **组合模式**：环境已安装 Superpowers。使用 Superpowers 执行通用开发生命周期，DW 只运行增量门禁。
 - **独立模式**：环境没有 Superpowers。DW 使用 `docs/02-development-workflow.md` 中的精简降级流程，保证工作仍可完成。
+- **独立模式负责人**：当前模型按用户要求、仓库规则和真实工具证据执行通用开发；DW 只补治理增量。
 
 模式在任务开始时确定。`standard`、`high-risk`、恢复任务或已有日志时记录到 `dev-logs/YYYY-MM-DD.md`；没有后续价值的 `quick` 不为形式创建日志。不要在任务中途无故切换。
 

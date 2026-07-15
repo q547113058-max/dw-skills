@@ -2,20 +2,22 @@
 
 DW 登记的外部或本地技能需要每周做一次更新检查；实际准备调用某个技能时，也要先确认该技能最近 7 天内已经检查过。任务分级、读取 DW 核心文档或某个 skill 仅被列在清单中，不构成调用，不触发检查。
 
-## 覆盖范围
+## Skill 注册表
 
-覆盖 `AGENTS.md` 和 `docs/02-development-workflow.md` 中登记的技能：
+注册表不放入默认 `AGENTS.md`，避免每次任务加载无关来源信息。
 
-- `frontend-design`
-- `awesome-design-md`
-- `taste-skill` / `design-taste-frontend`
-- `codegraph`
-- `graphify`
-- `agentmemory`
-- `ponytail`
-- `superpowers`
-- `vpn-mihomo`
-- `github`
+| Skill | 本地路径 | 来源 | 触发用途 |
+| --- | --- | --- | --- |
+| `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | UI 实现和视觉 QA |
+| `awesome-design-md` | 按需远端读取 | `https://github.com/VoltAgent/awesome-design-md` | UI 风格系统匹配 |
+| `taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向和反模板化判断 |
+| `codegraph` | 待配置 | `https://github.com/colbymchenry/codegraph` | 轻量依赖/调用关系 |
+| `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 架构和长期知识图谱 |
+| `agentmemory` | 待配置 | `https://github.com/rohitg00/agentmemory` | 条件持久化记忆层 |
+| `ponytail` | 待配置 | `https://github.com/DietrichGebert/ponytail` | 反过度工程参考 |
+| `superpowers` | 待配置 | `https://github.com/obra/superpowers` | combined 模式通用开发生命周期 |
+| `vpn-mihomo` | `C:\Users\54711\.codex\skills\vpn-mihomo\SKILL.md` | 本地私有 | 网络失败后的代理操作 |
+| `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | `https://cli.github.com/` | GitHub 外部状态和 mutation |
 
 ## 检测命令
 
