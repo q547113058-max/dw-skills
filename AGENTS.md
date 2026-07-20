@@ -1,56 +1,44 @@
 # DW Skills 工作说明
 
-DW 是项目治理层，不重复模型或 Superpowers 的通用开发能力。每次任务只读取本文件和被触发的专项文档。
+本文件是 DW 唯一运行入口。DW 只做开发治理，不重复模型或已启用工具的通用开发流程；`SKILL.md`、README 和 `docs/` 不是默认必读。
 
-## 第二大脑范围
+## 任务分级
 
-- 云盘迁移前，仅 `CODEX_HOME=D:\Codex\home` 使用 `D:\Codex\vault`；其他环境保持关闭。
-- `dw-skills` 只维护一个物理 checkout；活动路径可使用目录联接。
-- 第二大脑禁止保存 secrets、凭据、私人原文或可由 Git 重建的大段内容。
+- `quick`：默认；明确、低风险、易回滚的窄改动。
+- `standard`：一般行为变化、多文件修改或需要自动化验证。
+- `high-risk`：架构、认证、敏感数据、支付、migration、部署、secrets 或不可逆操作。
 
-## 启动路由
+## 执行规则
 
-1. 选择任务级别：
-   - `quick`：默认；明确、低风险、易回滚的窄改动。
-   - `standard`：一般行为变化、多文件修改或需要自动化验证。
-   - `high-risk`：架构、认证、敏感数据、支付、migration、部署、secrets 或不可逆操作。
-2. 选择运行模式：Superpowers 可用为 `combined`，否则为 `standalone`；两者不得伪造或重复产物。
-3. 只加载命中触发条件的文档：
+- 默认 `standalone`，由当前模型按用户要求、仓库规范和真实工具结果工作。仅在环境明确暴露 Superpowers 时切换 `combined` 并读取 `docs/15-superpowers-integration.md`；无法确认视为不可用。
+- 一项能力只有一个负责人；复用已有计划、测试、审查、验证和任务状态，不创建同目的产物。
+- `quick` 做针对性验证和 diff 审查；`standard` 运行相关确定性检查；`high-risk` 增加专项审查、失败路径、回滚验证和正式摘要。
+- 任务级别不触发日志。只有跨会话恢复、稳定决策、阻塞、交接或明确要求时，才读取 `docs/06-development-log-standard.md` 和 `docs/10-session-checkpoints-and-recovery.md`。
+- 无真实命令或工具证据不得宣称通过，不得编造工具、脚本或外部状态。
 
-| 触发条件 | 文档 |
-| --- | --- |
-| `standard` / `high-risk` 或 combined | `docs/15-superpowers-integration.md` |
-| standalone 需要流程降级 | `docs/02-development-workflow.md` |
-| 仓库缺少技术规则或触发安全边界 | `docs/03-technical-standards.md` |
-| UI、页面、交互 | `docs/04-design-standards.md` |
-| 需要执行清单 | `docs/05-execution-checklist.md` 对应级别 |
-| 实质性记录或恢复 | `docs/06-development-log-standard.md`、`docs/10-session-checkpoints-and-recovery.md` |
-| 代码关系超出直接阅读 | `docs/07-code-structure-analysis.md` |
-| 已授权 GitHub 操作 | `docs/08-github-update-standard.md` |
-| `standard` / `high-risk` 质量证据 | `docs/09-quality-gates-and-review-loop.md` |
-| 条件工具、Hook、角色或领域规则 | `docs/12-conditional-quality-and-tooling-policy.md` |
-| agentmemory 评估 | `docs/13-agentmemory-adaptation.md` |
-| 实际调用或更新登记 skill | `docs/14-skill-update-policy.md` |
+## 四类条件门禁
 
-## 能力所有权
+| 门禁 | 触发 | 按需动作 |
+| --- | --- | --- |
+| 安全 | 认证、授权、secrets、不可信输入、支付、隐私 | 读 `docs/03-technical-standards.md`、`docs/09-quality-gates-and-review-loop.md` 和 `docs/12-conditional-quality-and-tooling-policy.md` |
+| 数据 | schema、migration、持久化、客户数据、完整性 | 使用上述技术、质量和条件规则 |
+| 部署 | CI/CD、基础设施、运行配置、发布、回滚 | 使用上述技术、质量和条件规则 |
+| 外部操作 | GitHub、VPN、第三方服务或外部 mutation | 先确认权限再读对应 runbook；GitHub 读 `docs/08-github-update-standard.md` |
 
-- `combined`：Superpowers 负责需求、计划、TDD、调试、通用审查、完成验证和分支生命周期。
-- `standalone`：当前模型按用户要求、仓库规范和真实工具结果执行通用开发；DW 不复述模型原生方法。
-- DW 只负责任务分级、UI/产品上下文、第二大脑、工具成本、条件安全/领域门禁、skill 治理和交付记录。
-- 实际 GitHub、VPN、图谱和持久记忆状态由相应工具负责，模型推断不能替代工具结果。
-- 一项能力只有一个负责人；已有计划、测试、审查或验证证据直接复用。
+## 显式扩展
 
-## 分级门禁
+- 执行清单：需要时读 `docs/05-execution-checklist.md`，只执行当前级别和已触发门禁。
+- 代码图谱：直接阅读不足时才读 `docs/07-code-structure-analysis.md`；长期架构图谱才用 Graphify。
+- Skill：实际使用、安装、更新或迁移时才读 `docs/14-skill-update-policy.md`。
+- 第二大脑：仅迁移、恢复或跨环境同步时读 `docs/16-second-brain-deployment.md`。
+- 多 Agent：仅用户明确要求并行且环境支持时读 `docs/12-conditional-quality-and-tooling-policy.md` 的编排策略。
+- agentmemory：仅明确评估或启用持久记忆层时读 `docs/13-agentmemory-adaptation.md`。
 
-- `quick`：针对性验证和 diff 审查；没有长期价值时不创建日志、TODO、质量评级或检查点。
-- `standard`：运行项目已有且相关的确定性检查；需要恢复或形成稳定决策时记录日志。
-- `high-risk`：增加安全/专项审查、失败与回滚验证、恢复检查点和正式验证摘要。
-- 无真实命令或证据不得宣称通过；不存在的工具和脚本不得编造。
+DW 不提供 UI、视觉、品牌、排版、颜色、动效或组件风格标准，也不默认调用设计类 Skill。界面要求只来自用户、产品规范、仓库现有设计系统和当前环境的上层规则。
 
-## 外部状态边界
+## 硬边界
 
-- GitHub mutation 只在用户明确授权或仓库已有交付策略时执行；不得默认 push、建 PR、合并或改设置。
-- 网络失败时才检查 `vpn-mihomo`；命令级代理优先，系统代理必须由用户明确要求，任务结束后恢复。
-- UI 任务默认使用 `frontend-design` 并主动匹配 `awesome-design-md`；其他设计 skill 只按职责增量调用。
-- 代码理解默认直接读文件；关系问题才用 codegraph，架构或长期图谱问题才用 Graphify。
-- agentmemory 和外部 skill runtime 默认不安装；启用、更新或迁移前先读取对应策略并确认权限。
+- 不记录或输出 secrets、凭据、私人原文、VPN 订阅/节点信息或可由 Git 重建的大段内容。
+- GitHub mutation 仅在明确授权或仓库已有交付策略时执行；不得默认 push、建 PR、合并或改设置。
+- 网络失败后才检查 `vpn-mihomo`；优先命令级代理。系统代理需明确要求，任务结束后恢复并验证。
+- 外部 runtime、hooks、plugins、Agent 编排和第二大脑扩展均不默认安装或启用。

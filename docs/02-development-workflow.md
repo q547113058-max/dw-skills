@@ -1,13 +1,13 @@
 # 开发流程
 
-DW 默认与 Superpowers 组合使用。通用开发阶段由 Superpowers 推进，DW 在阶段边界加载项目特有规则。详细映射见 `docs/15-superpowers-integration.md`。
+DW 默认使用独立模式，由当前模型执行通用开发。只有当前环境明确暴露 Superpowers 时才启用组合模式并读取 `docs/15-superpowers-integration.md`；DW 始终只补充项目特有规则。
 
 ## 任务分级
 
 | 级别 | 触发条件 | DW 流程深度 |
 | --- | --- | --- |
 | `quick` | 默认；需求明确、低风险、容易回滚、影响少量文件 | 最小上下文、针对性验证、diff 审查、简短交付 |
-| `standard` | 一般功能、行为变化、多文件 Bugfix、需要计划或自动化测试 | 相关文档、短计划、日志和确定性检查 |
+| `standard` | 一般功能、行为变化、多文件 Bugfix、需要计划或自动化测试 | 相关文档、短计划和确定性检查；日志按恢复价值触发 |
 | `high-risk` | 架构、认证、敏感数据、支付、migration、部署、secrets | 完整相关门禁、安全/独立审查和恢复检查点 |
 
 任务级别与 combined / standalone 模式独立：级别决定 DW 增量深度，模式决定通用生命周期负责人。
@@ -16,7 +16,7 @@ DW 默认与 Superpowers 组合使用。通用开发阶段由 Superpowers 推进
 
 1. 读取 `AGENTS.md` 并选择任务级别；`quick` 只读触达文件，其他级别或恢复任务再读相关文档和最近日志。
 2. 检查 Git 状态、当前分支、最近提交和未提交用户改动。
-3. 检查 Superpowers 是否在当前环境可用。
+3. 从当前环境已暴露的能力判断 Superpowers 是否可用；无法确认时直接使用 `standalone`。
 4. 需要日志时记录 `Mode: combined` 或 `Mode: standalone`；完成即结束的 `quick` 不为形式创建日志。
 5. 跨步骤、跨会话或已有计划时，找到唯一的当前任务清单和第一个未完成事项。
 
@@ -24,34 +24,31 @@ DW 默认与 Superpowers 组合使用。通用开发阶段由 Superpowers 推进
 
 ## 组合模式
 
-### 需求与设计
+### 需求与方案
 
 使用 Superpowers `brainstorming` 澄清需求和确认方案。DW 只在以下情况补充：
 
 - 项目有必须填写但尚未覆盖的合规、平台或数据限制。
-- UI 工作需要产品上下文、设计方向、token 或反参考。
 - 重要项目决策需要写入仓库文档。
 
-不要在设计已批准后再次要求填写完整的 DW 需求模板。
+不要在方案已批准后再次要求填写完整的 DW 需求模板。
 
 ### 计划
 
 使用 `writing-plans` 生成实施计划。DW 只把以下增量加入计划：
 
-- UI 视觉与可访问性验证。
 - 安全、技术栈或领域门禁。
 - 日志、恢复信息和 GitHub 交付记录。
 - 确有必要的 Graphify、agentmemory 或 Skill 更新步骤。
 
 ### 工作区和实现
 
-使用 `using-git-worktrees` 管理隔离工作区，并使用 `executing-plans` 或 `subagent-driven-development` 实施。
+按已启用的 Superpowers 策略实施。只有用户明确要求并行 Agent 或隔离工作区且环境支持时，才使用 worktree 或子 Agent 编排。
 
 DW 在实现中强制：
 
 - 保留用户已有改动。
 - 默认先搜索和复用，遵循 Ponytail 精简阶梯。
-- UI 任务应用 `docs/04-design-standards.md`。
 - 工具按成本分级，轻量任务不启用重型图谱或记忆层。
 - 条件规则只在触发时加载。
 
@@ -62,13 +59,13 @@ DW 在实现中强制：
 - 代码审查由 requesting/receiving review skills 负责。
 - 完成证明由 `verification-before-completion` 负责。
 
-DW 接受上述过程的证据，不重复相同目的的仪式。只补充未覆盖的 UI、安全、技术栈、领域和交付检查。
+DW 接受上述过程的证据，不重复相同目的的仪式。只补充未覆盖的安全、技术栈、领域和交付检查。
 
 ### 完成与交付
 
 使用 `finishing-a-development-branch` 完成分支决策。DW 随后：
 
-1. `standard`、`high-risk`、恢复任务或存在重要决策/阻塞时，更新必要的项目文档和当天日志。
+1. 仅在跨会话恢复、稳定决策、阻塞、交接或用户/仓库要求时，更新必要的项目文档和当天日志。
 2. 汇总 Superpowers 验证证据与 DW 增量检查。
 3. 记录未运行检查、剩余风险和下一步。
 4. 按 `docs/08-github-update-standard.md` 和用户授权执行 GitHub 操作。

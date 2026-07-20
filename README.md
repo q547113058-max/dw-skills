@@ -1,66 +1,33 @@
 # DW Skills
 
-DW Skills 是一套面向 Agent 辅助开发的项目治理层。它不再重复实现完整的软件开发方法论；在支持的 Agent 环境中，通用开发主流程由 [obra/superpowers](https://github.com/obra/superpowers) 执行，DW 负责补充项目上下文、UI 设计、会话恢复、工具治理、交付记录和规则沉淀。
+开发治理：采用 `dw-skills` 轻量分级治理，按任务风险启用测试、安全、审批和交付门禁。
 
-通用规划、编码、调试、普通审查和 Git 常识由当前模型或 Superpowers 负责，不在 DW 默认入口重复。DW 文档只保留会改变项目路由、权限、外部状态、持久记录或验收证据的规则。
+DW 不是产品运行技术栈，也不实现第二套通用开发方法。它只保留项目级治理：任务分级、四类条件门禁、权限和外部状态边界、必要的恢复记录，以及 skill 来源治理。
 
-## 第二大脑部署范围
+## 结构
 
-- 当前只在 `CODEX_HOME=D:\Codex\home` 启用第二大脑，`D:\Codex\vault` 是云盘迁移前的唯一权威 Vault。
-- 其他电脑和环境保持关闭，不安装全局路由，不初始化或更新平行项目记忆。
-- `dw-skills` 只保留一个物理 Git checkout；活动 skill 路径可通过目录联接复用。
+- 一个运行入口：`AGENTS.md`。
+- 三个级别：`quick`、`standard`、`high-risk`。
+- 四类条件门禁：安全、数据、部署、外部操作。
+- 显式扩展：Superpowers、第二大脑、多 Agent、GitHub 交付和 skill 更新均在真实触发后加载。
 
-## 任务级别
+`SKILL.md` 只负责发现和指向入口。`docs/` 是参考资料，不应因任务级别而整批读取。
 
-- `quick`：默认；低风险窄改动，只加载最小上下文并做针对性验证。
-- `standard`：一般功能、行为变化、多文件 Bugfix，增加短计划、日志和相关确定性检查。
-- `high-risk`：架构、认证、数据、支付、migration、部署或 secrets，增加完整相关门禁和恢复检查点。
+## 核心原则
 
-任务级别决定流程深度，运行模式决定通用生命周期负责人，两者独立。
+- 当前模型默认负责通用开发；只有明确检测到 Superpowers 时才启用组合模式。
+- 已有计划、测试、审查和验证证据直接复用，不重复创建。
+- 任务级别不自动产生开发日志；只记录有恢复价值或会影响后续工作的事实。
+- 外部 mutation、运行时安装和跨环境记忆启用都需要明确权限。
+- 完成结论必须来自真实工具和项目检查。
+- DW 不提供或强制 UI、视觉、品牌、颜色、排版、动效和组件风格标准，也不默认调用设计类 Skill。
 
-## 分工
+## 参考文档
 
-| 能力 | 默认负责人 |
-| --- | --- |
-| 需求澄清、方案设计 | Superpowers `brainstorming` |
-| 实施计划 | Superpowers `writing-plans` |
-| 隔离工作区 | Superpowers `using-git-worktrees` |
-| TDD | Superpowers `test-driven-development` |
-| 执行与子 Agent 编排 | Superpowers `executing-plans` / `subagent-driven-development` |
-| 调试 | Superpowers `systematic-debugging` |
-| 代码审查与完成验证 | Superpowers review / verification skills |
-| UI 方向、设计 token、视觉 QA | DW 设计规则和登记的设计 Skills |
-| 项目日志、会话恢复、工具选型 | DW |
-| 安全、技术栈和领域附加门禁 | DW 条件规则 |
-| GitHub 交付记录、反馈归因 | DW |
-
-原则是“一项能力只有一个主流程”。DW 不要求重复生成 Superpowers 已经产出的需求、计划、TDD 记录或审查报告，只补充缺失的项目级信息。
-
-## 运行模式
-
-- **组合模式**：环境已安装 Superpowers。使用 Superpowers 执行通用开发生命周期，DW 只运行增量门禁。
-- **独立模式**：环境没有 Superpowers。DW 使用 `docs/02-development-workflow.md` 中的精简降级流程，保证工作仍可完成。
-- **独立模式负责人**：当前模型按用户要求、仓库规则和真实工具证据执行通用开发；DW 只补治理增量。
-
-模式在任务开始时确定。`standard`、`high-risk`、恢复任务或已有日志时记录到 `dev-logs/YYYY-MM-DD.md`；没有后续价值的 `quick` 不为形式创建日志。不要在任务中途无故切换。
-
-## DW 保留的差异化能力
-
-- UI 任务的产品上下文、设计方向、token 和视觉 QA。
-- 轻量代码理解、codegraph、Graphify 和 agentmemory 的成本分级。
-- Ponytail 精简实现审查。
-- 无状态会话恢复、项目 TODO 和开发日志。
-- 安全敏感、技术栈专项、AI eval 和领域规则等条件门禁。
-- Skill 来源、更新和迁移治理。
-- GitHub 更新、交付状态和反馈归因。
-
-## 使用方式
-
-1. 读取 `AGENTS.md`。
-2. 选择 `quick`、`standard` 或 `high-risk`，并检测 combined / standalone 模式。
-3. `standard`、`high-risk` 或 combined 模式读取 `docs/15-superpowers-integration.md`。
-4. 只读取当前任务需要的 DW 文档。
-5. 组合模式下按 Superpowers 当前阶段执行，再运行 DW 增量清单。
-6. 独立模式下使用 DW 精简降级流程。
-
-详细分工和冲突处理见 `docs/15-superpowers-integration.md`。
+- 分级清单：`docs/05-execution-checklist.md`
+- 质量与条件工具：`docs/09-quality-gates-and-review-loop.md`、`docs/12-conditional-quality-and-tooling-policy.md`
+- 恢复：`docs/06-development-log-standard.md`、`docs/10-session-checkpoints-and-recovery.md`
+- GitHub：`docs/08-github-update-standard.md`
+- Skill 更新：`docs/14-skill-update-policy.md`
+- Superpowers：`docs/15-superpowers-integration.md`
+- 第二大脑部署：`docs/16-second-brain-deployment.md`

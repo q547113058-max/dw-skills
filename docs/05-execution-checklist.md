@@ -4,7 +4,7 @@
 
 ## 模式
 
-- [ ] Superpowers 可用为 `combined`，否则为 `standalone`。
+- [ ] 默认 `standalone`；只有当前环境明确暴露 Superpowers 时才切换为 `combined`。
 - [ ] combined 复用其计划、TDD、调试、审查和验证；standalone 由当前模型按仓库规则执行。
 - [ ] 不维护第二套同目的产物或任务状态。
 
@@ -29,17 +29,21 @@
 - [ ] 验证正常、失败和边界场景，必要时运行集成/E2E。
 - [ ] 创建恢复检查点并输出正式验证摘要。
 
-## 专项触发器
+## 四类条件门禁
 
-| 触发 | 增量动作 |
+| 门禁 | 增量动作 |
 | --- | --- |
-| UI | `docs/04-design-standards.md`、`frontend-design`、主动匹配 `awesome-design-md` |
-| 复杂代码关系 | codegraph；架构/长期图谱才用 Graphify |
-| 长期多会话记忆 | 评估 `docs/13-agentmemory-adaptation.md` |
-| GitHub 交付 | 先确认授权，再读 `docs/08-github-update-standard.md` |
-| 网络失败 | 检查 `vpn-mihomo`，优先命令级代理 |
-| 外部 skill | 只检测和加载实际调用的 skill |
-| Auth、数据、支付、migration、部署、secrets | 升级 `high-risk` 并加载相关安全/领域门禁 |
+| 安全 | Auth、支付、secrets、隐私或不可信边界时升级并加载安全门禁 |
+| 数据 | schema、migration、客户数据和完整性规则 |
+| 部署 | CI/CD、基础设施、发布、运行配置和回滚验证 |
+| 外部操作 | 先确认权限；GitHub、VPN、第三方服务和 skill 只处理本次实际使用项 |
+
+## 显式扩展
+
+- [ ] 复杂代码关系才使用 codegraph；架构/长期图谱才使用 Graphify。
+- [ ] 第二大脑迁移、恢复或跨环境同步才读取 `docs/16-second-brain-deployment.md`。
+- [ ] 用户明确要求多 Agent 且环境支持时才启用编排策略。
+- [ ] 实际使用、安装、更新或迁移 skill 时才读取 `docs/14-skill-update-policy.md`。
 
 ## 升级
 

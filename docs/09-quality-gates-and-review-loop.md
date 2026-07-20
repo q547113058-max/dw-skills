@@ -36,16 +36,6 @@ DW 日志记录引用和结论即可，不复制整段输出。若证据过期�
 
 ## DW 增量门禁
 
-### UI 与前端
-
-触发条件：页面、组件、交互、样式或公开 Web 输出发生变化。
-
-- 检查桌面和移动布局、溢出、重叠和文本可读性。
-- 检查键盘、焦点、标签、role、reduced-motion 和颜色对比度。
-- 检查加载、空、错误、禁用和成功状态。
-- 检查危险 URL、原始 HTML、公开环境变量和客户端 auth 边界。
-- 视觉行为使用浏览器或截图检查；结构测试不能替代视觉 QA。
-
 ### 安全
 
 触发条件：auth、用户数据、支付、数据库、文件系统、外部 API、webhook、加密、secrets、环境变量、原始 HTML、重定向或公开 bundle。
@@ -76,7 +66,6 @@ DW 日志记录引用和结论即可，不复制整段输出。若证据过期�
 满足任一条件时，在 Superpowers 通用 review 之外追加专项审查：
 
 - 安全敏感边界。
-- 高风险 UI 用户旅程或可访问性要求。
 - 数据迁移、兼容性或不可逆行为。
 - 技术栈特有并且通用审查未覆盖的失败模式。
 
@@ -90,7 +79,6 @@ DW 日志记录引用和结论即可，不复制整段输出。若证据过期�
 Mode: combined / standalone
 Superpowers evidence: reused / unavailable / stale
 Project checks: PASS / FAIL / SKIPPED
-DW UI gate: PASS / FAIL / N/A
 DW security gate: PASS / FAIL / N/A
 DW stack/domain gate: PASS / FAIL / N/A
 Diff: reviewed / not reviewed

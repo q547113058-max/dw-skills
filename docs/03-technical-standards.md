@@ -34,6 +34,5 @@ Superpowers 或仓库 CI 已提供的最新证据直接复用；证据过期或�
 
 ## 条件专项
 
-- Web/UI 规则由 `docs/04-design-standards.md` 和 `docs/09-quality-gates-and-review-loop.md` 负责。
 - 技术栈和领域规则只在栈与影响范围明确时从 `docs/12-conditional-quality-and-tooling-policy.md` 加载。
 - GitHub 交付只按 `docs/08-github-update-standard.md` 和用户授权执行。

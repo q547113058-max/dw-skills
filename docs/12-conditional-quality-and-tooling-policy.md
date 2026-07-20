@@ -19,7 +19,7 @@
 以下规则已经以项目增量规则形式体现在 `AGENTS.md` 和 `docs/` 中：
 
 - `workflow-quality`：项目确定性检查、条件 eval 和持续学习；通用 TDD/验证由 Superpowers 负责。
-- `rules-core`：通用工程规则、安全触发器、审查严重级别、条件前端规则。
+- `rules-core`：通用工程规则、安全触发器和审查严重级别。
 - `role-triggers`：安全、E2E 和技术栈专项增量审查触发器。
 - `fallback-recipes`：Superpowers 不可用时的构建修复、检查点、质量门禁、安全扫描、会话恢复和 PR 配方。
 - `agentic-patterns`：完成标准、小工作单元、eval-first、模型/成本纪律和人工控制合并门禁。
@@ -41,7 +41,7 @@
 | `research-apis` | 需要研究或 API discovery | search-first 和 source-quality 规则 |
 | `operator-workflows` | GitHub、Jira、billing、Google Workspace 等外部应用已配置 | 带认证检查的操作 runbook |
 | `agentmemory` | 长期多会话、多 Agent、跨 Hermes/Codex 记忆共享或重复解释成本高 | 可选记忆层；默认核心工具、零 LLM、无自动注入 |
-| `orchestration` | 多 Agent、分支、worktrees 或并行任务 | 组合模式使用 Superpowers；独立模式才使用最小 ownership、handoff 和 merge gates |
+| `orchestration` | 用户明确要求多 Agent 并行，且当前环境确实支持 | 使用已有编排能力；只补最小 ownership、handoff 和 merge gates |
 | `devops-infra` | 部署、Docker 或基础设施进入范围 | 部署和回滚标准 |
 | `media-generation` | 产品需要图片、音频、视频或 demo assets | 先用本地已有 media skills，再补充专项规则 |
 | `document-processing` | 文档转换或翻译超出已安装 document 插件能力 | 参考 workflow |
@@ -101,9 +101,9 @@ Hooks 是可选自动化，不是默认行为。
 
 ## 编排策略
 
-组合模式的并行 Agent、worktree、任务派发和分支完成由 Superpowers 相关 Skills 负责。DW 不建立第二套调度协议。
+多 Agent、worktree、任务派发和分支完成默认关闭。只有用户明确要求并行执行且当前环境确实提供相应能力时才启用；已启用 Superpowers 时由其相关 Skills 负责，DW 不建立第二套调度协议。
 
-独立模式下，只有单 Agent 执行明显不足且环境确实提供相应能力时才使用编排。
+独立模式不会因为任务较大而自行启用编排；缺少用户明确要求或环境能力时继续使用单 Agent。
 
 并行工作前必须有：
 
@@ -124,7 +124,7 @@ Hooks 是可选自动化，不是默认行为。
 - 部署规则写入部署/回滚文档。
 - business/content/media/domain 规则写入产品专项文档。
 
-启用决策和规则来源记录到 `dev-logs/YYYY-MM-DD.md`。
+启用决策只有在形成稳定约束或需要跨会话恢复时才记录到 `dev-logs/YYYY-MM-DD.md`。
 
 ## Hermes 适配
 

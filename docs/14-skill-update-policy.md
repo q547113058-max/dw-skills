@@ -1,77 +1,61 @@
-# Skill 周更新策略
+# Skill 更新策略
 
-DW 登记的外部或本地技能需要每周做一次更新检查；实际准备调用某个技能时，也要先确认该技能最近 7 天内已经检查过。任务分级、读取 DW 核心文档或某个 skill 仅被列在清单中，不构成调用，不触发检查。
+只在实际准备使用、安装、更新或迁移某个 skill 时检查它。普通任务不会因 skill 出现在登记表中而触发检查，也不再执行全量每周周检。
 
-## Skill 注册表
+## 检查频率
 
-注册表不放入默认 `AGENTS.md`，避免每次任务加载无关来源信息。
+- 普通开发 skill：距上次成功检查满 30 天后，在使用前检查。
+- 安全、部署和外部连接/操作 skill：每次使用前检查。
+- 候选 skill：不参与活动检查；只有用户明确评估、安装或启用时才检查。
+- `-MaxAgeDays` 只用于临时覆盖普通 skill 的 30 天周期，不改变“每次使用前”类别。
 
-| Skill | 本地路径 | 来源 | 触发用途 |
+## 活动注册表
+
+| Skill | 来源 | 类别 | 用途 |
 | --- | --- | --- | --- |
-| `frontend-design` | `C:\Users\54711\.codex\skills\frontend-design\SKILL.md` | `https://github.com/anthropics/skills/tree/main/skills/frontend-design` | UI 实现和视觉 QA |
-| `awesome-design-md` | 按需远端读取 | `https://github.com/VoltAgent/awesome-design-md` | UI 风格系统匹配 |
-| `taste-skill` | `C:\Users\54711\.codex\skills\taste-skill\SKILL.md` | `https://github.com/Leonxlnx/taste-skill` | 审美方向和反模板化判断 |
-| `codegraph` | 待配置 | `https://github.com/colbymchenry/codegraph` | 轻量依赖/调用关系 |
-| `graphify` | `C:\Users\54711\.codex\skills\graphify\SKILL.md` | `https://github.com/safishamsi/graphify` | 架构和长期知识图谱 |
-| `agentmemory` | 待配置 | `https://github.com/rohitg00/agentmemory` | 条件持久化记忆层 |
-| `ponytail` | 待配置 | `https://github.com/DietrichGebert/ponytail` | 反过度工程参考 |
-| `superpowers` | 待配置 | `https://github.com/obra/superpowers` | combined 模式通用开发生命周期 |
-| `vpn-mihomo` | `C:\Users\54711\.codex\skills\vpn-mihomo\SKILL.md` | 本地私有 | 网络失败后的代理操作 |
-| `github` | `C:\Users\54711\.codex\skills\github\SKILL.md` | `https://cli.github.com/` | GitHub 外部状态和 mutation |
+| `graphify` | `https://github.com/safishamsi/graphify` | 普通 / 30 天 | 架构和长期知识图谱 |
+| `vpn-mihomo` | 本地私有 | 外部连接 / 使用前 | 网络失败后的命令级代理 |
+| `github` | `https://cli.github.com/` | 外部操作 / 使用前 | GitHub 状态和 mutation |
 
-## 检测命令
+## 候选参考
 
-检查全部技能：
+以下能力未安装或未配置，不参与 `-Skill all`：
+
+| Skill | 来源 | 评估条件 |
+| --- | --- | --- |
+| `superpowers` | `https://github.com/obra/superpowers` | 环境明确提供或用户要求安装 |
+| `codegraph` | `https://github.com/colbymchenry/codegraph` | 需要轻量代码关系工具 |
+| `agentmemory` | `https://github.com/rohitg00/agentmemory` | 明确评估持久记忆层 |
+| `ponytail` | `https://github.com/DietrichGebert/ponytail` | 明确评估外部运行时；精简原则本身无需安装 |
+
+## 命令
+
+检查本次准备使用的活动 skill：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" check -Skill graphify
+```
+
+检查全部活动项的到期状态，不包含候选：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" check
 ```
 
-检查单个技能：
+显式评估候选：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" check -Skill frontend-design
+powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" check -Skill superpowers -IncludeCandidates
 ```
 
-完成一次人工检查或更新后，记录本周状态：
+`mark` 和 `update` 都会执行真实探测，并只在探测成功时更新 `lastChecked`；它们不会覆盖本地 skill 文件。远端 SHA、工具可用性或本地私有路径检查失败时，只写入 `lastAttempt` 和失败状态，不得把失败尝试当作更新证明。
 
-```powershell
-powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" mark -Skill frontend-design
-```
+状态文件为 `work/skill-update-state.json`。不得记录 token、订阅 URL、节点服务器、账号、密码或完整私有配置。
 
-记录全部技能本周已检查：
+## 更新边界
 
-```powershell
-powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" mark
-```
-
-状态文件写入 `work/skill-update-state.json`。该文件只记录检查时间、来源、状态和远端 commit 摘要；不得记录 token、订阅 URL、节点服务器、账号或密码。
-
-## 调用时检测规则
-
-准备调用任一 DW 登记技能前：
-
-1. 运行单技能检查命令。
-2. 如果 `Due=True`，先检查来源仓库或工具版本是否需要更新。
-3. 如果技能目录是 Git checkout，可在审查 diff 后更新；不是 Git checkout 时，不要强行覆盖本地文件。
-4. 对 `vpn-mihomo` 这类本地私有技能，只更新公开说明或脱敏模板；不得上传真实订阅 URL、token、节点服务器、UUID、密码或完整配置。
-5. 对 `codegraph`、`agentmemory`、`ponytail`、`superpowers` 等待配置技能，只记录来源和状态；未明确需要前不安装运行时、hooks、plugins、marketplace 或 platform configs。
-6. 只检查本次实际调用的 skill；不要在 `quick` 或无关任务中逐项检查全部登记技能。
-
-## 每周更新规则
-
-每周至少执行一次全部技能检查：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" update
-```
-
-`update` 在当前策略中等价于“检查并记录状态”，不会自动覆盖本地技能文件。需要更新本地内容时必须先审查来源、权限、secrets 风险和回滚方式。
-
-## GitHub 同步
-
-如果本策略、脚本或技能说明发生变化：
-
-- 更新当天 `dev-logs/YYYY-MM-DD.md`。
-- 用户已授权或仓库有明确交付策略时，提交 `dw-skills` 相关文档和脚本并推送到 GitHub。
-- 未获得 GitHub mutation 授权时只保留本地变更并记录待办；已授权但普通 `git push` 因网络问题失败时，可按 `docs/08-github-update-standard.md` 使用 GitHub API 同步并记录原因。
+- Git checkout 只有在审查 diff、权限、secrets 风险和回滚方式后才更新。
+- 非 Git checkout 不强行覆盖；按来源人工比较必要文件。
+- 本地私有 skill 只更新公开说明或脱敏模板。
+- 候选 runtime、hooks、plugins、marketplace 和平台配置未经明确授权不得安装。
+- 策略或脚本变化只有在存在恢复价值时才写开发日志；GitHub mutation 仍需明确授权。

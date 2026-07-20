@@ -1,13 +1,13 @@
 # Superpowers 集成策略
 
-本文件定义 DW 与 `obra/superpowers` 的组合边界。目标是获得 Superpowers 的可执行开发方法论，同时保留 DW 的项目治理能力，避免重复提问、重复计划和重复审查。
+本文件只在当前环境已经明确暴露 `obra/superpowers` 能力后读取，用于定义组合边界。未检测到能力时默认 `standalone`，不预读本文件、不安装也不模拟 Superpowers。
 
 ## 运行模式检测
 
-任务开始时检查当前 Agent 环境是否暴露 Superpowers Skills 或插件能力。
+先从当前 Agent 环境已暴露的 Skills 或插件能力判断是否存在 Superpowers。
 
 - 可用：记录 `Mode: combined`。
-- 不可用：记录 `Mode: standalone`，说明一次后使用 DW 降级流程。
+- 不可用：直接使用 `Mode: standalone`，无需读取其余集成策略。
 - 无法确认：以不可用处理，不伪造 Skill 调用结果。
 
 模式只描述能力是否存在，不要求安装插件。安装、更新或启用 Superpowers 必须由用户或当前环境的插件策略授权。
@@ -16,13 +16,13 @@
 
 | 阶段/能力 | 组合模式负责人 | DW 的增量职责 |
 | --- | --- | --- |
-| 需求与方案 | `brainstorming` | 补充项目模板中仍缺失的硬约束；UI 时补产品上下文 |
+| 需求与方案 | `brainstorming` | 补充项目模板中仍缺失的硬约束 |
 | 实施计划 | `writing-plans` | 补充 DW 条件门禁和需要更新的项目记录 |
 | 隔离环境 | `using-git-worktrees` | 检查本地路径、用户改动和项目恢复记录 |
-| 实现 | `executing-plans` 或 `subagent-driven-development` | 工具成本分级、UI 规则、Ponytail 精简原则 |
+| 实现 | `executing-plans` 或 `subagent-driven-development` | 工具成本分级、Ponytail 精简原则 |
 | TDD | `test-driven-development` | 接受其 RED/GREEN 证据，不建立第二套周期 |
 | 调试 | `systematic-debugging` | 记录项目特有根因和恢复信息 |
-| 代码审查 | `requesting-code-review` / `receiving-code-review` | 只补安全、UI、技术栈或领域专项审查 |
+| 代码审查 | `requesting-code-review` / `receiving-code-review` | 只补安全、技术栈或领域专项审查 |
 | 完成验证 | `verification-before-completion` | 汇总 DW 增量检查和无法运行项 |
 | 分支完成 | `finishing-a-development-branch` | 更新日志和 GitHub 交付记录 |
 
@@ -38,7 +38,7 @@
 
 ## 产物复用
 
-- Superpowers 设计文档可作为 DW 的需求依据；只补缺失字段，不复制全文。
+- Superpowers 方案文档可作为 DW 的需求依据；只补缺失字段，不复制全文。
 - Superpowers 实施计划是唯一任务清单；DW 日志只记录当前阶段、完成项和恢复入口。
 - Superpowers 测试输出和 review 结果可直接进入 DW 验证摘要。
 - Worktree 或分支信息只保存引用，不在 DW 创建平行状态。
@@ -47,7 +47,6 @@
 
 | 触发条件 | 加载的 DW 规则 |
 | --- | --- |
-| UI、页面、前端交互 | `docs/04-design-standards.md`，设计 Skills，浏览器/截图 QA |
 | 长期或跨会话任务 | `docs/06-development-log-standard.md`、`docs/10-session-checkpoints-and-recovery.md` |
 | 复杂代码理解 | `docs/07-code-structure-analysis.md` |
 | GitHub 交付 | `docs/08-github-update-standard.md` |
@@ -64,7 +63,7 @@ Superpowers 不可用时，当前模型是通用开发负责人，按用户要�
 2. 检查代码库和现有模式。
 3. 对非 `quick` 任务保留可验证的范围和验收证据。
 4. 运行项目已有且相关的确定性检查。
-5. 审查触发的 UI、安全、技术栈、恢复和交付增量。
+5. 审查触发的安全、技术栈、恢复和交付增量。
 6. 需要时更新恢复记录，并按授权完成 GitHub 交付。
 
 模型原生的实现、调试和普通审查不在 DW 文档中重复描述。独立模式不模拟不存在的 hooks、插件事件或子 Agent；能力缺失应透明报告。
@@ -75,6 +74,6 @@ Superpowers 不可用时，当前模型是通用开发负责人，按用户要�
 
 1. 这个产物是否已经存在？
 2. 当前动作是否新增项目特有价值？
-3. 删除这个 DW 步骤会不会丢失安全、UI、恢复或交付证据？
+3. 删除这个 DW 步骤会不会丢失安全、恢复或交付证据？
 
 如果前两项分别为“是”和“否”，跳过该步骤。
