@@ -1,6 +1,6 @@
 # GitHub 更新标准
 
-代码修改在验证后按用户授权和仓库策略通过 GitHub 交付。修改本地文件不自动等于获准 push、创建 PR、合并或修改仓库设置。
+代码修改在验证后按用户授权和仓库策略通过 GitHub 交付。读取公开仓库、查询状态、Issue 或 PR 不需要 mutation 授权；push、创建 PR、评论、合并、发布或修改设置需要明确授权或仓库既有交付策略。修改本地文件不自动等于获准执行这些动作。
 
 组合模式下，分支完成和选项呈现由 Superpowers `finishing-a-development-branch` 负责；DW 只执行用户选定的 GitHub 动作并记录结果。
 
@@ -73,7 +73,7 @@ gh pr create
 
 ## 阻塞情况
 
-以下情况记录到开发日志：
+以下情况只有在需要跨会话恢复、交接或形成稳定决策时才记录到开发日志：
 
 - 不是 Git 仓库
 - 没有 GitHub remote
@@ -86,8 +86,7 @@ gh pr create
 
 最终回复必须说明：
 
-- 是否已提交
-- commit hash
+- 是否已提交；已提交时提供 commit hash
 - 是否已推送
 - 已创建时提供 GitHub repo 或 PR 链接
 - 哪些检查已运行

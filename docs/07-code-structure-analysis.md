@@ -84,7 +84,7 @@
 已安装位置：
 
 - Skill：`C:\Users\54711\.codex\skills\graphify\SKILL.md`
-- 下载地址：`https://github.com/safishamsi/graphify`
+- 下载地址：`https://github.com/Graphify-Labs/graphify`
 - CLI：`graphify`
 - 备用 CLI：`C:\Users\54711\.local\bin\graphify.exe`
 - 参考仓库：`work\graphify`

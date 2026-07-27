@@ -13,8 +13,9 @@
 
 | Skill | 来源 | 类别 | 用途 |
 | --- | --- | --- | --- |
-| `graphify` | `https://github.com/safishamsi/graphify` | 普通 / 30 天 | 架构和长期知识图谱 |
-| `vpn-mihomo` | 本地私有 | 外部连接 / 使用前 | 网络失败后的命令级代理 |
+| `graphify` | `https://github.com/Graphify-Labs/graphify` | 普通 / 30 天 | 架构和长期知识图谱 |
+| `open-code-review-delegate` | `https://github.com/alibaba/open-code-review` | 普通 / 30 天 | 明确代码审查任务中的确定性文件筛选和规则解析；审查判断由当前模型负责 |
+| `vpn-mihomo` | `https://github.com/q547113058-max/vpn-skills/tree/main/vpn-mihomo-codex`；本地运行路径 `C:\Users\54711\.codex\skills\vpn-mihomo` | 外部连接 / 使用前 | 网络失败后的本地 Mihomo 和命令级代理；订阅状态只在本地处理 |
 | `github` | `https://cli.github.com/` | 外部操作 / 使用前 | GitHub 状态和 mutation |
 
 ## 候选参考
@@ -27,6 +28,10 @@
 | `codegraph` | `https://github.com/colbymchenry/codegraph` | 需要轻量代码关系工具 |
 | `agentmemory` | `https://github.com/rohitg00/agentmemory` | 明确评估持久记忆层 |
 | `ponytail` | `https://github.com/DietrichGebert/ponytail` | 明确评估外部运行时；精简原则本身无需安装 |
+| `domain-modeling` | `https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling` | 明确要求建立或修改领域术语、术语表或 ADR；不允许隐式调用 |
+| `codebase-design` | `https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design` | 明确要求架构、模块接口或边界设计时作为非强制参考 |
+| `v2ray-subscribe-proxy-setup` | `https://github.com/q547113058-max/vpn-skills/tree/main/v2ray-subscribe-proxy-setup` | 明确要求 V2Ray 订阅解码、代理配置或节点验证 |
+| `v2ray-concurrent-speedtest` | `https://github.com/q547113058-max/vpn-skills/tree/main/v2ray-concurrent-speedtest` | 明确要求 V2Ray 节点并发测速 |
 
 ## 命令
 
@@ -51,6 +56,8 @@ powershell -ExecutionPolicy Bypass -File ".\scripts\check-dw-skill-updates.ps1" 
 `mark` 和 `update` 都会执行真实探测，并只在探测成功时更新 `lastChecked`；它们不会覆盖本地 skill 文件。远端 SHA、工具可用性或本地私有路径检查失败时，只写入 `lastAttempt` 和失败状态，不得把失败尝试当作更新证明。
 
 状态文件为 `work/skill-update-state.json`。不得记录 token、订阅 URL、节点服务器、账号、密码或完整私有配置。
+
+`vpn-skills` 的公开仓库包含三类能力，但 DW 只激活本地 `vpn-mihomo` 路由；V2Ray 配置和测速能力保持候选状态。公开仓库当前树检测到订阅/节点 URI 形式的非占位内容迹象，因此不把其运行脚本视为可直接复制的无密钥模板，不从公开仓库覆盖本地私有运行文件。
 
 ## 更新边界
 
