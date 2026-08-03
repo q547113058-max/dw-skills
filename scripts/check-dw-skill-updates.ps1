@@ -20,6 +20,8 @@ if (-not $StatePath) {
 
 $ActiveSkills = @(
   [pscustomobject]@{ Name = "graphify"; Source = "https://github.com/Graphify-Labs/graphify"; LocalPath = "C:\Users\54711\.codex\skills\graphify\SKILL.md"; Kind = "github-skill"; Policy = "monthly"; IntervalDays = 30; Scope = "active" },
+  [pscustomobject]@{ Name = "finesse-ui"; Source = "https://github.com/mouse-lin/finesse-skill"; LocalPath = "D:\Codex\home\skills\finesse-ui\SKILL.md"; Kind = "github-skill"; Policy = "monthly"; IntervalDays = 30; Scope = "active" },
+  [pscustomobject]@{ Name = "browser-harness"; Source = "https://github.com/browser-use/browser-harness"; LocalPath = "D:\Codex\home\skills\browser-harness\SKILL.md"; Kind = "github-skill"; Policy = "before-use"; IntervalDays = 0; Scope = "active" },
   [pscustomobject]@{ Name = "open-code-review-delegate"; Source = "https://github.com/alibaba/open-code-review"; LocalPath = "D:\Codex\home\skills\open-code-review-delegate\SKILL.md"; Kind = "github-adapted"; Policy = "monthly"; IntervalDays = 30; Scope = "active" },
   [pscustomobject]@{ Name = "vpn-mihomo"; Source = "https://github.com/q547113058-max/vpn-skills/tree/main/vpn-mihomo-codex"; LocalPath = "C:\Users\54711\.codex\skills\vpn-mihomo\SKILL.md"; Kind = "local-private"; Policy = "before-use"; IntervalDays = 0; Scope = "active" },
   [pscustomobject]@{ Name = "github"; Source = "https://cli.github.com/"; LocalPath = "C:\Users\54711\.codex\skills\github\SKILL.md"; Kind = "tool"; Policy = "before-use"; IntervalDays = 0; Scope = "active" }

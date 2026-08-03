@@ -12,6 +12,8 @@
 
 - 默认 `standalone`，由当前模型按用户要求、仓库规范和真实工具结果工作。仅在环境明确暴露 Superpowers 时切换 `combined` 并读取 `docs/15-superpowers-integration.md`；无法确认视为不可用。
 - 一项能力只有一个负责人；复用已有计划、测试、审查、验证和任务状态，不创建同目的产物。
+- `standard`、`high-risk` 在验收不明确时先写明最低通过条件、质量目标和明确失败边界；只有歧义会改变范围、风险或外部操作时才等待确认。
+- 复杂或跨阶段任务只维护一个计划，先明确目标、步骤、风险和少量检查点；`quick` 不为形式创建计划产物。
 - `quick` 做针对性验证和 diff 审查；`standard` 运行相关确定性检查；`high-risk` 只增加与实际风险匹配的失败路径、权限、兼容性、回滚和专项验证。
 - 任务级别不触发日志。只有跨会话恢复、稳定决策、阻塞、交接或明确要求时，才读取 `docs/06-development-log-standard.md` 和 `docs/10-session-checkpoints-and-recovery.md`。
 - 无真实命令或工具证据不得宣称通过，不得编造工具、脚本或外部状态。
@@ -32,10 +34,12 @@
 - 领域与代码库设计：仅用户明确要求建立或修改领域术语、术语表、ADR，或评估模块接口和架构边界时，读 `docs/18-domain-and-codebase-design.md`；项目既有术语和架构规范优先。
 - 代码审查自动化：仅用户明确要求代码审查且需要确定性文件筛选或项目规则解析时，读 `docs/17-open-code-review-integration.md` 并使用 `open-code-review-delegate`；当前模型仍是审查能力负责人。
 - Skill：实际使用、安装、更新或迁移时才读 `docs/14-skill-update-policy.md`。
+- 界面设计：用户要求设计、实现、重设计或审查网页/UI 时调用已安装的 `finesse-ui`，并按 brand、product、workflow 或 commerce 路由；需要确认安装边界、优先级或更新方式时读 `docs/19-finesse-ui-integration.md`。
+- 浏览器交互：网页打开、导航、点击、输入、截图、登录态、动态渲染或自动化任务以已安装的 `browser-harness` 为主要本地路径；公共页面的普通读取仍优先使用 fetch。上层 Browser 规则、用户确认、仓库规则和外部操作边界优先；需要安装路径或运行边界时读 `docs/20-browser-harness-installation.md`。
 - 多 Agent：仅用户明确要求并行且环境支持时读 `docs/12-conditional-quality-and-tooling-policy.md` 的编排策略。
 - agentmemory：仅明确评估或启用持久记忆层时读 `docs/13-agentmemory-adaptation.md`。
 
-DW 不提供 UI、视觉、品牌、排版、颜色、动效或组件风格标准，也不默认调用设计类 Skill。界面要求只来自用户、产品规范、仓库现有设计系统和当前环境的上层规则。
+DW 不自建 UI、视觉、品牌、排版、颜色、动效或组件风格标准。`finesse-ui` 只在真实界面任务中提供条件参考；用户要求、产品规范、仓库现有设计系统和当前环境的上层规则优先。不得仅为输出 Design Read 停止已明确的任务，不自动创建 `PRODUCT.md` 或 `design-model.yaml`，也不得让上游根 `AGENTS.md` 覆盖项目规则。
 
 ## 硬边界
 

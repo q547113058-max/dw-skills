@@ -14,6 +14,8 @@
 | Skill | 来源 | 类别 | 用途 |
 | --- | --- | --- | --- |
 | `graphify` | `https://github.com/Graphify-Labs/graphify` | 普通 / 30 天 | 架构和长期知识图谱 |
+| `finesse-ui` | `https://github.com/mouse-lin/finesse-skill` | 普通 / 30 天 | 网页/UI 的 brand、product、workflow、commerce 设计和审查；完整仓库安装，条件调用 |
+| `browser-harness` | `https://github.com/browser-use/browser-harness` | 外部连接 / 使用前 | Windows Chrome 的 CDP 浏览器交互；完整仓库安装，遥测、录屏和域名 Skill 默认关闭 |
 | `open-code-review-delegate` | `https://github.com/alibaba/open-code-review` | 普通 / 30 天 | 明确代码审查任务中的确定性文件筛选和规则解析；审查判断由当前模型负责 |
 | `vpn-mihomo` | `https://github.com/q547113058-max/vpn-skills/tree/main/vpn-mihomo-codex`；本地运行路径 `C:\Users\54711\.codex\skills\vpn-mihomo` | 外部连接 / 使用前 | 网络失败后的本地 Mihomo 和命令级代理；订阅状态只在本地处理 |
 | `github` | `https://cli.github.com/` | 外部操作 / 使用前 | GitHub 状态和 mutation |
