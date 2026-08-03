@@ -14,7 +14,7 @@
 
 ## 每日复盘
 
-Codex 桌面自动任务在 Asia/Shanghai 每日 01:00 运行，处理前一自然日的本地会话记录。它按项目归纳稳定偏好、决策、进度、阻塞、验收和下一步，写入 `00_Inbox/YYYY-MM-DD-codex-memory-review.md`。
+Codex 桌面自动任务按主机时区每日 01:00 运行；当前主机时区是 `America/New_York`。任务处理该时区前一自然日的本地会话记录，按项目归纳稳定偏好、决策、进度、阻塞、验收和下一步，写入 `00_Inbox/YYYY-MM-DD-codex-memory-review.md`。
 
 自动任务不得保存完整对话、secrets、凭据、私人原文、VPN 信息、客户敏感数据或可由 Git 重建的大段内容；不得修改项目代码、提交或推送 Git，也不得自动晋升候选记忆。
 
