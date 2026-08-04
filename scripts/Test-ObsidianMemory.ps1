@@ -4,6 +4,7 @@ $checks = @(
     @{ Name = 'Codex global memory entry'; Path = 'D:\Codex\home\AGENTS.md'; Pattern = 'memory-policy\.md' },
     @{ Name = 'Vault global rules'; Path = 'D:\Codex\vault\00_System\Codex\global-rules.md'; Pattern = 'D:\\Codex\\vault' },
     @{ Name = 'Memory policy'; Path = 'D:\Codex\vault\00_System\Codex\memory-policy.md'; Pattern = 'status: reviewed' },
+    @{ Name = 'Feedback event schema'; Path = 'D:\Codex\vault\00_System\Codex\feedback-event-schema.md'; Pattern = 'event_id:' },
     @{ Name = 'Daily review template'; Path = 'D:\Codex\vault\00_System\Codex\daily-review-template.md'; Pattern = 'status: candidate' },
     @{ Name = 'Candidate inbox'; Path = 'D:\Codex\vault\00_Inbox'; Pattern = $null },
     @{ Name = 'Project memory root'; Path = 'D:\Codex\vault\30_Projects'; Pattern = $null }
