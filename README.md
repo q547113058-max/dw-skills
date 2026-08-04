@@ -31,6 +31,7 @@ DW 不是产品运行技术栈，也不实现第二套通用开发方法。它�
 - 恢复：`docs/06-development-log-standard.md`、`docs/10-session-checkpoints-and-recovery.md`
 - GitHub：`docs/08-github-update-standard.md`
 - Skill 更新：`docs/14-skill-update-policy.md`
+- Obsidian 与反馈治理：`docs/21-obsidian-cross-project-memory.md`
 - Finesse UI：`docs/19-finesse-ui-integration.md`
 - Browser Harness：`docs/20-browser-harness-installation.md`
 - Superpowers：`docs/15-superpowers-integration.md`
