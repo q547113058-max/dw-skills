@@ -1,46 +1,5 @@
-# 开发日志标准
+# Development Log Standard
 
-开发日志是恢复和决策记录，不是任务级别的固定产物。满足任一条件时才使用 `dev-logs/YYYY-MM-DD.md`：
+The active rule is [references/recovery-and-logs.md](../references/recovery-and-logs.md).
 
-- 工作将跨会话继续或需要中断恢复。
-- 形成会影响后续工作的稳定决策。
-- 存在阻塞、失败恢复信息或明确后续待办。
-- 需要 Agent 交接，或用户/仓库明确要求记录。
-
-`standard` 或 `high-risk` 本身不强制创建日志。没有长期价值的已完成任务不为形式记录。
-
-## 规则
-
-1. 需要日志且当天文件不存在时才创建。
-2. 只记录安全继续工作所需的摘要，不复制计划、测试输出或可由 Git 重建的大段内容。
-3. 已有唯一计划、审查或验证产物时仅引用其路径和当前状态。
-4. 在会话结束前更新完成项、关键决策、验证、阻塞和精确下一步。
-5. 不记录 secrets、凭据、私人原文或敏感外部配置。
-
-## 模板
-
-```markdown
-# 开发日志 - YYYY-MM-DD
-
-## 会话
-
-- 任务：
-- 任务级别：quick / standard / high-risk
-- 运行模式：standalone / combined
-
-## 已完成
-
--
-
-## 关键决策
-
--
-
-## 验证
-
--
-
-## 阻塞与下一步
-
--
-```
+Development logs are recovery summaries and stable-decision references, not stable decision facts. Write the decision body to the project's existing rules or decision file; record only its path or ID, current state, verification, and next step here when recovery, handoff, a blocker, or an explicit request requires it.

@@ -1,51 +1,10 @@
-# 条件工具与扩展策略
+# Conditional Tooling Policy
 
-仅在明确启用技术栈专项规则、外部 runtime、Hook、多 Agent 或持久记忆层时读取本文。普通开发和单纯使用项目现有工具不加载本文件。
+Use only when installing or enabling an external runtime, Hook, MCP, plugin, or other tool integration.
 
-## 启用原则
-
-- 先使用仓库已有工具、规则和依赖。
-- 不批量复制外部 `commands/`、`agents/`、`hooks/`、配置或脚本。
-- 安装 runtime、Hook、plugin、MCP 或平台配置前，确认权限、来源、网络行为、文件范围和回滚方式。
-- 不因能力已登记就自动启用；项目需求、技术栈和使用目的必须明确。
-- 一项能力只有一个负责人，复用已有计划、测试、审查和验证结果。
-
-## 条件模块
-
-| 模块 | 何时启用 | 最小要求 |
-| --- | --- | --- |
-| 技术栈规则 | 变更涉及栈特有失败模式 | 只加载对应语言、框架或构建规则 |
-| 数据库工具 | migration、性能或完整性需要专用工具 | 明确环境、权限、备份和回滚 |
-| 部署工具 | CI/CD、容器、基础设施或生产发布 | 区分预览与生产，验证配置和回滚 |
-| 外部操作 | GitHub、Jira、云服务或业务平台 mutation | 明确授权、目标、影响和结果验证 |
-| 性能工具 | 性能、延迟、吞吐或成本是验收目标 | 先定义基线和可重复 benchmark |
-| AI eval | 普通测试无法稳定评估 Agent/prompt 行为 | 定义样本、评分和发布阈值 |
-| agentmemory | 用户明确评估或启用持久记忆层 | 默认零自动注入，不保存 secrets |
-| 多 Agent | 用户明确要求并行且环境支持 | 最小 ownership、handoff 和合并门禁 |
-
-## Hook 与运行时
-
-Hook 默认关闭。启用时必须：
-
-- 绑定项目已有的确定性命令或经审查脚本。
-- 有清晰失败消息、手动绕行和卸载步骤。
-- 不静默发送代码、prompts、secrets 或文件到远程服务。
-- 修改范围限定到目标文件，不覆盖用户配置。
-- 避免每次编辑运行长 build、自动安装包或隐藏失败。
-
-自动化按以下顺序成熟，不跨级放大未经验证的流程：
-
-1. 手工跑通并验证输入、输出和失败处理。
-2. 将稳定步骤写成可复现 SOP。
-3. 在有限数据、权限和目标范围内半自动执行，保留人工确认。
-4. 只有成功率、监控、停止条件和回滚已验证后才全自动执行。
-
-权限也按范围递进：先只读或 dry-run，再做单目标、可回滚 mutation；扩大批量、生产或特权权限需要新的明确授权和验证证据。
-
-## 多 Agent
-
-单 Agent 是默认。并行前明确每项工作的 owner、scope、输出和合并负责人；并发写入使用独立 Git worktree 或独立副本，共享文件不得无协调并发写入。已有编排能力负责调度，DW 不建立平行任务系统。
-
-## 记录边界
-
-只有扩展形成稳定项目依赖、需要跨会话恢复、出现阻塞或用户明确要求时才记录。普通试用和未安装候选不进入默认项目流程。
+- Confirm user or repository authorization, source, version, network behavior, file scope, permissions, privacy impact, and rollback before installation.
+- Keep Hooks disabled by default; bind enabled Hooks to reviewed, deterministic commands.
+- Do not silently send code, prompts, secrets, or files to remote services.
+- Prefer read-only or dry-run operation first, then the smallest reversible mutation; verify the result and stop on unexpected scope.
+- Do not install candidates, plugins, runtimes, or platform configuration merely because they are listed.
+- The tool's own Skill owns implementation and usage details; DW owns only authorization, scope, evidence, and recovery boundaries.
