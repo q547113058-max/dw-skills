@@ -31,6 +31,14 @@ Use `references/governance-gates.md` only when a gate or non-quick verification 
 - Maintain one plan and one task state. Reuse existing workflow artifacts; do not create parallel plans, decisions, or status systems.
 - Automatic memory starts as `candidate` and becomes `reviewed` only after current facts are verified; memory is never the project facts source.
 
+## Repeated Command Automation
+
+- Turn stable, frequently repeated command sequences into project scripts instead of rebuilding long commands each time. Typical cases include test-server upload, Git synchronization, hot update, redeployment, restart, and status verification.
+- Reuse the project's existing language and toolchain. Parameterize environments, branches, services, and paths; never commit secrets, credentials, or machine-only configuration.
+- Scripts must fail clearly and verify final state. Add idempotency, repeat-run protection, or precondition checks where deployment, restart, or remote writes can partially succeed.
+- Validate a new or changed script on its normal path and likely failure path, then reuse it until behavior or environment changes.
+- Script automation does not expand authority; pushes, production changes, deletion, downtime, and other external mutations still require the applicable authorization.
+
 ## Boundaries
 
 Load `references/recovery-and-logs.md` only for cross-session recovery, interruption, handoff, or an explicit checkpoint request. Load `references/github-mutation.md` before authorized GitHub mutations. Other tools and skills own their own installation and usage rules.
