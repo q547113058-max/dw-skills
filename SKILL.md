@@ -35,10 +35,11 @@ Use `references/governance-gates.md` only when a gate or non-quick verification 
 
 - Turn stable, frequently repeated command sequences into project scripts instead of rebuilding long commands each time. Typical cases include test-server upload, Git synchronization, hot update, redeployment, restart, and status verification.
 - Reuse the project's existing language and toolchain. Parameterize environments, branches, services, and paths; never commit secrets, credentials, or machine-only configuration.
+- For maintained projects, keep the minimum reproducible runtime environment and verified command paths in the project's existing runbook, README, or operations document. Include the actual fallback used when the expected command is unavailable, such as `npm.cmd`, a bundled runtime, or a project script.
 - Scripts must fail clearly and verify final state. Add idempotency, repeat-run protection, or precondition checks where deployment, restart, or remote writes can partially succeed.
 - Validate a new or changed script on its normal path and likely failure path, then reuse it until behavior or environment changes.
 - Script automation does not expand authority; pushes, production changes, deletion, downtime, and other external mutations still require the applicable authorization.
 
 ## Boundaries
 
-Load `references/recovery-and-logs.md` only for cross-session recovery, interruption, handoff, or an explicit checkpoint request. Load `references/github-mutation.md` before authorized GitHub mutations. Other tools and skills own their own installation and usage rules.
+Load `references/project-environment.md` when establishing, changing, or recovering a maintained project's runtime. Load `references/recovery-and-logs.md` only for cross-session recovery, interruption, handoff, or an explicit checkpoint request. Load `references/github-mutation.md` before authorized GitHub mutations. Other tools and skills own their own installation and usage rules.
