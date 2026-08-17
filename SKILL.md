@@ -43,3 +43,8 @@ Use `references/governance-gates.md` only when a gate or non-quick verification 
 ## Boundaries
 
 Load `references/project-environment.md` when establishing, changing, or recovering a maintained project's runtime. Load `references/recovery-and-logs.md` only for cross-session recovery, interruption, handoff, or an explicit checkpoint request. Load `references/github-mutation.md` before authorized GitHub mutations. Other tools and skills own their own installation and usage rules.
+
+## Context Capacity
+
+- When the platform exposes exact context usage and it reaches `90%` or higher, warn that context is nearly full, then converge the current work, create the necessary handoff, or open a new task when the work cannot be concluded safely.
+- When exact usage is not exposed, do not invent a percentage; act only on explicit capacity or compression signals.
