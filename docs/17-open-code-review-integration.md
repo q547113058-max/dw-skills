@@ -28,6 +28,7 @@ DW 以 **delegate 模式**使用 `alibaba/open-code-review`（下称 OCR）。OC
 ## 安装与更新
 
 - 从官方 release 固定版本下载二进制，并校验官方 `sha256sum.txt`。
+- delegate 模式不需要任何 LLM 配置：本机没有 `~/.opencodereview/config.json`，也没有 `OCR_LLM_*` / `ANTHROPIC_*` 环境变量，`preview` 与 `rule` 均可正常执行。不要为了"补全配置"而写入 provider、URL 或 Token。
 - 当前记录：`v1.12.13` / `opencodereview-windows-amd64.exe` / SHA256 `520b135f1e15e129643678c2f6ce1daff9e5299250b59aa849a19ad723e716a4`。实测 `ocr version` 返回 `open-code-review v1.12.13 (fabbdb29) windows/amd64`，哈希与官方校验文件一致。
 - 不使用管道执行远程安装脚本；不运行未审查的 postinstall、hooks 或平台配置。
 - 更新前审查 release、安装脚本、依赖、网络目标和回滚路径；通过后替换 `ocr.exe`，并更新本节记录的版本与校验值。
