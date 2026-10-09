@@ -38,6 +38,7 @@ Do not add heavyweight plans, reviews, E2E, rollback drills, logs, checkpoints, 
 ## Routes
 
 - Recovering behavior or a data source that exists only in a shipped, packaged, or running target - native binaries, packaged or Electron/JavaScript apps, web pages and their network traffic, managed assemblies, firmware: read `references/reverse-engineering.md`.
+- Reviewing a diff, commit, or branch range where deterministic file selection or project rule resolution helps: read `docs/17-open-code-review-integration.md` and use the OCR delegate CLI. The current model stays the review owner.
 
 ## Boundaries
 

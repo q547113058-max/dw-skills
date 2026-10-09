@@ -25,6 +25,7 @@ DW 不是产品运行技术栈，也不实现第二套通用开发方法。它�
 ## 参考
 
 - 条件门禁与验证强度已内联在 `SKILL.md`，没有独立的 governance-gates 参考文件。
+- 代码审查自动化：`docs/17-open-code-review-integration.md`
 - 恢复与交接：`references/recovery-and-logs.md`
 - GitHub 变更：`references/github-mutation.md`
 - GitHub 更新标准：`docs/08-github-update-standard.md`
