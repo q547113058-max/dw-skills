@@ -2,13 +2,9 @@
 
 代码修改在验证后按用户授权和仓库策略通过 GitHub 交付。读取公开仓库、查询状态、Issue 或 PR 不需要 mutation 授权；push、创建 PR、评论、合并、发布或修改设置需要明确授权或仓库既有交付策略。修改本地文件不自动等于获准执行这些动作。
 
-组合模式下，分支完成和选项呈现由 Superpowers `finishing-a-development-branch` 负责；DW 只执行用户选定的 GitHub 动作并记录结果。
-
 ## 工具
 
-- GitHub skill：`C:\Users\54711\.codex\skills\github\SKILL.md`
-- GitHub CLI：`gh`
-- GitHub CLI 下载地址：`https://cli.github.com/`
+不假设任何特定 GitHub skill 或 CLI 已安装。使用当前环境实际可用的 Git/GitHub 工具；不要为了照本流程而安装工具。没有可用工具时，报告未执行及原因。
 
 ## 代码变更后的交付流程
 
@@ -46,17 +42,7 @@ git commit -m "type: concise description"
 git remote -v
 ```
 
-6. 在用户选择推送或创建 PR 后执行相应动作：
-
-```powershell
-git push
-```
-
-或创建 Pull Request：
-
-```powershell
-gh pr create
-```
+6. 在用户选择推送或创建 PR 后，用当前可用的工具执行；没有 `gh` 等 CLI 时按仓库既有方式执行，或报告阻塞。
 
 ## 禁止行为
 
